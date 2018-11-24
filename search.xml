@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>文件上传漏洞总结</title>
+      <link href="/2018/11/24/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/"/>
+      <url>/2018/11/24/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="文件上传漏洞总结"><a href="#文件上传漏洞总结" class="headerlink" title="文件上传漏洞总结"></a>文件上传漏洞总结</h1><h5 id="做过很多文件上传漏洞-感觉不难-但是比赛有些还是不会-明明是一个很简单的知识点-还要想半天-现在来总结一下-让自己的思路清晰点-系统化-日常更新！"><a href="#做过很多文件上传漏洞-感觉不难-但是比赛有些还是不会-明明是一个很简单的知识点-还要想半天-现在来总结一下-让自己的思路清晰点-系统化-日常更新！" class="headerlink" title="做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！"></a>做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！</h5><p>因为很多图片,懒得放在图床里面,所以放在csdn或者博客园里面<br><a href="https://blog.csdn.net/qq_30464257/article/details/84404229#%E8%83%BD%E8%A2%AB%E8%A7%A3%E6%9E%90%E7%9A%84%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D%E5%88%97%E8%A1%A8%EF%BC%9Ajsp%20jspx%20jspfasp%20asa%20cer%20aspxphp%20php%20php3%20php4exe%20exee" target="_blank" rel="noopener">文件上传漏洞总结</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>湖湘杯WP</title>
       <link href="/2018/11/21/2018%E6%B9%96%E6%B9%98%E6%9D%AFWP/"/>
       <url>/2018/11/21/2018%E6%B9%96%E6%B9%98%E6%9D%AFWP/</url>
