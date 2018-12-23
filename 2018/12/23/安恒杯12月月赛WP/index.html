@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="文件上传漏洞总结做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！因为很多图片,懒得放在图床里面,所以放在csdn或者博客园里面文件上传漏洞总结">
+<meta name="description" content="WEB这次的月赛可以说非常适合我这种菜鸡做了 ezweb2:请求包中发现一个user=base64 解码得到user,构造admin 然后base64提交 发现跳转到后台admin.php 试了一个ls发现有回显,应该是个命令执行漏洞 构造: cmd = ls$IFS/  成功回显 然后读取flag:  cmd = cat $IFS /ffLAG_404 easy：1234567891011121">
 <meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件上传漏洞总结">
-<meta property="og:url" content="https://style-404.github.io/2018/11/24/文件上传漏洞总结/index.html">
+<meta property="og:title" content="安恒杯12月月赛WP">
+<meta property="og:url" content="https://style-404.github.io/2018/12/23/安恒杯12月月赛WP/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="文件上传漏洞总结做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！因为很多图片,懒得放在图床里面,所以放在csdn或者博客园里面文件上传漏洞总结">
+<meta property="og:description" content="WEB这次的月赛可以说非常适合我这种菜鸡做了 ezweb2:请求包中发现一个user=base64 解码得到user,构造admin 然后base64提交 发现跳转到后台admin.php 试了一个ls发现有回显,应该是个命令执行漏洞 构造: cmd = ls$IFS/  成功回显 然后读取flag:  cmd = cat $IFS /ffLAG_404 easy：1234567891011121">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-24T12:39:20.949Z">
+<meta property="og:updated_time" content="2018-12-23T15:00:42.627Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文件上传漏洞总结">
-<meta name="twitter:description" content="文件上传漏洞总结做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！因为很多图片,懒得放在图床里面,所以放在csdn或者博客园里面文件上传漏洞总结">
+<meta name="twitter:title" content="安恒杯12月月赛WP">
+<meta name="twitter:description" content="WEB这次的月赛可以说非常适合我这种菜鸡做了 ezweb2:请求包中发现一个user=base64 解码得到user,构造admin 然后base64提交 发现跳转到后台admin.php 试了一个ls发现有回显,应该是个命令执行漏洞 构造: cmd = ls$IFS/  成功回显 然后读取flag:  cmd = cat $IFS /ffLAG_404 easy：1234567891011121">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://style-404.github.io/2018/11/24/文件上传漏洞总结/">
+  <link rel="canonical" href="https://style-404.github.io/2018/12/23/安恒杯12月月赛WP/">
 
 
 
 
 
-  <title>文件上传漏洞总结 | 可乐'blog</title>
+  <title>安恒杯12月月赛WP | 可乐'blog</title>
   
 
 
@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2018/11/24/文件上传漏洞总结/">
+    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2018/12/23/安恒杯12月月赛WP/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="筱阳">
@@ -334,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">文件上传漏洞总结</h1>
+          <h1 class="post-title" itemprop="name headline">安恒杯12月月赛WP</h1>
         
 
         <div class="post-meta">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-24T20:30:46+08:00">
-                2018-11-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-23T22:59:22+08:00">
+                2018-12-23
               </time>
             
 
@@ -356,28 +356,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -406,7 +384,20 @@
       
 
       
-        <h1 id="文件上传漏洞总结"><a href="#文件上传漏洞总结" class="headerlink" title="文件上传漏洞总结"></a>文件上传漏洞总结</h1><h5 id="做过很多文件上传漏洞-感觉不难-但是比赛有些还是不会-明明是一个很简单的知识点-还要想半天-现在来总结一下-让自己的思路清晰点-系统化-日常更新！"><a href="#做过很多文件上传漏洞-感觉不难-但是比赛有些还是不会-明明是一个很简单的知识点-还要想半天-现在来总结一下-让自己的思路清晰点-系统化-日常更新！" class="headerlink" title="做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！"></a>做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！</h5><p>因为很多图片,懒得放在图床里面,所以放在csdn或者博客园里面<br><a href="https://blog.csdn.net/qq_30464257/article/details/84404229#%E8%83%BD%E8%A2%AB%E8%A7%A3%E6%9E%90%E7%9A%84%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D%E5%88%97%E8%A1%A8%EF%BC%9Ajsp%20jspx%20jspfasp%20asa%20cer%20aspxphp%20php%20php3%20php4exe%20exee" target="_blank" rel="noopener">文件上传漏洞总结</a></p>
+        <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><pre><code>这次的月赛可以说非常适合我这种菜鸡做了
+</code></pre><h2 id="ezweb2"><a href="#ezweb2" class="headerlink" title="ezweb2:"></a>ezweb2:</h2><p>请求包中发现一个user=base64</p>
+<p>解码得到user,构造admin 然后base64提交</p>
+<p>发现跳转到后台admin.php</p>
+<p>试了一个ls发现有回显,应该是个命令执行漏洞</p>
+<p>构造: cmd = ls$IFS/  成功回显</p>
+<p>然后读取flag:  cmd = cat $IFS /ffLAG_404</p>
+<h2 id="easy："><a href="#easy：" class="headerlink" title="easy："></a>easy：</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span>  </span></span><br><span class="line"><span class="php">@error_reporting(<span class="number">1</span>); </span></span><br><span class="line"><span class="php"><span class="keyword">include</span> <span class="string">'flag.php'</span>;</span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">baby</span> </span></span></span><br><span class="line"><span class="php">&#123;   </span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> $file;</span></span><br><span class="line"><span class="php">    <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span>      </span></span></span><br><span class="line"><span class="php">    &#123;          </span></span><br><span class="line"><span class="php">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;file)) </span></span><br><span class="line"><span class="php">        &#123;</span></span><br><span class="line"><span class="php">            $filename = <span class="string">"./&#123;$this-&gt;file&#125;"</span>;        </span></span><br><span class="line"><span class="php">            <span class="keyword">if</span> (file_get_contents($filename))         </span></span><br><span class="line"><span class="php">            &#123;              </span></span><br><span class="line"><span class="php">                <span class="keyword">return</span> file_get_contents($filename); </span></span><br><span class="line"><span class="php">            &#125; </span></span><br><span class="line"><span class="php">        &#125;     </span></span><br><span class="line"><span class="php">    &#125;  </span></span><br><span class="line"><span class="php">&#125;  </span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'data'</span>]))  </span></span><br><span class="line"><span class="php">&#123; </span></span><br><span class="line"><span class="php">    $data = $_GET[<span class="string">'data'</span>];</span></span><br><span class="line"><span class="php">    preg_match(<span class="string">'/[oc]:\d+:/i'</span>,$data,$matches);</span></span><br><span class="line"><span class="php">    <span class="keyword">if</span>(count($matches))</span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">die</span>(<span class="string">'Hacker!'</span>);</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">    <span class="keyword">else</span></span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        $good = unserialize($data);</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> $good;</span></span><br><span class="line"><span class="php">    &#125;     </span></span><br><span class="line"><span class="php">&#125; </span></span><br><span class="line"><span class="php"><span class="keyword">else</span> </span></span><br><span class="line"><span class="php">&#123; </span></span><br><span class="line"><span class="php">    highlight_file(<span class="string">"./index.php"</span>); </span></span><br><span class="line"><span class="php">&#125; </span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>本地构造序列化<br>O:4:”baby”:1:{s:4:”file”;s:8:”flag.php”;}</p>
+<p>因为存在过滤出语句<br>preg_match(‘/[oc]:\d+:/i’,$data,$matches);</p>
+<p>所以需要绕过,用加号进行绕过:<br>O:+4:”baby”:1:{s:4:”file”;s:8:”flag.php”;}</p>
+<p>但如果直接传值的话会，服务器接收到会把加号认为空格，所以要对加号url编码：<br>O:%2b4:”baby”:1:{s:4:”file”;s:8:”flag.php”;}</p>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h2 id="JUJU"><a href="#JUJU" class="headerlink" title="JUJU"></a>JUJU</h2><p> 提示女朋友问我这11只JUJU哪只好看？<br> 图片里没有11只JUJU，用windex改个高度即可<br>然后base32解码得到flag</p>
+<h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><p>zip加密，一般zip加密只有那几种，并且打开zip文件里面还有一个已经给出的txt文件，还有一个经过加密的zip文件，很明显是明文攻击就可以了<br>将txt文件加密为zip文件,然后用ARCHPR进行明文攻击<br>得到一个doc文件打开,得到一个5 3 的图片，把图片移开就可以看到flag了</p>
 
       
     </div>
@@ -466,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/21/2018湖湘杯WP/" rel="next" title="湖湘杯WP">
-                <i class="fa fa-chevron-left"></i> 湖湘杯WP
+              <a href="/2018/12/21/CTF实验吧writeup/" rel="next" title="CTF实验吧writeup">
+                <i class="fa fa-chevron-left"></i> CTF实验吧writeup
               </a>
             
           </div>
@@ -475,10 +466,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/24/有点小情绪/" rel="prev" title="有点小情绪">
-                有点小情绪 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -626,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件上传漏洞总结"><span class="nav-number">1.</span> <span class="nav-text">文件上传漏洞总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#做过很多文件上传漏洞-感觉不难-但是比赛有些还是不会-明明是一个很简单的知识点-还要想半天-现在来总结一下-让自己的思路清晰点-系统化-日常更新！"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB"><span class="nav-number">1.</span> <span class="nav-text">WEB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ezweb2"><span class="nav-number">2.</span> <span class="nav-text">ezweb2:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easy："><span class="nav-number">3.</span> <span class="nav-text">easy：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISC"><span class="nav-number">4.</span> <span class="nav-text">MISC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JUJU"><span class="nav-number">5.</span> <span class="nav-text">JUJU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习资料"><span class="nav-number">6.</span> <span class="nav-text">学习资料</span></a></li></ol></div>
             
 
           </div>
