@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="CTF,">
+  <meta name="keywords" content="web安全,">
 
 
 
@@ -123,18 +123,21 @@
 
 
 
-<meta name="description" content="文件上传漏洞总结做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！因为很多图片,懒得放在图床里面,所以放在csdn或者博客园里面文件上传漏洞总结">
-<meta name="keywords" content="CTF">
+<meta name="description" content="造成这种漏洞的原因是Mysql字段的字符集和php mysqli客户端设置的字符集不相同。 MySQL字符集介绍MySQL服务器可以支持多种字符集，在同一台服务器，同一个数据库，甚至同一个表的不同字段都可以指定使用不同的字符集，相比oracle等其他数据库管理系统，在同一个数据库只能使用相同的字符集，MySQL明显存在更大的灵活性。MySQL提供了不同级别的设置，包括server级、databas">
+<meta name="keywords" content="web安全">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件上传漏洞总结">
-<meta property="og:url" content="https://style-404.github.io/2018/11/24/文件上传漏洞总结/index.html">
+<meta property="og:title" content="Mysql字符编码利用技巧">
+<meta property="og:url" content="https://style-404.github.io/2019/01/12/Mysql字符编码利用技巧/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="文件上传漏洞总结做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！因为很多图片,懒得放在图床里面,所以放在csdn或者博客园里面文件上传漏洞总结">
+<meta property="og:description" content="造成这种漏洞的原因是Mysql字段的字符集和php mysqli客户端设置的字符集不相同。 MySQL字符集介绍MySQL服务器可以支持多种字符集，在同一台服务器，同一个数据库，甚至同一个表的不同字段都可以指定使用不同的字符集，相比oracle等其他数据库管理系统，在同一个数据库只能使用相同的字符集，MySQL明显存在更大的灵活性。MySQL提供了不同级别的设置，包括server级、databas">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-24T12:39:20.949Z">
+<meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/19-1-12/64138853.jpg">
+<meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/19-1-12/67794247.jpg">
+<meta property="og:updated_time" content="2019-01-12T06:46:01.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文件上传漏洞总结">
-<meta name="twitter:description" content="文件上传漏洞总结做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！因为很多图片,懒得放在图床里面,所以放在csdn或者博客园里面文件上传漏洞总结">
+<meta name="twitter:title" content="Mysql字符编码利用技巧">
+<meta name="twitter:description" content="造成这种漏洞的原因是Mysql字段的字符集和php mysqli客户端设置的字符集不相同。 MySQL字符集介绍MySQL服务器可以支持多种字符集，在同一台服务器，同一个数据库，甚至同一个表的不同字段都可以指定使用不同的字符集，相比oracle等其他数据库管理系统，在同一个数据库只能使用相同的字符集，MySQL明显存在更大的灵活性。MySQL提供了不同级别的设置，包括server级、databas">
+<meta name="twitter:image" content="http://pkf8r5ond.bkt.clouddn.com/19-1-12/64138853.jpg">
 
 
 
@@ -164,13 +167,13 @@
 
 
 
-  <link rel="canonical" href="https://style-404.github.io/2018/11/24/文件上传漏洞总结/">
+  <link rel="canonical" href="https://style-404.github.io/2019/01/12/Mysql字符编码利用技巧/">
 
 
 
 
 
-  <title>文件上传漏洞总结 | 可乐'blog</title>
+  <title>Mysql字符编码利用技巧 | 可乐'blog</title>
   
 
 
@@ -317,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2018/11/24/文件上传漏洞总结/">
+    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2019/01/12/Mysql字符编码利用技巧/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="筱阳">
@@ -334,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">文件上传漏洞总结</h1>
+          <h1 class="post-title" itemprop="name headline">Mysql字符编码利用技巧</h1>
         
 
         <div class="post-meta">
@@ -346,8 +349,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-24T20:30:46+08:00">
-                2018-11-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-12T14:44:43+08:00">
+                2019-01-12
               </time>
             
 
@@ -369,8 +372,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
+                  <a href="/categories/web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
                   </a>
                 </span>
 
@@ -406,7 +409,45 @@
       
 
       
-        <h1 id="文件上传漏洞总结"><a href="#文件上传漏洞总结" class="headerlink" title="文件上传漏洞总结"></a>文件上传漏洞总结</h1><h5 id="做过很多文件上传漏洞-感觉不难-但是比赛有些还是不会-明明是一个很简单的知识点-还要想半天-现在来总结一下-让自己的思路清晰点-系统化-日常更新！"><a href="#做过很多文件上传漏洞-感觉不难-但是比赛有些还是不会-明明是一个很简单的知识点-还要想半天-现在来总结一下-让自己的思路清晰点-系统化-日常更新！" class="headerlink" title="做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！"></a>做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！</h5><p>因为很多图片,懒得放在图床里面,所以放在csdn或者博客园里面<br><a href="https://blog.csdn.net/qq_30464257/article/details/84404229#%E8%83%BD%E8%A2%AB%E8%A7%A3%E6%9E%90%E7%9A%84%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D%E5%88%97%E8%A1%A8%EF%BC%9Ajsp%20jspx%20jspfasp%20asa%20cer%20aspxphp%20php%20php3%20php4exe%20exee" target="_blank" rel="noopener">文件上传漏洞总结</a></p>
+        <p>造成这种漏洞的原因是<br>Mysql字段的字符集和php mysqli客户端设置的字符集不相同。</p>
+<h2 id="MySQL字符集介绍"><a href="#MySQL字符集介绍" class="headerlink" title="MySQL字符集介绍"></a>MySQL字符集介绍</h2><p>MySQL服务器可以支持多种字符集，在同一台服务器，同一个数据库，甚至同一个表的不同字段都可以指定使用不同的字符集，相比oracle等其他数据库管理系统，在同一个数据库只能使用相同的字符集，MySQL明显存在更大的灵活性。<br>MySQL提供了不同级别的设置，包括server级、database级、table级、column级，可以提供非常精准的设置。<br>我们在进行编写php文件的时候</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$mysqli</span> = new mysqli(<span class="string">"localhost"</span>, <span class="string">"root"</span>, <span class="string">"root"</span>, <span class="string">"cat"</span>);</span><br><span class="line"></span><br><span class="line"><span class="regexp">/* check connection */</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$mysqli</span>-&gt;connect_errno) &#123;</span><br><span class="line">    printf(<span class="string">"Connect failed: %s\n"</span>, <span class="variable">$mysqli</span>-&gt;connect_error);</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$mysqli</span>-&gt;query(<span class="string">"set names utf8"</span>);</span><br></pre></td></tr></table></figure>
+<p>设置了字符集为UTF-8<br>set names utf8 的意思是将客户端的字符集设置为utf8<br>在mysql可以查看<br><img src="http://pkf8r5ond.bkt.clouddn.com/19-1-12/64138853.jpg" alt=""><br>如上图，在默认情况下，mysql字符集为latin1，而执行了set names utf8;以后，character_set_client、character_set_connection、character_set_results等与客户端相关的配置字符集都变成了utf8，但character_set_database、character_set_server等服务端相关的字符集还是latin1。</p>
+<p>这就是该Trick的核心，因为这一条语句，导致客户端、服务端的字符集出现了差别。既然有差别，Mysql在执行查询的时候，就涉及到字符集的转换。</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MySQL Server收到请求时将请求数据从character_<span class="keyword">set</span>_client</span><br><span class="line">转换为character_<span class="keyword">set</span>_connection；</span><br><span class="line">进行内部操作前将请求数据从character_<span class="keyword">set</span>_connection转换为内部操作字符集</span><br></pre></td></tr></table></figure>
+<h1 id="实战一"><a href="#实战一" class="headerlink" title="实战一"></a>实战一</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">if</span> ($username === <span class="string">'admin'</span>) &#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">if</span> ($_SERVER[<span class="string">'REMOTE_ADDR'</span>] !== <span class="string">'127.0.0.1'</span>) &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">die</span>(<span class="string">'Permission denied!'</span>);</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php">$result = $mysqli-&gt;query(<span class="string">"SELECT * FROM z_users where username = '&#123;$username&#125;' and password = '&#123;$password&#125;'"</span>);</span></span><br></pre></td></tr></table></figure>
+<p>if语句嫌疑很大，大概是考我们怎么登陆admin的账号</p>
+<h2 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h2><p>在我们这个案例中，character_set_client和character_set_connection被设置成了utf8，而内部操作字符集其实也就是username字段的字符集还是默认的latin1。于是，整个操作就有如下字符串转换过程：</p>
+<p>utf8 –&gt; utf8 –&gt; latin1</p>
+<p>最后执行比较username=’admin’的时候，’admin’是一个latin1字符串。<br>Mysql在转换字符集的时候，将不完整的字符给忽略了。<br>举个简单的例子，佬这个汉字的UTF-8编码是\xE4\xBD\xAC，我们可以依次尝试访问下面三个URL：</p>
+<pre><code>http://localhost:9090/test.php?username=admin%e4
+http://localhost:9090/test.php?username=admin%e4%bd
+http://localhost:9090/test.php?username=admin%e4%bd%ac
+</code></pre><p>可以发现，前两者都能成功获取到username=admin的结果，而最后一个URL，也就是当我输入佬字完整的编码时，将会失败：</p>
+<p><strong>为什么会抛出错误？</strong><br>原因很简单，因为latin1并不支持汉字，所以utf8汉字转换成latin1时就抛出了错误。</p>
+<p>那前两次为什么没有抛出错误？因为前两次输入的编码并不完整，Mysql在进行编码转换时，就将其忽略了。</p>
+<p>这个特点也导致，我们查询username=admin%e4时，%e4被省略，最后查出了username=admin的结果。</p>
+<h2 id="只有部分字符可以使用"><a href="#只有部分字符可以使用" class="headerlink" title="只有部分字符可以使用"></a>只有部分字符可以使用</h2><p>我在测试这个Trick的时候发现，username=admin%c2时可以正确得到结果，但username=admin%c1就不行，这是为什么？<br>简单fuzz了一下，如果在admin后面加上一个字符，有如下结果：</p>
+<pre><code>\x00~\x7F： 返回空白结果
+\x80~\xC1： 返回错误Illegal mix of collations
+\xC2~\xEF： 返回admin的结果
+\xF0~\xFF： 返回错误Illegal mix of collations
+</code></pre><h2 id="实战二"><a href="#实战二" class="headerlink" title="实战二"></a>实战二</h2><p><img src="http://pkf8r5ond.bkt.clouddn.com/19-1-12/67794247.jpg" alt=""><br>同理是这个if语句</p>
+<pre><code>比较$row[&apos;id&apos;]和$id的区别
+</code></pre><p>令id=%c2 即可</p>
+<h2 id="实战三"><a href="#实战三" class="headerlink" title="实战三"></a>实战三</h2><h1 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h1><p>使用MySQL字符集时的建议</p>
+<p>建立数据库/表和进行数据库操作时尽量显式指出使用的字符集，而不是依赖于MySQL的默认设置，否则MySQL升级时可能带来很大困扰；</p>
+<p>• 数据库和连接字符集都使用latin1时虽然大部分情况下都可以解决乱码问题，但缺点是无法以字符为单位来进行SQL操作，一般情况下将数据库和连接字符集都置为utf8是较好的选择；</p>
+<p>• 使用mysql C API时，初始化数据库句柄后马上用mysql_options设定MYSQL_SET_CHARSET_NAME属性为utf8，这样就不用显式地用 SET NAMES语句指定连接字符集，且用mysql_ping重连断开的长连接时也会把连接字符集重置为utf8；</p>
+<p>• 对于mysql PHP API，一般页面级的PHP程序总运行时间较短，在连接到数据库以后显式用SET NAMES语句设置一次连接字符集即可；但当使用长连接时，请注意保持连接通畅并在断开重连后用SET NAMES语句显式重置连接字符集。</p>
+<p>其他注意事项<br>• my.cnf中的default_character_set设置只影响mysql命令连接服务器时的连接字符集，不会对使用libmysqlclient库的应用程序产生任何作用！</p>
+<p>• 对字段进行的SQL函数操作通常都是以内部操作字符集进行的，不受连接字符集设置的影响。</p>
+<p>• SQL语句中的裸字符串会受到连接字符集或introducer设置的影响，对于比较之类的操作可能产生完全不同的结果，需要小心！</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.leavesongs.com/PENETRATION/mysql-charset-trick.html" target="_blank" rel="noopener">Mysql字符编码利用技巧
+</a><br><a href="http://www.laruence.com/2008/01/05/3192.html" target="_blank" rel="noopener">深入Mysql字符集设置</a><br><a href="https://www.leavesongs.com/PENETRATION/Mini-XCTF-Writeup.html" target="_blank" rel="noopener">XCTF两道web题目的writeup
+</a></p>
+<p><a href="https://www.jb51.net/article/132521.htm" target="_blank" rel="noopener">带你5分钟读懂MySQL字符集设置
+</a></p>
 
       
     </div>
@@ -453,7 +494,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CTF/" rel="tag"># CTF</a>
+            <a href="/tags/web安全/" rel="tag"># web安全</a>
           
         </div>
       
@@ -466,8 +507,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/21/2018湖湘杯WP/" rel="next" title="湖湘杯WP">
-                <i class="fa fa-chevron-left"></i> 湖湘杯WP
+              <a href="/2019/01/12/2018·i春秋圣诞欢乐赛官方WriteUp/" rel="next" title="2018·i春秋圣诞欢乐赛官方WriteUp">
+                <i class="fa fa-chevron-left"></i> 2018·i春秋圣诞欢乐赛官方WriteUp
               </a>
             
           </div>
@@ -475,10 +516,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/24/日记/" rel="prev" title="有点小情绪">
-                有点小情绪 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -626,7 +663,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件上传漏洞总结"><span class="nav-number">1.</span> <span class="nav-text">文件上传漏洞总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#做过很多文件上传漏洞-感觉不难-但是比赛有些还是不会-明明是一个很简单的知识点-还要想半天-现在来总结一下-让自己的思路清晰点-系统化-日常更新！"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">做过很多文件上传漏洞,感觉不难,但是比赛有些还是不会,明明是一个很简单的知识点,还要想半天,现在来总结一下,让自己的思路清晰点,系统化,日常更新！</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL字符集介绍"><span class="nav-number">1.</span> <span class="nav-text">MySQL字符集介绍</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#实战一"><span class="nav-number"></span> <span class="nav-text">实战一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞成因"><span class="nav-number">1.</span> <span class="nav-text">漏洞成因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#只有部分字符可以使用"><span class="nav-number">2.</span> <span class="nav-text">只有部分字符可以使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战二"><span class="nav-number">3.</span> <span class="nav-text">实战二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战三"><span class="nav-number">4.</span> <span class="nav-text">实战三</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修复建议"><span class="nav-number"></span> <span class="nav-text">修复建议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></li></div>
             
 
           </div>
