@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基础SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统） SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSRF学习">
+<meta property="og:url" content="https://style-404.github.io/2019/03/24/SSRF学习/index.html">
+<meta property="og:site_name" content="可乐&#39;blog">
+<meta property="og:description" content="基础SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统） SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g165ua5y17j30nh0e53zv.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1alni59d8j30cd054746.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1aloes9ghj30dk04r3ye.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1al3w4pbaj30gy04lmxh.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1am35xhzsj30ia05mmxy.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1am6i39etj30j105m76b.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1am85bx7bj30gf04laax.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1bsq6l2jxj30j10740to.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1bsrqdgtzj30hz04c3zf.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1bssc5zo6j30fw04c758.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1bssxuyczj30g7041jsa.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1btni4rg0j30zt0aewhm.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1btog0m5mj30ut0bqtel.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1btpefn7bj30uh0cfadp.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g19dh7bspwj30ki048t8j.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g19dir17yuj30p405ct90.jpg">
+<meta property="og:updated_time" content="2019-03-24T15:20:47.939Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSRF学习">
+<meta name="twitter:description" content="基础SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统） SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g165ua5y17j30nh0e53zv.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://style-404.github.io/2019/03/24/SSRF学习/">
+
+
+
+
+
+  <title>SSRF学习 | 可乐'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可乐'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2019/03/24/SSRF学习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="筱阳">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可乐'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SSRF学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T23:18:09+08:00">
+                2019-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统）</p>
+<p>SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL地址获取网页文本内容，加载指定地址的图片，下载等等。</p>
+<p>注释：除了http/https等方式可以造成ssrf，类似tcp connect 方式也可以探测内网一些ip 的端口是否开发服务，只不过危害比较小而已。</p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g165ua5y17j30nh0e53zv.jpg" alt=""></p>
+<p>SSRF到反射XSS<br>尝试利用URL访问内部资源并使服务器执行操作<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">file:</span><span class="comment">///</span></span><br><span class="line"><span class="symbol">dict:</span><span class="comment">//</span></span><br><span class="line"><span class="symbol">ftp:</span><span class="comment">//</span></span><br><span class="line"><span class="symbol">gopher:</span><span class="comment">//</span></span><br></pre></td></tr></table></figure></p>
+<p>我们可以扫描内部网络和端口<br>如果它在云实例上运行，则尝试获取元数据</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$_GET</span>[<span class="string">'url'</span>];</span><br><span class="line"><span class="variable">$info</span> = parse_url(<span class="variable">$url</span>);</span><br><span class="line"><span class="regexp">//</span>假设www.site.com为白名单网站</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$info</span>[<span class="string">'host'</span>] != <span class="string">'www.baidu.com'</span>)</span><br><span class="line">&#123;</span><br><span class="line">    echo <span class="string">'目标网址不合法'</span>;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$ch</span> = curl_init();</span><br><span class="line">curl_setopt(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">curl_setopt(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$url</span>);</span><br><span class="line"><span class="variable">$data</span> = curl_exec(<span class="variable">$ch</span>);</span><br><span class="line">curl_close(<span class="variable">$ch</span>);</span><br><span class="line">echo <span class="variable">$data</span>;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码我们知道，主要是进行网址过滤，如果用户输入的网址不是公司的网址，则服务器不会发起请求。<br>这段代码的目的是，防止用户输入其它恶意数据，造成攻击，比如：<br><a href="http://www.site.com/test.php?url=http://10.0.0.16" target="_blank" rel="noopener">http://www.site.com/test.php?url=http://10.0.0.16</a> –攻击者尝试内网漫游<br><a href="http://www.site.com/test.php?url=http://www.hack.com" target="_blank" rel="noopener">http://www.site.com/test.php?url=http://www.hack.com</a> –攻击者引导服务器访问不合法网址<br>新人写代码往往对一些函数并不是了解很深入，这段代码忽视了两个问题：</p>
+<ol>
+<li>parse_url原理是什么？<br>parse_url只是负责字符串解析，它不保证你的协议真伪，这里我们不用http协议，而使用一个根本不存在的协议abc测试：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$url = <span class="string">'http://www.baidu.com/test'</span>;</span></span><br><span class="line"><span class="php">$info = parse_url($url);</span></span><br><span class="line"><span class="php">var_dump($info);</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1alni59d8j30cd054746.jpg" alt=""><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$url = <span class="string">'abc://www.baidu.com/test'</span>;</span></span><br><span class="line"><span class="php">$info = parse_url($url);</span></span><br><span class="line"><span class="php">var_dump($info);</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1aloes9ghj30dk04r3ye.jpg" alt=""></p>
+<ol start="2">
+<li>curl支持哪些协议？<br>curl是基于libcurl实现的，支持的协议非常多。<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libcurl supports HTTPS certificates, HTTP POST, HTTP PUT, FTP uploading, Kerberos, SPNEGO, HTTP form based upload, proxies, cookies, user+password authentication, file transfer resume, http<span class="built_in"> proxy </span>tunneling <span class="keyword">and</span> more</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>那么问题来了，我们回到最开始那个代码，我们可以发现存在两处问题：</p>
+<ol>
+<li>白名单只是检测了host，而没有检测协议。</li>
+<li>curl除了支持http协议，还支持file协议。</li>
+</ol>
+<p><a href="http://www.site.com/test.php?url=file://www.site.com/etc/passwd" target="_blank" rel="noopener">http://www.site.com/test.php?url=file://www.site.com/etc/passwd</a></p>
+<p>php curl识别出来这是个file协议，他会忽略<a href="http://www.site.com，而是直接读取文件/etc/passwd。" target="_blank" rel="noopener">www.site.com，而是直接读取文件/etc/passwd。</a></p>
+<p>dict协议应用<br>dict协议是一个字典服务器协议，通常用于让客户端使用过程中能够访问更多的字典源，但是在SSRF中如果可以使用dict协议那么就可以轻易的获取目标服务器端口上运行的服务版本等信息。</p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>LCTF的一道SSRF签到题</p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1al3w4pbaj30gy04lmxh.jpg" alt=""></p>
+<p>输入baidu.com  返回了源码 可见是调用curl 命令</p>
+<p>尝试用file 协议读取文件<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1am35xhzsj30ia05mmxy.jpg" alt=""><br>后端代码会给我们提交的url内容在最后加一个／，需要通过？或者#的方法截断 需要进行url编码直接传#是会拼接成 /etc/passwd#/ 整体作为一个path<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1am6i39etj30j105m76b.jpg" alt=""><br>接着读取 flag<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1am85bx7bj30gf04laax.jpg" alt=""><br>随便读一下源码<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span><span class="keyword">if</span>(!$_GET[<span class="string">'site'</span>])&#123; <span class="keyword">echo</span> &lt;&lt;&lt;EOF &lt;html&gt; &lt;body&gt; look source code: &lt;form action=<span class="string">''</span> method=<span class="string">'GET'</span>&gt; &lt;input type=<span class="string">'submit'</span> name=<span class="string">'submit'</span> /&gt;&lt;input type=<span class="string">'text'</span> name=<span class="string">'site'</span> style=<span class="string">"width:1000px"</span> value=<span class="string">"https://www.baidu.com"</span>/&gt; &lt;/form&gt; &lt;/body&gt; &lt;/html&gt; EOF; <span class="keyword">die</span>(); &#125;</span></span><br><span class="line"><span class="php">$url = $_GET[<span class="string">'site'</span>]; $url_schema = parse_url($url);</span></span><br><span class="line"><span class="php">$host = $url_schema[<span class="string">'host'</span>];</span></span><br><span class="line"><span class="php">$request_url = $url.<span class="string">"/"</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> ($host !== <span class="string">'www.baidu.com'</span>)&#123; <span class="keyword">die</span>(<span class="string">"wrong site"</span>); &#125;</span></span><br><span class="line"><span class="php">$ci = curl_init();</span></span><br><span class="line"><span class="php">curl_setopt($ci, CURLOPT_URL, $request_url);</span></span><br><span class="line"><span class="php">curl_setopt($ci, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span></span><br><span class="line"><span class="php"> $res = curl_exec($ci);</span></span><br><span class="line"><span class="php">curl_close($ci);</span></span><br><span class="line"><span class="php"><span class="keyword">if</span>($res)&#123; <span class="keyword">echo</span> <span class="string">"&lt;h1&gt;Source Code:&lt;/h1&gt;"</span>; <span class="keyword">echo</span> $request_url; <span class="keyword">echo</span> <span class="string">"&lt;hr /&gt;"</span>; <span class="keyword">echo</span> htmlentities($res); &#125;</span></span><br><span class="line"><span class="php"><span class="keyword">else</span>&#123; <span class="keyword">echo</span> <span class="string">"get source failed"</span>; &#125; <span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>平安科技的一道CTF<br>看到有参数为url 猜测是一道SSRF<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1bsq6l2jxj30j10740to.jpg" alt=""><br>尝试访问flag_file.php 弹出<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1bsrqdgtzj30hz04c3zf.jpg" alt=""><br>直接使用127.0.0.1 不行，可能做了关键字过滤<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1bssc5zo6j30fw04c758.jpg" alt=""><br>把127.0.0.1转成整数或者localhost，成功拿到flag</p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1bssxuyczj30g7041jsa.jpg" alt=""></p>
+<p>第二届XCTF<br>Web400-百度内网漫游<br>题目给了一篇wooyun文章，通过查看得知是ssrf，随意在搜索框输入，返回百度的内容。<br>抓包，发现有一个link参数，根据ssrf的特性，确认此处存在ssrf漏洞。<br>于是我们要做的就是利用这个参数去访问其内网，但是经过测试发现，其过滤了IP，于是在自己的vps上放了一个302跳转：<br>利用跳转来访问内网<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1btni4rg0j30zt0aewhm.jpg" alt=""><br>访问这个css文件<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1btog0m5mj30ut0bqtel.jpg" alt=""><br>得到内网的域名,接下来访问这个内网域名<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1btpefn7bj30uh0cfadp.jpg" alt=""><br>点了下导航栏下面的图片，直接给跳回去，但是发现地址栏多了一些东西，看到src，以及online几个参数，</p>
+<h1 id="通过gopher发送post数据包"><a href="#通过gopher发送post数据包" class="headerlink" title="通过gopher发送post数据包"></a>通过gopher发送post数据包</h1><h1 id="通过gopher攻击内网数据库"><a href="#通过gopher攻击内网数据库" class="headerlink" title="通过gopher攻击内网数据库"></a>通过gopher攻击内网数据库</h1><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>2018  ISITDTU 的一道CTF<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g19dh7bspwj30ki048t8j.jpg" alt=""></p>
+<p>能够看出来是一道SSRF<br>于是利用file:// 读一下文件 输入file:///etc/passwd<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g19dir17yuj30p405ct90.jpg" alt=""><br>可以看到后台判断了服务器是否为localhost，所以我们通过file://localhost/etc/passwd即可绕过限制。这里我们尝试读题目源码file://localhost/var/www/html/index.php<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">include_once</span> <span class="string">"config.php"</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'url'</span>])&amp;&amp;!<span class="keyword">empty</span>($_POST[<span class="string">'url'</span>]))</span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    $url = $_POST[<span class="string">'url'</span>];</span></span><br><span class="line"><span class="php">    $content_url = getUrlContent($url);</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="keyword">else</span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    $content_url = <span class="string">""</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'debug'</span>]))</span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    show_source(<span class="keyword">__FILE__</span>);</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>再读一下config.php<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">$hosts = <span class="string">"localhost"</span>;</span></span><br><span class="line"><span class="php">$dbusername = <span class="string">"ssrf_user"</span>;</span></span><br><span class="line"><span class="php">$dbpasswd = <span class="string">""</span>;</span></span><br><span class="line"><span class="php">$dbname = <span class="string">"ssrf"</span>;</span></span><br><span class="line"><span class="php">$dbport = <span class="number">3306</span>;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">$conn = mysqli_connect($hosts,$dbusername,$dbpasswd,$dbname,$dbport);</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="function"><span class="keyword">function</span> <span class="title">initdb</span><span class="params">($conn)</span></span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    $dbinit = <span class="string">"create table if not exists flag(secret varchar(100));"</span>;</span></span><br><span class="line"><span class="php">    <span class="keyword">if</span>(mysqli_query($conn,$dbinit)) <span class="keyword">return</span> <span class="number">1</span>;</span></span><br><span class="line"><span class="php">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="function"><span class="keyword">function</span> <span class="title">safe</span><span class="params">($url)</span></span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    $tmpurl = parse_url($url, PHP_URL_HOST);</span></span><br><span class="line"><span class="php">    <span class="keyword">if</span>($tmpurl != <span class="string">"localhost"</span> <span class="keyword">and</span> $tmpurl != <span class="string">"127.0.0.1"</span>)</span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        var_dump($tmpurl);</span></span><br><span class="line"><span class="php">        <span class="keyword">die</span>(<span class="string">"&lt;h1&gt;Only access to localhost&lt;/h1&gt;"</span>);</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">    <span class="keyword">return</span> $url;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="function"><span class="keyword">function</span> <span class="title">getUrlContent</span><span class="params">($url)</span></span>&#123;</span></span><br><span class="line"><span class="php">    $url = safe($url);</span></span><br><span class="line"><span class="php">    $url = escapeshellarg($url);</span></span><br><span class="line"><span class="php">    $pl = <span class="string">"curl "</span>.$url;</span></span><br><span class="line"><span class="php">    <span class="keyword">echo</span> $pl;</span></span><br><span class="line"><span class="php">    $content = shell_exec($pl);</span></span><br><span class="line"><span class="php">    <span class="keyword">return</span> $content;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php">initdb($conn);</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>在数据库中且给出了我们一个空密码的mysql账户<br>gopher协议的主要功能是可以直接发起socket连接获取数据，而且由于mysql这里给出的密码是空密码，因此可以通过gopher发起sql请求来获取数据。</p>
+<p>帮助生成gopher攻击mysql的payload</p>
+<p><a href="https://github.com/style-404/mysql_gopher_attack" target="_blank" rel="noopener">https://github.com/style-404/mysql_gopher_attack</a></p>
+<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><p>2016Hctf的一道题</p>
+<p>hackme上一道的一道XSS加ssrf</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://xz.aliyun.com/t/4420#toc-4" target="_blank" rel="noopener">https://xz.aliyun.com/t/4420#toc-4</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="筱阳 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="筱阳 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/23/thinnkphp学习/" rel="next" title="thinnkphp学习">
+                <i class="fa fa-chevron-left"></i> thinnkphp学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="筱阳">
+            
+              <p class="site-author-name" itemprop="name">筱阳</p>
+              <p class="site-description motion-element" itemprop="description">只会复现的菜鸡</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.freebuf.com/" title="freebug" target="_blank">freebug</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#实例"><span class="nav-number"></span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实战"><span class="nav-number">1.</span> <span class="nav-text">实战</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过gopher发送post数据包"><span class="nav-number"></span> <span class="nav-text">通过gopher发送post数据包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过gopher攻击内网数据库"><span class="nav-number"></span> <span class="nav-text">通过gopher攻击内网数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">1.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">2.</span> <span class="nav-text">redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number"></span> <span class="nav-text">参考</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">筱阳</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

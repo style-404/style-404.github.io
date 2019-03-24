@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#安装与配置 配置我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。 我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：123">
+<meta name="keywords" content="开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thinnkphp学习">
+<meta property="og:url" content="https://style-404.github.io/2019/03/23/thinnkphp学习/index.html">
+<meta property="og:site_name" content="可乐&#39;blog">
+<meta property="og:description" content="#安装与配置 配置我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。 我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：123">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1d7k1f0n1j30gn05x3yw.jpg">
+<meta property="og:updated_time" content="2019-03-23T16:52:45.935Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="thinnkphp学习">
+<meta name="twitter:description" content="#安装与配置 配置我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。 我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：123">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1d7k1f0n1j30gn05x3yw.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://style-404.github.io/2019/03/23/thinnkphp学习/">
+
+
+
+
+
+  <title>thinnkphp学习 | 可乐'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可乐'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2019/03/23/thinnkphp学习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="筱阳">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可乐'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">thinnkphp学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-23T22:26:50+08:00">
+                2019-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#安装与配置</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。</p>
+<p>我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：<br><figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">return <span class="built_in">array</span>(</span><br><span class="line">    <span class="symbol">'URL_ROUTER_ON'</span>   =&gt; <span class="literal">true</span>,</span><br><span class="line">    <span class="symbol">'URL_ROUTE_RULES'</span>=&gt;<span class="built_in">array</span>(</span><br><span class="line"></span><br><span class="line">    <span class="symbol">'blogs</span>/:id'               =&gt; <span class="built_in">array</span>(<span class="symbol">'Index</span>/read'),</span><br><span class="line">    <span class="symbol">'article</span>/:id'               =&gt; <span class="built_in">array</span>(<span class="symbol">'Article</span>/show')</span><br><span class="line">),</span><br><span class="line">    <span class="symbol">'URL_MAP_RULES'</span>=&gt;<span class="built_in">array</span>(</span><br><span class="line">    <span class="symbol">'new</span>/top' =&gt; <span class="symbol">'Index</span>/top?<span class="keyword">type</span>=top'</span><br><span class="line">),</span><br><span class="line"></span><br><span class="line">    <span class="symbol">'DB_TYPE'</span>               =&gt;  <span class="symbol">'mysql'</span>,</span><br><span class="line">    <span class="symbol">'DB_HOST'</span>               =&gt;  <span class="symbol">'localhost'</span>,</span><br><span class="line">    <span class="symbol">'DB_NAME'</span>               =&gt;  <span class="symbol">'think'</span>,</span><br><span class="line">    <span class="symbol">'DB_USER'</span>               =&gt;  <span class="symbol">'root'</span>,</span><br><span class="line">    <span class="symbol">'DB_PWD'</span>                =&gt;  <span class="string">''</span>,</span><br><span class="line">    <span class="symbol">'DB_PORT'</span>               =&gt;  <span class="string">'3306'</span>,</span><br><span class="line">    <span class="symbol">'DB_PREFIX'</span>             =&gt;  <span class="symbol">'think_'</span>,</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>说明：ThinkPHP的配置参数（一级参数）是不区分大小写的，因为不管大写小写，最后都会转为小写。但是为了在编程的过程中更符合规范，建议统一使用大写来设置配置参数。上面的第一个配置URL_ROUTER_ON，我们开启了路由重写功能，为后面的 URL_ROUTE_RULES 奠定基础（详细的后面我们会在路由章节说到）。最后几个带DB_的设置项是表示设置连接数据库的参数，几乎每一个web应用都会用到数据库，这些设置为我们后续进一步学习的基础。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"> <span class="keyword">return</span> <span class="keyword">array</span>(</span></span><br><span class="line"><span class="php">    <span class="string">'USER_CONFIG'</span>        =&gt; <span class="keyword">array</span>(</span></span><br><span class="line"><span class="php">        <span class="string">'USER_AUTH'</span> =&gt; <span class="keyword">true</span>,</span></span><br><span class="line"><span class="php">        <span class="string">'USER_TYPE'</span> =&gt; <span class="number">2</span>,</span></span><br><span class="line"><span class="php">    ),</span></span><br><span class="line"><span class="php">);</span></span><br></pre></td></tr></table></figure></p>
+<p>如上面的USER_CONFIG下的USER_AUTH和USER_TYPE是区分大小写的。 这个只是示例，如果在项目中真的需要二级配置，请区分大小写，这些配置也是在Application/Common/Conf/config.php中配置的。</p>
+<p>了解了ThinkPHP的配置格式后，我们再看看ThinkPHP的配置加载顺序，理解配置项的加载顺序在开发的时候很重要，因为在同名的配置下，后加载的配置会覆盖前面加载的顺序，而生效的只有后加载的顺序。</p>
+<p>惯例配置-&gt;应用配置-&gt;模式配置-&gt;调试配置-&gt;状态配置-&gt;模块配置-&gt;扩展配置-&gt;动态配置</p>
+<p>上面的顺序就是ThinkPHP的配置加载顺序，而在一般情况下，这些配置都是自动加载的。我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中。在开发的时候我们可以在这里设置自己的配置，如果你不熟悉你可以配置什么值，你可以打开ThinkPHP/Conf/convention.php文件来查看相对应的配置项</p>
+<p>读取配置<br>在开发的过程中，我们有时候需要读取应用的配置值，在ThinkPHP中统一使用C(‘配置参数名’)来读取配置。比如：<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$model = C(<span class="string">'URL_MODEL'</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$model = C(<span class="string">'url_model'</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>这两个是等效的，都是可以读取到系统的URL访问模式的设置值，因为在ThinkPHP的配置项是不分大小写的。但是建议统一使用大写方式。</p>
+<p>可以利用config首字母来记忆C()方法。</p>
+<h2 id="课后习题"><a href="#课后习题" class="headerlink" title="课后习题"></a>课后习题</h2><p>查看ThinkPHP/Conf/convention.php的内容，对其中的配置项进行初步了解<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="comment">// +----------------------------------------------------------------------</span></span></span><br><span class="line"><span class="php"><span class="comment">// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]</span></span></span><br><span class="line"><span class="php"><span class="comment">// +----------------------------------------------------------------------</span></span></span><br><span class="line"><span class="php"><span class="comment">// | Copyright (c) 2006-2014 http://thinkphp.cn All rights reserved.</span></span></span><br><span class="line"><span class="php"><span class="comment">// +----------------------------------------------------------------------</span></span></span><br><span class="line"><span class="php"><span class="comment">// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )</span></span></span><br><span class="line"><span class="php"><span class="comment">// +----------------------------------------------------------------------</span></span></span><br><span class="line"><span class="php"><span class="comment">// | Author: liu21st &lt;liu21st@gmail.com&gt;</span></span></span><br><span class="line"><span class="php"><span class="comment">// +----------------------------------------------------------------------</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line">/**</span><br><span class="line"> * ThinkPHP惯例配置文件</span><br><span class="line"> * 该文件请不要修改，如果要覆盖惯例配置的值，可在应用配置文件中设定和惯例不符的配置项</span><br><span class="line"> * 配置名称大小写任意，系统会统一转换成小写</span><br><span class="line"> * 所有配置参数都可以在生效前动态改变</span><br><span class="line"><span class="php"> */</span></span><br><span class="line"><span class="php">defined(<span class="string">'THINK_PATH'</span>) <span class="keyword">or</span> <span class="keyword">exit</span>();</span></span><br><span class="line"><span class="php"><span class="keyword">return</span>  <span class="keyword">array</span>(</span></span><br><span class="line"><span class="php">    <span class="comment">/* 应用设定 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'APP_USE_NAMESPACE'</span>     =&gt;  <span class="keyword">true</span>,    <span class="comment">// 应用类库是否使用命名空间</span></span></span><br><span class="line"><span class="php">    <span class="string">'APP_SUB_DOMAIN_DEPLOY'</span> =&gt;  <span class="keyword">false</span>,   <span class="comment">// 是否开启子域名部署</span></span></span><br><span class="line"><span class="php">    <span class="string">'APP_SUB_DOMAIN_RULES'</span>  =&gt;  <span class="keyword">array</span>(), <span class="comment">// 子域名部署规则</span></span></span><br><span class="line"><span class="php">    <span class="string">'APP_DOMAIN_SUFFIX'</span>     =&gt;  <span class="string">''</span>, <span class="comment">// 域名后缀 如果是com.cn net.cn 之类的后缀必须设置    </span></span></span><br><span class="line"><span class="php">    <span class="string">'ACTION_SUFFIX'</span>         =&gt;  <span class="string">''</span>, <span class="comment">// 操作方法后缀</span></span></span><br><span class="line"><span class="php">    <span class="string">'MULTI_MODULE'</span>          =&gt;  <span class="keyword">true</span>, <span class="comment">// 是否允许多模块 如果为false 则必须设置 DEFAULT_MODULE</span></span></span><br><span class="line"><span class="php">    <span class="string">'MODULE_DENY_LIST'</span>      =&gt;  <span class="keyword">array</span>(<span class="string">'Common'</span>,<span class="string">'Runtime'</span>),</span></span><br><span class="line"><span class="php">    <span class="string">'CONTROLLER_LEVEL'</span>      =&gt;  <span class="number">1</span>,</span></span><br><span class="line"><span class="php">    <span class="string">'APP_AUTOLOAD_LAYER'</span>    =&gt;  <span class="string">'Controller,Model'</span>, <span class="comment">// 自动加载的应用类库层 关闭APP_USE_NAMESPACE后有效</span></span></span><br><span class="line"><span class="php">    <span class="string">'APP_AUTOLOAD_PATH'</span>     =&gt;  <span class="string">'Model'</span>, <span class="comment">// 自动加载的路径 关闭APP_USE_NAMESPACE后有效</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* Cookie设置 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'COOKIE_EXPIRE'</span>         =&gt;  <span class="number">0</span>,    <span class="comment">// Cookie有效期</span></span></span><br><span class="line"><span class="php">    <span class="string">'COOKIE_DOMAIN'</span>         =&gt;  <span class="string">''</span>,      <span class="comment">// Cookie有效域名</span></span></span><br><span class="line"><span class="php">    <span class="string">'COOKIE_PATH'</span>           =&gt;  <span class="string">'/'</span>,     <span class="comment">// Cookie路径</span></span></span><br><span class="line"><span class="php">    <span class="string">'COOKIE_PREFIX'</span>         =&gt;  <span class="string">''</span>,      <span class="comment">// Cookie前缀 避免冲突</span></span></span><br><span class="line"><span class="php">    <span class="string">'COOKIE_HTTPONLY'</span>       =&gt;  <span class="string">''</span>,      <span class="comment">// Cookie httponly设置</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* 默认设定 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_M_LAYER'</span>       =&gt;  <span class="string">'Model'</span>, <span class="comment">// 默认的模型层名称</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_C_LAYER'</span>       =&gt;  <span class="string">'Controller'</span>, <span class="comment">// 默认的控制器层名称</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_V_LAYER'</span>       =&gt;  <span class="string">'View'</span>, <span class="comment">// 默认的视图层名称</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_LANG'</span>          =&gt;  <span class="string">'zh-cn'</span>, <span class="comment">// 默认语言</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_THEME'</span>         =&gt;  <span class="string">''</span>,	<span class="comment">// 默认模板主题名称</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_MODULE'</span>        =&gt;  <span class="string">'Home'</span>,  <span class="comment">// 默认模块</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_CONTROLLER'</span>    =&gt;  <span class="string">'Index'</span>, <span class="comment">// 默认控制器名称</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_ACTION'</span>        =&gt;  <span class="string">'index'</span>, <span class="comment">// 默认操作名称</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_CHARSET'</span>       =&gt;  <span class="string">'utf-8'</span>, <span class="comment">// 默认输出编码</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_TIMEZONE'</span>      =&gt;  <span class="string">'PRC'</span>,	<span class="comment">// 默认时区</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_AJAX_RETURN'</span>   =&gt;  <span class="string">'JSON'</span>,  <span class="comment">// 默认AJAX 数据返回格式,可选JSON XML ...</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_JSONP_HANDLER'</span> =&gt;  <span class="string">'jsonpReturn'</span>, <span class="comment">// 默认JSONP格式返回的处理方法</span></span></span><br><span class="line"><span class="php">    <span class="string">'DEFAULT_FILTER'</span>        =&gt;  <span class="string">'htmlspecialchars'</span>, <span class="comment">// 默认参数过滤方法 用于I函数...</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* 数据库设置 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_TYPE'</span>               =&gt;  <span class="string">''</span>,     <span class="comment">// 数据库类型</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_HOST'</span>               =&gt;  <span class="string">''</span>, <span class="comment">// 服务器地址</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_NAME'</span>               =&gt;  <span class="string">''</span>,          <span class="comment">// 数据库名</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_USER'</span>               =&gt;  <span class="string">''</span>,      <span class="comment">// 用户名</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_PWD'</span>                =&gt;  <span class="string">''</span>,          <span class="comment">// 密码</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_PORT'</span>               =&gt;  <span class="string">''</span>,        <span class="comment">// 端口</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_PREFIX'</span>             =&gt;  <span class="string">''</span>,    <span class="comment">// 数据库表前缀</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_FIELDTYPE_CHECK'</span>    =&gt;  <span class="keyword">false</span>,       <span class="comment">// 是否进行字段类型检查</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_FIELDS_CACHE'</span>       =&gt;  <span class="keyword">true</span>,        <span class="comment">// 启用字段缓存</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_CHARSET'</span>            =&gt;  <span class="string">'utf8'</span>,      <span class="comment">// 数据库编码默认采用utf8</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_DEPLOY_TYPE'</span>        =&gt;  <span class="number">0</span>, <span class="comment">// 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_RW_SEPARATE'</span>        =&gt;  <span class="keyword">false</span>,       <span class="comment">// 数据库读写是否分离 主从式有效</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_MASTER_NUM'</span>         =&gt;  <span class="number">1</span>, <span class="comment">// 读写分离后 主服务器数量</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_SLAVE_NO'</span>           =&gt;  <span class="string">''</span>, <span class="comment">// 指定从服务器序号</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_SQL_BUILD_CACHE'</span>    =&gt;  <span class="keyword">false</span>, <span class="comment">// 数据库查询的SQL创建缓存</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_SQL_BUILD_QUEUE'</span>    =&gt;  <span class="string">'file'</span>,   <span class="comment">// SQL缓存队列的缓存方式 支持 file xcache和apc</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_SQL_BUILD_LENGTH'</span>   =&gt;  <span class="number">20</span>, <span class="comment">// SQL缓存的队列长度</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_SQL_LOG'</span>            =&gt;  <span class="keyword">false</span>, <span class="comment">// SQL执行日志记录</span></span></span><br><span class="line"><span class="php">    <span class="string">'DB_BIND_PARAM'</span>         =&gt;  <span class="keyword">false</span>, <span class="comment">// 数据库写入数据自动参数绑定</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* 数据缓存设置 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'DATA_CACHE_TIME'</span>       =&gt;  <span class="number">0</span>,      <span class="comment">// 数据缓存有效期 0表示永久缓存</span></span></span><br><span class="line"><span class="php">    <span class="string">'DATA_CACHE_COMPRESS'</span>   =&gt;  <span class="keyword">false</span>,   <span class="comment">// 数据缓存是否压缩缓存</span></span></span><br><span class="line"><span class="php">    <span class="string">'DATA_CACHE_CHECK'</span>      =&gt;  <span class="keyword">false</span>,   <span class="comment">// 数据缓存是否校验缓存</span></span></span><br><span class="line"><span class="php">    <span class="string">'DATA_CACHE_PREFIX'</span>     =&gt;  <span class="string">''</span>,     <span class="comment">// 缓存前缀</span></span></span><br><span class="line"><span class="php">    <span class="string">'DATA_CACHE_TYPE'</span>       =&gt;  <span class="string">'File'</span>,  <span class="comment">// 数据缓存类型,支持:File|Db|Apc|Memcache|Shmop|Sqlite|Xcache|Apachenote|Eaccelerator</span></span></span><br><span class="line"><span class="php">    <span class="string">'DATA_CACHE_PATH'</span>       =&gt;  TEMP_PATH,<span class="comment">// 缓存路径设置 (仅对File方式缓存有效)</span></span></span><br><span class="line"><span class="php">    <span class="string">'DATA_CACHE_SUBDIR'</span>     =&gt;  <span class="keyword">false</span>,    <span class="comment">// 使用子目录缓存 (自动根据缓存标识的哈希创建子目录)</span></span></span><br><span class="line"><span class="php">    <span class="string">'DATA_PATH_LEVEL'</span>       =&gt;  <span class="number">1</span>,        <span class="comment">// 子目录缓存级别</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* 错误设置 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'ERROR_MESSAGE'</span>         =&gt;  <span class="string">'页面错误！请稍后再试～'</span>,<span class="comment">//错误显示信息,非调试模式有效</span></span></span><br><span class="line"><span class="php">    <span class="string">'ERROR_PAGE'</span>            =&gt;  <span class="string">''</span>,	<span class="comment">// 错误定向页面</span></span></span><br><span class="line"><span class="php">    <span class="string">'SHOW_ERROR_MSG'</span>        =&gt;  <span class="keyword">false</span>,    <span class="comment">// 显示错误信息</span></span></span><br><span class="line"><span class="php">    <span class="string">'TRACE_MAX_RECORD'</span>      =&gt;  <span class="number">100</span>,    <span class="comment">// 每个级别的错误信息 最大记录数</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* 日志设置 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'LOG_RECORD'</span>            =&gt;  <span class="keyword">false</span>,   <span class="comment">// 默认不记录日志</span></span></span><br><span class="line"><span class="php">    <span class="string">'LOG_TYPE'</span>              =&gt;  <span class="string">'File'</span>, <span class="comment">// 日志记录类型 默认为文件方式</span></span></span><br><span class="line"><span class="php">    <span class="string">'LOG_LEVEL'</span>             =&gt;  <span class="string">'EMERG,ALERT,CRIT,ERR'</span>,<span class="comment">// 允许记录的日志级别</span></span></span><br><span class="line"><span class="php">    <span class="string">'LOG_FILE_SIZE'</span>         =&gt;  <span class="number">2097152</span>,	<span class="comment">// 日志文件大小限制</span></span></span><br><span class="line"><span class="php">    <span class="string">'LOG_EXCEPTION_RECORD'</span>  =&gt;  <span class="keyword">false</span>,    <span class="comment">// 是否记录异常信息日志</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* SESSION设置 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'SESSION_AUTO_START'</span>    =&gt;  <span class="keyword">true</span>,    <span class="comment">// 是否自动开启Session</span></span></span><br><span class="line"><span class="php">    <span class="string">'SESSION_OPTIONS'</span>       =&gt;  <span class="keyword">array</span>(), <span class="comment">// session 配置数组 支持type name id path expire domain 等参数</span></span></span><br><span class="line"><span class="php">    <span class="string">'SESSION_TYPE'</span>          =&gt;  <span class="string">''</span>, <span class="comment">// session hander类型 默认无需设置 除非扩展了session hander驱动</span></span></span><br><span class="line"><span class="php">    <span class="string">'SESSION_PREFIX'</span>        =&gt;  <span class="string">''</span>, <span class="comment">// session 前缀</span></span></span><br><span class="line"><span class="php">    <span class="comment">//'VAR_SESSION_ID'      =&gt;  'session_id',     //sessionID的提交变量</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* 模板引擎设置 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_CONTENT_TYPE'</span>     =&gt;  <span class="string">'text/html'</span>, <span class="comment">// 默认模板输出类型</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_ACTION_ERROR'</span>     =&gt;  THINK_PATH.<span class="string">'Tpl/dispatch_jump.tpl'</span>, <span class="comment">// 默认错误跳转对应的模板文件</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_ACTION_SUCCESS'</span>   =&gt;  THINK_PATH.<span class="string">'Tpl/dispatch_jump.tpl'</span>, <span class="comment">// 默认成功跳转对应的模板文件</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_EXCEPTION_FILE'</span>   =&gt;  THINK_PATH.<span class="string">'Tpl/think_exception.tpl'</span>,<span class="comment">// 异常页面的模板文件</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_DETECT_THEME'</span>     =&gt;  <span class="keyword">false</span>,       <span class="comment">// 自动侦测模板主题</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_TEMPLATE_SUFFIX'</span>  =&gt;  <span class="string">'.html'</span>,     <span class="comment">// 默认模板文件后缀</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_FILE_DEPR'</span>        =&gt;  <span class="string">'/'</span>, <span class="comment">//模板文件CONTROLLER_NAME与ACTION_NAME之间的分割符</span></span></span><br><span class="line"><span class="php">    <span class="comment">// 布局设置</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_ENGINE_TYPE'</span>      =&gt;  <span class="string">'Think'</span>,     <span class="comment">// 默认模板引擎 以下设置仅对使用Think模板引擎有效</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_CACHFILE_SUFFIX'</span>  =&gt;  <span class="string">'.php'</span>,      <span class="comment">// 默认模板缓存后缀</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_DENY_FUNC_LIST'</span>   =&gt;  <span class="string">'echo,exit'</span>,    <span class="comment">// 模板引擎禁用函数</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_DENY_PHP'</span>         =&gt;  <span class="keyword">false</span>, <span class="comment">// 默认模板引擎是否禁用PHP原生代码</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_L_DELIM'</span>          =&gt;  <span class="string">'&#123;'</span>,            <span class="comment">// 模板引擎普通标签开始标记</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_R_DELIM'</span>          =&gt;  <span class="string">'&#125;'</span>,            <span class="comment">// 模板引擎普通标签结束标记</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_VAR_IDENTIFY'</span>     =&gt;  <span class="string">'array'</span>,     <span class="comment">// 模板变量识别。留空自动判断,参数为'obj'则表示对象</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_STRIP_SPACE'</span>      =&gt;  <span class="keyword">true</span>,       <span class="comment">// 是否去除模板文件里面的html空格与换行</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_CACHE_ON'</span>         =&gt;  <span class="keyword">true</span>,        <span class="comment">// 是否开启模板编译缓存,设为false则每次都会重新编译</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_CACHE_PREFIX'</span>     =&gt;  <span class="string">''</span>,         <span class="comment">// 模板缓存前缀标识，可以动态改变</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_CACHE_TIME'</span>       =&gt;  <span class="number">0</span>,         <span class="comment">// 模板缓存有效期 0 为永久，(以数字为值，单位:秒)</span></span></span><br><span class="line"><span class="php">    <span class="string">'TMPL_LAYOUT_ITEM'</span>      =&gt;  <span class="string">'&#123;__CONTENT__&#125;'</span>, <span class="comment">// 布局模板的内容替换标识</span></span></span><br><span class="line"><span class="php">    <span class="string">'LAYOUT_ON'</span>             =&gt;  <span class="keyword">false</span>, <span class="comment">// 是否启用布局</span></span></span><br><span class="line"><span class="php">    <span class="string">'LAYOUT_NAME'</span>           =&gt;  <span class="string">'layout'</span>, <span class="comment">// 当前布局名称 默认为layout</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">// Think模板引擎标签库相关设定</span></span></span><br><span class="line"><span class="php">    <span class="string">'TAGLIB_BEGIN'</span>          =&gt;  <span class="string">'&lt;'</span>,  <span class="comment">// 标签库标签开始标记</span></span></span><br><span class="line"><span class="php">    <span class="string">'TAGLIB_END'</span>            =&gt;  <span class="string">'&gt;'</span>,  <span class="comment">// 标签库标签结束标记</span></span></span><br><span class="line"><span class="php">    <span class="string">'TAGLIB_LOAD'</span>           =&gt;  <span class="keyword">true</span>, <span class="comment">// 是否使用内置标签库之外的其它标签库，默认自动检测</span></span></span><br><span class="line"><span class="php">    <span class="string">'TAGLIB_BUILD_IN'</span>       =&gt;  <span class="string">'cx'</span>, <span class="comment">// 内置标签库名称(标签使用不必指定标签库名称),以逗号分隔 注意解析顺序</span></span></span><br><span class="line"><span class="php">    <span class="string">'TAGLIB_PRE_LOAD'</span>       =&gt;  <span class="string">''</span>,   <span class="comment">// 需要额外加载的标签库(须指定标签库名称)，多个以逗号分隔</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* URL设置 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_CASE_INSENSITIVE'</span>  =&gt;  <span class="keyword">true</span>,   <span class="comment">// 默认false 表示URL区分大小写 true则表示不区分大小写</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_MODEL'</span>             =&gt;  <span class="number">1</span>,       <span class="comment">// URL访问模式,可选参数0、1、2、3,代表以下四种模式：</span></span></span><br><span class="line"><span class="php">    <span class="comment">// 0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_PATHINFO_DEPR'</span>     =&gt;  <span class="string">'/'</span>,	<span class="comment">// PATHINFO模式下，各参数之间的分割符号</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_PATHINFO_FETCH'</span>    =&gt;  <span class="string">'ORIG_PATH_INFO,REDIRECT_PATH_INFO,REDIRECT_URL'</span>, <span class="comment">// 用于兼容判断PATH_INFO 参数的SERVER替代变量列表</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_REQUEST_URI'</span>       =&gt;  <span class="string">'REQUEST_URI'</span>, <span class="comment">// 获取当前页面地址的系统变量 默认为REQUEST_URI</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_HTML_SUFFIX'</span>       =&gt;  <span class="string">'html'</span>,  <span class="comment">// URL伪静态后缀设置</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_DENY_SUFFIX'</span>       =&gt;  <span class="string">'ico|png|gif|jpg'</span>, <span class="comment">// URL禁止访问的后缀设置</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_PARAMS_BIND'</span>       =&gt;  <span class="keyword">true</span>, <span class="comment">// URL变量绑定到Action方法参数</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_PARAMS_BIND_TYPE'</span>  =&gt;  <span class="number">0</span>, <span class="comment">// URL变量绑定的类型 0 按变量名绑定 1 按变量顺序绑定</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_PARAMS_FILTER'</span>     =&gt;  <span class="keyword">false</span>, <span class="comment">// URL变量绑定过滤</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_PARAMS_FILTER_TYPE'</span>=&gt;  <span class="string">''</span>, <span class="comment">// URL变量绑定过滤方法 如果为空 调用DEFAULT_FILTER</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_ROUTER_ON'</span>         =&gt;  <span class="keyword">false</span>,   <span class="comment">// 是否开启URL路由</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_ROUTE_RULES'</span>       =&gt;  <span class="keyword">array</span>(), <span class="comment">// 默认路由规则 针对模块</span></span></span><br><span class="line"><span class="php">    <span class="string">'URL_MAP_RULES'</span>         =&gt;  <span class="keyword">array</span>(), <span class="comment">// URL映射定义规则</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="comment">/* 系统变量名称设置 */</span></span></span><br><span class="line"><span class="php">    <span class="string">'VAR_MODULE'</span>            =&gt;  <span class="string">'m'</span>,     <span class="comment">// 默认模块获取变量</span></span></span><br><span class="line"><span class="php">    <span class="string">'VAR_ADDON'</span>             =&gt;  <span class="string">'addon'</span>,     <span class="comment">// 默认的插件控制器命名空间变量</span></span></span><br><span class="line"><span class="php">    <span class="string">'VAR_CONTROLLER'</span>        =&gt;  <span class="string">'c'</span>,    <span class="comment">// 默认控制器获取变量</span></span></span><br><span class="line"><span class="php">    <span class="string">'VAR_ACTION'</span>            =&gt;  <span class="string">'a'</span>,    <span class="comment">// 默认操作获取变量</span></span></span><br><span class="line"><span class="php">    <span class="string">'VAR_AJAX_SUBMIT'</span>       =&gt;  <span class="string">'ajax'</span>,  <span class="comment">// 默认的AJAX提交变量</span></span></span><br><span class="line"><span class="php">    <span class="string">'VAR_JSONP_HANDLER'</span>     =&gt;  <span class="string">'callback'</span>,</span></span><br><span class="line"><span class="php">    <span class="string">'VAR_PATHINFO'</span>          =&gt;  <span class="string">'s'</span>,    <span class="comment">// 兼容模式PATHINFO获取变量例如 ?s=/module/action/id/1 后面的参数取决于URL_PATHINFO_DEPR</span></span></span><br><span class="line"><span class="php">    <span class="string">'VAR_TEMPLATE'</span>          =&gt;  <span class="string">'t'</span>,    <span class="comment">// 默认模板切换变量</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    <span class="string">'HTTP_CACHE_CONTROL'</span>    =&gt;  <span class="string">'private'</span>,  <span class="comment">// 网页缓存控制</span></span></span><br><span class="line"><span class="php">    <span class="string">'CHECK_APP_DIR'</span>         =&gt;  <span class="keyword">true</span>,       <span class="comment">// 是否检查应用目录是否创建</span></span></span><br><span class="line"><span class="php">    <span class="string">'FILE_UPLOAD_TYPE'</span>      =&gt;  <span class="string">'Local'</span>,    <span class="comment">// 文件上传方式</span></span></span><br><span class="line"><span class="php">    <span class="string">'DATA_CRYPT_TYPE'</span>       =&gt;  <span class="string">'Think'</span>,    <span class="comment">// 数据加密方式</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">);</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/home/</span>shiyanlou/ThinkPHP</span><br><span class="line">php -S <span class="string">localhost:</span><span class="number">8999</span></span><br></pre></td></tr></table></figure>
+<p>cd /home/shiyanlou/ThinkPHP<br>php -S localhost:8999<br>在这里，我们访问到的是ThinkPHP自带的默认入口文件index.php也就是访问到的是IndexController的index()方法，这是因为ThinkPHP默认设置：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'DEFAULT_CONTROLLER'</span>    =&gt;  <span class="string">'Index'</span></span><br></pre></td></tr></table></figure></p>
+<p>如果你查看过ThinkPHP/Conf/convention.php文件，应该就会明白这个其实就是设置默认的控制器。</p>
+<p>关于控制器(Controller)我们后面会仔细说，控制器的文件位于Application/Home/Controller 文件夹之下</p>
+<p>了解这些基本知识之后，那么如果我们需要访问其它的页面，访问其他的控制器和方法呢？答案就在本节的路由教程中。</p>
+<h2 id="路由定义规则"><a href="#路由定义规则" class="headerlink" title="路由定义规则"></a>路由定义规则</h2><p>在使用路由之前，确保你的URL支持PATH_INFO（或者兼容URL模式也可以，采用普通URL模式的情况下不支持路由功能）并且确认已开启一下的路由设置：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'URL_ROUTER_ON'</span>   =&gt; <span class="keyword">true</span></span><br></pre></td></tr></table></figure></p>
+<p>这里涉及到两个设置项，PATH_INFO和URL_ROUTER_ON，这些在ThinkPHP/Conf/convention.php文件都可以找到。 此处输入图片的描述 此处输入图片的描述</p>
+<p>在满足以上两个条件之后，就可以配置路由规则了。在配置文件中使用URL_ROUTE_RULES参数进行配置，配置格式是一个数组，其格式为： ‘路由表达式’=&gt;’路由地址和传入参数’每个元素都代表一个路由规则，比如：在config.php 添加配置项<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'URL_ROUTE_RULES'</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">    <span class="string">'blogs/:year/:month/:day'</span> =&gt; <span class="keyword">array</span>(<span class="string">'Index/archive'</span>, <span class="string">'status=1'</span>),</span><br><span class="line">    <span class="string">'blogs/:id'</span>               =&gt; <span class="string">'Index/read'</span>,</span><br><span class="line">),</span><br></pre></td></tr></table></figure></p>
+<p>ThinkPHP按定义的顺序依次匹配路由规则，一旦匹配到的话，就会定位到路由定义中的控制器和操作方法去执行（你可以传入其他的参数），而后面的规则不会继续匹配</p>
+<p>以上的路由配置说明：在每个路由表达式中，:后面跟参数名称，比如上面的:year,:month,:id都是参数名称，以:id为例，它指向Index控制器的read方法，这个方法接受一个$id的参数：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">read</span><span class="params">($id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"read page with"</span> .$id;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>你需要在IndexController中添加上面的代码，IndexController位于Application/Home/Controller之下</p>
+<p>在浏览器输入<a href="http://localhost:8999/index.php/Home/blogs/2就可以看到" target="_blank" rel="noopener">http://localhost:8999/index.php/Home/blogs/2就可以看到</a></p>
+<p>Home就代表Home模块，你可以简单地将它映射到相应的Home目录，这是由于在默认的配置中<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'DEFAULT_MODULE'</span>        =&gt;  <span class="string">'Home'</span></span><br></pre></td></tr></table></figure></p>
+<p>你可以根据自己的需求修改，但本课依旧采用默认的Home模块.</p>
+<p>如果你还需要传入额外的参数，像第一条的规则array(‘Index/archive’, ‘status=1’)中的status一样传入，你看设置多个这样的参数。</p>
+<p>如果你尝试在浏览器输入：</p>
+<p><a href="http://localhost:8999/index.php/Home/blogs/string" target="_blank" rel="noopener">http://localhost:8999/index.php/Home/blogs/string</a></p>
+<p>ThinkPHP也给我们返回了string，但在日常的开发中，我们通常需要限制:id变量是整数，那该怎么做呢？只需要稍稍改动就可以了，写成<br><figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">'blogs</span>/:id\d'               =&gt; <span class="symbol">'Index</span>/read',</span><br></pre></td></tr></table></figure></p>
+<p>以上\d表示限制变量id只能是数字。</p>
+<p>对于可选参数，可以用[]包含表示，比如：</p>
+<p>‘blogs/:year/:month/[:day]’ =&gt; array(‘Index/archive’, ‘status=1’),<br>上面的day现在就是可选参数了，你可以传入，也可以不传。</p>
+<p>在ThinkPHP中，还支持在限制路由的后缀和使用正则路由。</p>
+<p>限制路由后缀，通常使用在平时常见的html,htm等后缀，还是以上面的规则为例：</p>
+<p>‘blogs/:id’               =&gt; array(‘Index/read’,array(‘ext’=&gt;’html’))<br>你就可以限制这条规则只能在.html的路由后缀生效。</p>
+<p>2.2 正则路由<br>正则本身就是一门很大的学问，在学习ThinkPHP的正则路由之前，最好是具备一定的正则表达式的基础。</p>
+<p>路由表达式支持的正则定义必须以/开头，否则就视为规则表达式，比如：</p>
+<p>‘#^blog\/(\d+)$#’ =&gt; ‘Index/read’<br>这会解析为规则路由而不是正则路由，因为路由表达式并没有以/开始，所以，我们需要这样写：</p>
+<p>‘/^new\/(\d{4})\/(\d{2})$/‘ =&gt; ‘Index/achive?year=:1&amp;month=:2’,<br>以上就是一条正确的正则路由。对于正则表达式中的每个正则规则子模式）部分(如\d{4}和\d{2})，如果需要在后面的路由地址中引用，可以采用:1、:2这样的方式，序号就是子模式的序号</p>
+<p>2.3 静态路由<br>ThinkPHP框架其实还有一个路由机制叫静态路由，这实际上就是规则路由的静态简化版，路由定义中不包含动态参数(如上面的路由规则中id参数)，静态路由不需要遍历路由规则而是直接定位，因此执行效率会较高。静态路由采用URL_MAP_RULES来定义规则：</p>
+<p>‘URL_ROUTER_ON’   =&gt; true,<br>‘URL_MAP_RULES’=&gt;array(<br>    ‘new/top’ =&gt; ‘Index/top?type=top’<br>)</p>
+<p>由于Index/top?type=top中Index表示控制器，第一个top表示方法，所以我们需要在Index控制器中创建top()方法：</p>
+<p>public function top(){<br>        echo “top page <br>“;<br>    }</p>
+<p>你需要在IndexController中添加上面的代码，IndexController位于Application/Home/Controller之下</p>
+<p>根据上面这条规则，如果我们访问到</p>
+<p><a href="http://localhost:8999/index.php/Home/new/top" target="_blank" rel="noopener">http://localhost:8999/index.php/Home/new/top</a></p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1d7k1f0n1j30gn05x3yw.jpg" alt=""></p>
+<p>其实我们访问的是：</p>
+<p><a href="http://localhost:8999/index.php/Home/index/top/type/top" target="_blank" rel="noopener">http://localhost:8999/index.php/Home/index/top/type/top</a><br>转译成就是new/top对应的是Index控制器的top()方法，传人的参数为type，参数值为top，所以就有了index/top/type/top</p>
+<p>但是，当我们访问<a href="http://localhost:8999/index.php/Home/new/top/var/test尽管URL地址前面也有new/top，然而由于静态路由是完整匹配的性质，所以不会匹配到index/top/type/top" target="_blank" rel="noopener">http://localhost:8999/index.php/Home/new/top/var/test尽管URL地址前面也有new/top，然而由于静态路由是完整匹配的性质，所以不会匹配到index/top/type/top</a></p>
+<h2 id="课后习题-1"><a href="#课后习题-1" class="headerlink" title="课后习题"></a>课后习题</h2><figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">'URL_ROUTER_ON'</span>   =&gt; <span class="literal">true</span>,</span><br><span class="line"><span class="symbol">'URL_ROUTE_RULES'</span> =&gt; <span class="built_in">array</span>(</span><br><span class="line">    <span class="symbol">'new</span>/:id\d'    =&gt; <span class="symbol">'Index</span>/read',</span><br><span class="line">    <span class="symbol">'new</span>/:name'    =&gt; <span class="symbol">'Index</span>/read',</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+<p>在路由配置如上的情况下，修改IndexController的read()方法，使得read()方法不再绑定参数，使用$_GET方式实现访问下面的两个地址都可以正确获取相应的返回结果：</p>
+<p><a href="http://localhost:8999/index.php/Home/new/8" target="_blank" rel="noopener">http://localhost:8999/index.php/Home/new/8</a><br><a href="http://localhost:8999/index.php/Home/new/hello" target="_blank" rel="noopener">http://localhost:8999/index.php/Home/new/hello</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="筱阳 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="筱阳 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"># 开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/23/flask框架学习/" rel="next" title="flask框架学习">
+                <i class="fa fa-chevron-left"></i> flask框架学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/24/SSRF学习/" rel="prev" title="SSRF学习">
+                SSRF学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="筱阳">
+            
+              <p class="site-author-name" itemprop="name">筱阳</p>
+              <p class="site-description motion-element" itemprop="description">只会复现的菜鸡</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.freebuf.com/" title="freebug" target="_blank">freebug</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课后习题"><span class="nav-number">2.</span> <span class="nav-text">课后习题</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#路由"><span class="nav-number"></span> <span class="nav-text">路由</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#路由定义规则"><span class="nav-number">1.</span> <span class="nav-text">路由定义规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课后习题-1"><span class="nav-number">2.</span> <span class="nav-text">课后习题</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">筱阳</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
