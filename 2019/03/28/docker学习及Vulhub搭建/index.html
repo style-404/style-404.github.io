@@ -131,7 +131,7 @@
 <meta property="og:description" content="安装在ubuntu下1、更新系统软件1$ sudo apt-get update 2、安装依赖包12345$ sudo apt-get install$ sudo apt-get install apt-transport-https$ sudo apt-get install ca-certificates$ sudo apt-get install curl$ sudo apt-get ins">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1ix2uwxw1j30nk05w3z6.jpg">
-<meta property="og:updated_time" content="2019-03-28T15:33:57.069Z">
+<meta property="og:updated_time" content="2019-03-30T09:22:04.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习">
 <meta name="twitter:description" content="安装在ubuntu下1、更新系统软件1$ sudo apt-get update 2、安装依赖包12345$ sudo apt-get install$ sudo apt-get install apt-transport-https$ sudo apt-get install ca-certificates$ sudo apt-get install curl$ sudo apt-get ins">
@@ -394,6 +394,9 @@
 <p>6、安装docker<br>默认就会安装最新版<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-<span class="builtin-name">get</span> install docker-ce</span><br></pre></td></tr></table></figure></p>
 <p>7、查看docker版本<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>docker -v</span><br></pre></td></tr></table></figure></p>
 <p>显示“Docker version xx.xx.x-ce, build afdb6d4”字样，表示安装成功。</p>
+<p>8.安装docker-compose</p>
+<p>pip install docker-compose<br> 没有pip 建议先安装pip （python3可选）</p>
+<p> curl -s <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">https://bootstrap.pypa.io/get-pip.py</a> | python</p>
 <h1 id="玩转容器与镜像"><a href="#玩转容器与镜像" class="headerlink" title="玩转容器与镜像"></a>玩转容器与镜像</h1><p>可以先使用<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -<span class="selector-tag">a</span>   <span class="comment">// 查看运行中的docker容器</span></span><br></pre></td></tr></table></figure></p>
 <p>然后使用如下命令进入一个容器<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo</span> docker attach <span class="variable">$id</span></span><br></pre></td></tr></table></figure></p>
 <p>退出容器:<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctrl + <span class="keyword">D</span></span><br></pre></td></tr></table></figure></p>
@@ -548,7 +551,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
