@@ -123,13 +123,13 @@
 
 
 
-<meta name="description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.thinkphp.cn/down/1107.html 下载访问public目录 接下来创建数据库123create database think">
+<meta name="description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.th">
 <meta name="keywords" content="web安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ThinkPHP 框架 5.0.15 SQL 注入分析">
 <meta property="og:url" content="https://style-404.github.io/2019/03/31/ThinkPHP-框架-5-0-15-SQL-注入分析/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.thinkphp.cn/down/1107.html 下载访问public目录 接下来创建数据库123create database think">
+<meta property="og:description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.th">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1lagv6yubj30oy0c9mxv.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1lutdt6uoj31160dwjt8.jpg">
@@ -139,10 +139,10 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lwlm2ja0j30p50ia0uu.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lx6wd4e5j30gb05nq2z.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lxdjwnw6j30pm0gkgnc.jpg">
-<meta property="og:updated_time" content="2019-03-31T05:47:43.481Z">
+<meta property="og:updated_time" content="2019-03-31T06:04:20.474Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ThinkPHP 框架 5.0.15 SQL 注入分析">
-<meta name="twitter:description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.thinkphp.cn/down/1107.html 下载访问public目录 接下来创建数据库123create database think">
+<meta name="twitter:description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.th">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1lagv6yubj30oy0c9mxv.jpg">
 
 
@@ -393,11 +393,11 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。<br>条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。</p>
 <h1 id="环境搭建与复现"><a href="#环境搭建与复现" class="headerlink" title="环境搭建与复现"></a>环境搭建与复现</h1><p>thinkphp 官网下载 5.0.14 版本下载：<a href="http://www.thinkphp.cn/down/1107.html" target="_blank" rel="noopener">http://www.thinkphp.cn/down/1107.html</a></p>
 <p>下载访问public目录<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1lagv6yubj30oy0c9mxv.jpg" alt=""></p>
 <p>接下来创建数据库<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> thinkphp;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span>(<span class="keyword">id</span> <span class="built_in">int</span> auto_increment primary <span class="keyword">key</span>,username <span class="built_in">varchar</span>(<span class="number">50</span>),<span class="keyword">password</span> <span class="built_in">varchar</span>(<span class="number">50</span>));</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,username,<span class="keyword">password</span>) <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"test"</span>,<span class="string">"thinkphp"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>在<figure class="highlight plain"><figcaption><span>中配置好数据库</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">同时在congfig.php中将app_debug开为true</span><br><span class="line">接下来在```\application\index\controller\Index.php```写一个 update 功能的 demo</span><br></pre></td></tr></table></figure></p>
+<p>在 <code>\application\database.php</code> 中配置好数据库<br>同时在congfig.php中将app_debug开为true<br>接下来在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">写一个 update 功能的 demo</span><br></pre></td></tr></table></figure></p>
 <p>public function index()<br>{<br>  $username = input(‘get.username/a’);<br>  // dump($password).”<br>“;<br>  // echo(db(‘user’)-&gt;where([‘id’=&gt;1])-&gt;update([‘password’=&gt;$password])).”<br>“;<br>  Db::table(“user”)-&gt;where([“id”=&gt;1])-&gt;insert([“username”=&gt;$username]);<br>  //dump(Db::table(‘user’)-&gt;where(‘id’,1)-&gt;find());</p>
 <p>}<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">$name = input(<span class="string">"get.username/a"</span>);</span><br></pre></td></tr></table></figure></p>
 <p>input()为TP框架的助手函数，get.name/a 表示获取get传入的name变量，并将其强制转换为数组类型<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Db::table<span class="function"><span class="params">(<span class="string">"user"</span>)</span>-&gt;</span>where<span class="function"><span class="params">([<span class="string">"id"</span>=&gt;<span class="number">1</span>])</span>-&gt;</span>insert([<span class="string">"username"</span>=&gt;$username]);</span><br></pre></td></tr></table></figure></p>
@@ -406,8 +406,9 @@
 <h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><p>当输入数据<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username[<span class="number">0</span>]=inc&amp;username[<span class="number">1</span>]=updatexml(<span class="number">1</span>,concat(<span class="number">0x7</span>,user(),<span class="number">0x7e</span>),<span class="number">1</span>)&amp;username[<span class="number">2</span>]=<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p>由input()获得数据<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1lw2y09s4j30i004ggn9.jpg" alt=""></p>
 <p>接着调用了update()方法 在thinkphp/library/think/db/Query.php:2078<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lwd536fhj30sk0dydhl.jpg" alt=""><br>在 2094 行会调用thinkphp/library/think/db/Builder.php:720： 下的insert()<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lwfmeyfkj30km0dl0tx.jpg" alt=""><br>接着会调用parseData()解析数据 在/library/think/db/Builder.php:86<br>从101 行开始分析:<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lwlm2ja0j30p50ia0uu.jpg" alt=""><br>将变量赋给$key 值赋给$var 即:<br>$key : “username”<br>$val : {“inc”,”updatexml(1,concat(0x7,user(),0x7e),1)”,”1”}<br>当$val[0] = inc 时 将$val[1] 与 $var[2] 进行拼接<br>虽然调用parseKey()处理 在thinkphp/library/think/db/builder/Mysql.php:90<br>可见并没有什么过滤，不过在某些情况下会用反引号把字段的值包起来，可能会影响payload的构造。<br>floatval()是将数据转化为浮点数<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lx6wd4e5j30gb05nq2z.jpg" alt=""><br>接着回到 thinkphp/library/think/db/Query.php 的 insert 中：</p>
+<p>在updata()中同样调用了parseData()函数 因此原理和利用是一样的</p>
 <h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lxdjwnw6j30pm0gkgnc.jpg" alt=""><br>只有当$val[1]==$key键值时才能进行拼接</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://bbs.ichunqiu.com/thread-38284-1-1.html" target="_blank" rel="noopener">https://bbs.ichunqiu.com/thread-38284-1-1.html</a><br><a href="https://xz.aliyun.com/t/2257" target="_blank" rel="noopener">https://xz.aliyun.com/t/2257</a><br><a href="https://xz.aliyun.com/t/2812#toc-5" target="_blank" rel="noopener">https://xz.aliyun.com/t/2812#toc-5</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://bbs.ichunqiu.com/thread-38284-1-1.html" target="_blank" rel="noopener">https://bbs.ichunqiu.com/thread-38284-1-1.html</a><br><a href="https://xz.aliyun.com/t/2257" target="_blank" rel="noopener">https://xz.aliyun.com/t/2257</a><br><a href="https://xz.aliyun.com/t/2812#toc-5" target="_blank" rel="noopener">https://xz.aliyun.com/t/2812#toc-5</a><br><a href="https://seaii-blog.com/index.php/2018/04/08/80.html" target="_blank" rel="noopener">https://seaii-blog.com/index.php/2018/04/08/80.html</a></p>
 
       
     </div>
