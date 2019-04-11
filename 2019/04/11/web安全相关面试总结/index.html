@@ -131,7 +131,7 @@
 <meta property="og:description" content="“如果一个人住，千万不要在下午时睡午觉，一觉睡到六七点等你一睁开眼，看着朦胧黑黑的天空，看着空荡的房间，会有一种被全世界遗弃的感觉，孤独在那一刻体现的淋漓尽致。” 前言收集和总结一些web安全面试可能会问到的问题，本文只是写个大概，提供一个方向，不会在某个问题讲太深，以下都是用本人通俗的话来讲，难免会有不正确的。 基本漏洞讲解sql注入原理:没有对输入生成的数据进行过滤或过滤不当，能够通过构造构造">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1ynhi655kj30k00k0wei.jpg">
-<meta property="og:updated_time" content="2019-04-11T06:59:39.331Z">
+<meta property="og:updated_time" content="2019-04-11T07:10:36.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web安全相关面试总结">
 <meta name="twitter:description" content="“如果一个人住，千万不要在下午时睡午觉，一觉睡到六七点等你一睁开眼，看着朦胧黑黑的天空，看着空荡的房间，会有一种被全世界遗弃的感觉，孤独在那一刻体现的淋漓尽致。” 前言收集和总结一些web安全面试可能会问到的问题，本文只是写个大概，提供一个方向，不会在某个问题讲太深，以下都是用本人通俗的话来讲，难免会有不正确的。 基本漏洞讲解sql注入原理:没有对输入生成的数据进行过滤或过滤不当，能够通过构造构造">
@@ -392,7 +392,7 @@
 <p><strong>注入类型</strong><br>get<br>post<br>cookie</p>
 <p><strong>注入方式</strong><br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">union</span>注入</span></span><br><span class="line">利用<span class="class"><span class="keyword">union</span> <span class="title">slect</span> 等等</span></span><br><span class="line"></span><br><span class="line">报错注入</span><br><span class="line">利用rand()+floor(),exp(),updatexml(),polygon()等等</span><br><span class="line"></span><br><span class="line">盲注(bool盲注和时间盲注)</span><br><span class="line">利用subtr(),<span class="keyword">if</span>(),ascii()等等、</span><br><span class="line"></span><br><span class="line">宽字节注入</span><br></pre></td></tr></table></figure></p>
 <p><strong>防御</strong><br>·使用预编译语句<br>·关闭错误提示<br>·强制类型转换</p>
-<h1 id="跨站脚本XSS"><a href="#跨站脚本XSS" class="headerlink" title="跨站脚本XSS"></a>跨站脚本XSS</h1><p><strong>原理</strong><br>向网页写入恶意脚本，当其他用户进行浏览时，就会触发恶意代码进行恶意操作</p>
+<h2 id="跨站脚本XSS"><a href="#跨站脚本XSS" class="headerlink" title="跨站脚本XSS"></a>跨站脚本XSS</h2><p><strong>原理</strong><br>向网页写入恶意脚本，当其他用户进行浏览时，就会触发恶意代码进行恶意操作</p>
 <p><strong>类型</strong><br>反射性(一次性)<br>一般在url中构造恶意代码，发送给其他用户点击执行相关操作</p>
 <p>存储型(永久性)<br>一般在进行表单提交，比如留言板，在表单提交恶意代码存到数据库，当其他用户浏览时会触发，影响大量用户</p>
 <p>dom型(基于)<br>通过修改dom结构来操作dom对象进行注入</p>
@@ -413,6 +413,18 @@
 <p><strong>包含方式</strong><br>包含上传文件<br>利用伪协议，php://input(写一句话),data://(执行命令),php://filter(读取文件内容)<br>包含日志文件<br>包含session<br><strong>防御</strong><br>设置allow_url_include,关闭allow_url_fopen<br>使用open_basedir进行限制包含<br>过滤包含文件函数中的参数</p>
 <h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p><strong>原理</strong><br>没有对文件的后缀名过滤或者可绕过从而上传危险文件</p>
 <p><strong>防御</strong><br>禁止上传目录有执行命令权限<br>文件路径名+文件名写死</p>
+<h1 id="面试常见问题"><a href="#面试常见问题" class="headerlink" title="面试常见问题"></a>面试常见问题</h1><p><strong>apache和nginx区别</strong><br>apache 性能高 模块多 更稳定 动静编译<br>nigix 轻量级 静态编译</p>
+<p><strong>怎么判断是否同源</strong><br>如果 两个页面的 协议 端口号 和 域名 相同  则两个页面 同源</p>
+<p><strong>php.ini的一些安全配置</strong><br>打开安全模式<br>关闭危险函数<br>关闭注册全局变量<br>关闭错误回显<br>限制活动目录<br>增加错误日志</p>
+<p><strong>如何进行信息收集</strong><br>获取真实ip<br>敏感目录扫描<br>子域名爆破<br>端口扫描<br>c段扫描<br>cms识别<br>中间件版本</p>
+<p><strong>myslq注入 5.0 以上和5.0 以下有什么区别</strong><br>5.0以下没有information_schema 这个表</p>
+<p><strong>SSRF 和 CSRF 有什么区别</strong><br>SSRF 由服务器发起<br>SCRF 有客户端发起</p>
+<p><strong>cookie 与session 的区别</strong><br>cookie 存在于本地<br>sesion 存在于服务器 返回一个ID 作为一个cookie</p>
+<p><strong>响应码了解多少</strong><br>404 文件不存在不<br>403 禁止访问<br>500 服务器错误<br>302 重定向<br>401 请求未经授权</p>
+<p><strong>常见端口号</strong><br>22 ssh<br>21 ftp<br>23 telnet<br>443 https</p>
+<p><strong>七层模型结构</strong><br>应用层 http ftp  dns<br>表示层 进行 解码与编码 加密解密<br>会话层 验证用户  断点续传<br>传输层 tip udp 建立连接<br>网络层 ip 进行选路<br>数据链路层<br>物理层</p>
+<p><strong>XSS 和 CSRF 的区别？</strong><br>XSS：跨站脚本攻击，注重的是脚本，一般来说，吃什么吐什么 有脚本的参与，黑客构造好各种各样功能的脚本让你来触发。</p>
+<p>CSRF：跨站请求伪造，注重的是跨站，伪造，也就是说重点在借刀杀人 借你的手触发某些操作。</p>
 
       
     </div>
@@ -475,6 +487,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/11/2019西湖论剑writeup/" rel="prev" title="2019西湖论剑writeup">
+                2019西湖论剑writeup <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -553,7 +569,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -622,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本漏洞讲解"><span class="nav-number">2.</span> <span class="nav-text">基本漏洞讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sql注入"><span class="nav-number">2.1.</span> <span class="nav-text">sql注入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跨站脚本XSS"><span class="nav-number">3.</span> <span class="nav-text">跨站脚本XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#csrf-夸站请求伪造"><span class="nav-number">3.1.</span> <span class="nav-text">csrf(夸站请求伪造)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssrf-服务端请求伪造"><span class="nav-number">3.2.</span> <span class="nav-text">ssrf(服务端请求伪造)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XXE漏洞"><span class="nav-number">3.3.</span> <span class="nav-text">XXE漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析漏洞"><span class="nav-number">3.4.</span> <span class="nav-text">解析漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件包含"><span class="nav-number">3.5.</span> <span class="nav-text">文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件上传"><span class="nav-number">3.6.</span> <span class="nav-text">文件上传</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本漏洞讲解"><span class="nav-number">2.</span> <span class="nav-text">基本漏洞讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sql注入"><span class="nav-number">2.1.</span> <span class="nav-text">sql注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨站脚本XSS"><span class="nav-number">2.2.</span> <span class="nav-text">跨站脚本XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#csrf-夸站请求伪造"><span class="nav-number">2.3.</span> <span class="nav-text">csrf(夸站请求伪造)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssrf-服务端请求伪造"><span class="nav-number">2.4.</span> <span class="nav-text">ssrf(服务端请求伪造)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XXE漏洞"><span class="nav-number">2.5.</span> <span class="nav-text">XXE漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析漏洞"><span class="nav-number">2.6.</span> <span class="nav-text">解析漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件包含"><span class="nav-number">2.7.</span> <span class="nav-text">文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件上传"><span class="nav-number">2.8.</span> <span class="nav-text">文件上传</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面试常见问题"><span class="nav-number">3.</span> <span class="nav-text">面试常见问题</span></a></li></ol></div>
             
 
           </div>
