@@ -133,7 +133,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/19-1-12/64138853.jpg">
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/19-1-12/67794247.jpg">
-<meta property="og:updated_time" content="2019-01-12T06:46:01.985Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:18.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql字符编码利用技巧">
 <meta name="twitter:description" content="造成这种漏洞的原因是Mysql字段的字符集和php mysqli客户端设置的字符集不相同。 MySQL字符集介绍MySQL服务器可以支持多种字符集，在同一台服务器，同一个数据库，甚至同一个表的不同字段都可以指定使用不同的字符集，相比oracle等其他数据库管理系统，在同一个数据库只能使用相同的字符集，MySQL明显存在更大的灵活性。MySQL提供了不同级别的设置，包括server级、databas">
@@ -409,7 +409,7 @@
       
 
       
-        <p>造成这种漏洞的原因是<br>Mysql字段的字符集和php mysqli客户端设置的字符集不相同。</p>
+        <p><meta name="referrer" content="no-referrer"><br>造成这种漏洞的原因是<br>Mysql字段的字符集和php mysqli客户端设置的字符集不相同。</p>
 <h2 id="MySQL字符集介绍"><a href="#MySQL字符集介绍" class="headerlink" title="MySQL字符集介绍"></a>MySQL字符集介绍</h2><p>MySQL服务器可以支持多种字符集，在同一台服务器，同一个数据库，甚至同一个表的不同字段都可以指定使用不同的字符集，相比oracle等其他数据库管理系统，在同一个数据库只能使用相同的字符集，MySQL明显存在更大的灵活性。<br>MySQL提供了不同级别的设置，包括server级、database级、table级、column级，可以提供非常精准的设置。<br>我们在进行编写php文件的时候</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$mysqli</span> = new mysqli(<span class="string">"localhost"</span>, <span class="string">"root"</span>, <span class="string">"root"</span>, <span class="string">"cat"</span>);</span><br><span class="line"></span><br><span class="line"><span class="regexp">/* check connection */</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$mysqli</span>-&gt;connect_errno) &#123;</span><br><span class="line">    printf(<span class="string">"Connect failed: %s\n"</span>, <span class="variable">$mysqli</span>-&gt;connect_error);</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$mysqli</span>-&gt;query(<span class="string">"set names utf8"</span>);</span><br></pre></td></tr></table></figure>
 <p>设置了字符集为UTF-8<br>set names utf8 的意思是将客户端的字符集设置为utf8<br>在mysql可以查看<br><img src="http://pkf8r5ond.bkt.clouddn.com/19-1-12/64138853.jpg" alt=""><br>如上图，在默认情况下，mysql字符集为latin1，而执行了set names utf8;以后，character_set_client、character_set_connection、character_set_results等与客户端相关的配置字符集都变成了utf8，但character_set_database、character_set_server等服务端相关的字符集还是latin1。</p>
@@ -598,7 +598,7 @@ http://localhost:9090/test.php?username=admin%e4%bd%ac
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

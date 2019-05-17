@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="前言以下都是以下代码审计的一些基础漏洞,适合新手学习~ extract 变量覆盖extract(array,extract_rules,prefix)该函数使用数组键名作为变量名，使用数组键值作为变量值。但是当变量中有同名的元素时，该函数默认将原有的值给覆盖掉。这就造成了变量覆盖漏洞。 123456789101112131415161718&amp;lt;?php$flag=&apos;xxx&apos;;extract($">
+<meta name="description" content="前言以下都是以下代码审计的一些基础漏洞,适合新手学习~ extract 变量覆盖extract(array,extract_rules,prefix)该函数使用数组键名作为变量名，使用数组键值作为变量值。但是当变量中有同名的元素时，该函数默认将原有的值给覆盖掉。这就造成了变量覆盖漏洞。 123456789101112131415161718&amp;lt;?php$flag=&apos;xxx&apos;;extract(">
 <meta name="keywords" content="代码审计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php_bugs(php代码审计基础)">
 <meta property="og:url" content="https://style-404.github.io/2019/03/16/php-bugs-php代码审计基础/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="前言以下都是以下代码审计的一些基础漏洞,适合新手学习~ extract 变量覆盖extract(array,extract_rules,prefix)该函数使用数组键名作为变量名，使用数组键值作为变量值。但是当变量中有同名的元素时，该函数默认将原有的值给覆盖掉。这就造成了变量覆盖漏洞。 123456789101112131415161718&amp;lt;?php$flag=&apos;xxx&apos;;extract($">
+<meta property="og:description" content="前言以下都是以下代码审计的一些基础漏洞,适合新手学习~ extract 变量覆盖extract(array,extract_rules,prefix)该函数使用数组键名作为变量名，使用数组键值作为变量值。但是当变量中有同名的元素时，该函数默认将原有的值给覆盖掉。这就造成了变量覆盖漏洞。 123456789101112131415161718&amp;lt;?php$flag=&apos;xxx&apos;;extract(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-16T14:24:35.188Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:19.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php_bugs(php代码审计基础)">
-<meta name="twitter:description" content="前言以下都是以下代码审计的一些基础漏洞,适合新手学习~ extract 变量覆盖extract(array,extract_rules,prefix)该函数使用数组键名作为变量名，使用数组键值作为变量值。但是当变量中有同名的元素时，该函数默认将原有的值给覆盖掉。这就造成了变量覆盖漏洞。 123456789101112131415161718&amp;lt;?php$flag=&apos;xxx&apos;;extract($">
+<meta name="twitter:description" content="前言以下都是以下代码审计的一些基础漏洞,适合新手学习~ extract 变量覆盖extract(array,extract_rules,prefix)该函数使用数组键名作为变量名，使用数组键值作为变量值。但是当变量中有同名的元素时，该函数默认将原有的值给覆盖掉。这就造成了变量覆盖漏洞。 123456789101112131415161718&amp;lt;?php$flag=&apos;xxx&apos;;extract(">
 
 
 
@@ -384,7 +384,8 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以下都是以下代码审计的一些基础漏洞,适合新手学习~</p>
+        <p><meta name="referrer" content="no-referrer"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以下都是以下代码审计的一些基础漏洞,适合新手学习~</p>
 <h2 id="extract-变量覆盖"><a href="#extract-变量覆盖" class="headerlink" title="extract 变量覆盖"></a>extract 变量覆盖</h2><p>extract(array,extract_rules,prefix)<br>该函数使用数组键名作为变量名，使用数组键值作为变量值。但是当变量中有同名的元素时，该函数默认将原有的值给覆盖掉。这就造成了变量覆盖漏洞。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">$flag=<span class="string">'xxx'</span>;</span></span><br><span class="line"><span class="php">extract($_GET);</span></span><br><span class="line"><span class="php"> <span class="keyword">if</span>(<span class="keyword">isset</span>($shiyan))</span></span><br><span class="line"><span class="php"> &#123;</span></span><br><span class="line"><span class="php">    $content=trim(@file_get_contents($flag));</span></span><br><span class="line"><span class="php">    <span class="keyword">if</span>($shiyan==$content)</span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span><span class="string">'ctf&#123;xxx&#125;'</span>;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">   <span class="keyword">else</span></span></span><br><span class="line"><span class="php">   &#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">echo</span><span class="string">'Oh.no'</span>;</span></span><br><span class="line"><span class="php">   &#125;</span></span><br><span class="line"><span class="php">   &#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>1、文件将get方法传输进来的值通过extrace()函数处理。<br>2、通过两个if语句分别判断是否存在gift变量，和变量gift的值和变量content的值是否相等。变量content的值是通过读取变量test的值获取到的。如果两个变量相等输出flag。如果不相等，输出错误。<br>但是我们并不知道test的值是什么？所以我们使用变量覆盖漏洞，重新给test赋值。</p>
@@ -609,7 +610,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

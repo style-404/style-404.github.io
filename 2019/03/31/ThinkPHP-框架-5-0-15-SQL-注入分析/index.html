@@ -123,13 +123,13 @@
 
 
 
-<meta name="description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.th">
+<meta name="description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.t">
 <meta name="keywords" content="web安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ThinkPHP 框架 5.0.15 SQL 注入分析">
 <meta property="og:url" content="https://style-404.github.io/2019/03/31/ThinkPHP-框架-5-0-15-SQL-注入分析/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.th">
+<meta property="og:description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.t">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1lagv6yubj30oy0c9mxv.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1lutdt6uoj31160dwjt8.jpg">
@@ -139,10 +139,10 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lwlm2ja0j30p50ia0uu.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lx6wd4e5j30gb05nq2z.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1lxdjwnw6j30pm0gkgnc.jpg">
-<meta property="og:updated_time" content="2019-03-31T06:14:23.730Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:06.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ThinkPHP 框架 5.0.15 SQL 注入分析">
-<meta name="twitter:description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.th">
+<meta name="twitter:description" content="前言在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。 环境搭建与复现thinkphp 官网下载 5.0.14 版本下载：http://www.t">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1lagv6yubj30oy0c9mxv.jpg">
 
 
@@ -393,7 +393,8 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。<br>条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。</p>
+        <p><meta name="referrer" content="no-referrer"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在thinkphp5.0.16 之前存在一个sql注入漏洞,在insert和update 方法中 传入参数可控,且无严格过滤，最终导致本次 SQL 注入漏洞发生。<br>条件:漏洞的利用是建立在thinkphp接受数组形式的参数的基础上，虽然这种写法在查询中非常少见，但是在更新、插入的时候还是有相应的需求的。</p>
 <h1 id="环境搭建与复现"><a href="#环境搭建与复现" class="headerlink" title="环境搭建与复现"></a>环境搭建与复现</h1><p>thinkphp 官网下载 5.0.14 版本下载：<a href="http://www.thinkphp.cn/down/1107.html" target="_blank" rel="noopener">http://www.thinkphp.cn/down/1107.html</a></p>
 <p>下载访问public目录<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1lagv6yubj30oy0c9mxv.jpg" alt=""></p>
 <p>接下来创建数据库<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> thinkphp;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span>(<span class="keyword">id</span> <span class="built_in">int</span> auto_increment primary <span class="keyword">key</span>,username <span class="built_in">varchar</span>(<span class="number">50</span>),<span class="keyword">password</span> <span class="built_in">varchar</span>(<span class="number">50</span>));</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,username,<span class="keyword">password</span>) <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"test"</span>,<span class="string">"thinkphp"</span>);</span><br></pre></td></tr></table></figure></p>
@@ -562,7 +563,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

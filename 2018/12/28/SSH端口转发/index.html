@@ -123,23 +123,23 @@
 
 
 
-<meta name="description" content="概述当你在咖啡馆享受免费 WiFi 的时候，有没有想到可能有人正在窃取你的密码及隐私信息？当你发现实验室的防火墙阻止了你的网络应用端口，是不是有苦难言？来看看 SSH 的端口转发功能能给我们带来什么好处吧！ 端口转发概述我们知道，SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH 还同时提供了一个非常有用的功能，这就是端口转发。它能够将其他 TCP 端口的网络数据通过">
+<meta name="description" content="概述当你在咖啡馆享受免费 WiFi 的时候，有没有想到可能有人正在窃取你的密码及隐私信息？当你发现实验室的防火墙阻止了你的网络应用端口，是不是有苦难言？来看看 SSH 的端口转发功能能给我们带来什么好处吧！ 端口转发概述我们知道，SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH 还同时提供了一个非常有用的功能，这就是端口转发。它能够将其他 TCP 端口的网络数据通">
 <meta name="keywords" content="SSH">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH端口转发">
 <meta property="og:url" content="https://style-404.github.io/2018/12/28/SSH端口转发/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="概述当你在咖啡馆享受免费 WiFi 的时候，有没有想到可能有人正在窃取你的密码及隐私信息？当你发现实验室的防火墙阻止了你的网络应用端口，是不是有苦难言？来看看 SSH 的端口转发功能能给我们带来什么好处吧！ 端口转发概述我们知道，SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH 还同时提供了一个非常有用的功能，这就是端口转发。它能够将其他 TCP 端口的网络数据通过">
+<meta property="og:description" content="概述当你在咖啡馆享受免费 WiFi 的时候，有没有想到可能有人正在窃取你的密码及隐私信息？当你发现实验室的防火墙阻止了你的网络应用端口，是不是有苦难言？来看看 SSH 的端口转发功能能给我们带来什么好处吧！ 端口转发概述我们知道，SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH 还同时提供了一个非常有用的功能，这就是端口转发。它能够将其他 TCP 端口的网络数据通">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/18-12-28/411092.jpg">
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/18-12-28/44696679.jpg">
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/18-12-28/81519205.jpg">
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/18-12-28/37833316.jpg">
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/18-12-28/94677613.jpg">
-<meta property="og:updated_time" content="2019-01-12T06:44:08.957Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:22.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH端口转发">
-<meta name="twitter:description" content="概述当你在咖啡馆享受免费 WiFi 的时候，有没有想到可能有人正在窃取你的密码及隐私信息？当你发现实验室的防火墙阻止了你的网络应用端口，是不是有苦难言？来看看 SSH 的端口转发功能能给我们带来什么好处吧！ 端口转发概述我们知道，SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH 还同时提供了一个非常有用的功能，这就是端口转发。它能够将其他 TCP 端口的网络数据通过">
+<meta name="twitter:description" content="概述当你在咖啡馆享受免费 WiFi 的时候，有没有想到可能有人正在窃取你的密码及隐私信息？当你发现实验室的防火墙阻止了你的网络应用端口，是不是有苦难言？来看看 SSH 的端口转发功能能给我们带来什么好处吧！ 端口转发概述我们知道，SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH 还同时提供了一个非常有用的功能，这就是端口转发。它能够将其他 TCP 端口的网络数据通">
 <meta name="twitter:image" content="http://pkf8r5ond.bkt.clouddn.com/18-12-28/411092.jpg">
 
 
@@ -412,7 +412,8 @@
       
 
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>当你在咖啡馆享受免费 WiFi 的时候，有没有想到可能有人正在窃取你的密码及隐私信息？当你发现实验室的防火墙阻止了你的网络应用端口，是不是有苦难言？来看看 SSH 的端口转发功能能给我们带来什么好处吧！</p>
+        <p><meta name="referrer" content="no-referrer"></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>当你在咖啡馆享受免费 WiFi 的时候，有没有想到可能有人正在窃取你的密码及隐私信息？当你发现实验室的防火墙阻止了你的网络应用端口，是不是有苦难言？来看看 SSH 的端口转发功能能给我们带来什么好处吧！</p>
 <h3 id="端口转发概述"><a href="#端口转发概述" class="headerlink" title="端口转发概述"></a>端口转发概述</h3><p>我们知道，SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH 还同时提供了一个非常有用的功能，这就是端口转发。它能够将其他 TCP 端口的网络数据通过 SSH 链接来转发，并且自动提供了相应的加密及解密服务。这一过程有时也被叫做“隧道”（tunneling），这是因为 SSH 为其他 TCP 链接提供了一个安全的通道来进行传输而得名。例如，Telnet，SMTP，LDAP 这些 TCP 应用均能够从中得益，避免了用户名，密码以及隐私信息的明文传输。而与此同时，如果您工作环境中的防火墙限制了一些网络端口的使用，但是允许 SSH 的连接，那么也是能够通过将 TCP 端口转发来使用 SSH 进行通讯。总的来说 SSH 端口转发能够提供两大功能：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">加密 SSH<span class="built_in"> Client </span>端至 SSH<span class="built_in"> Server </span>端之间的通讯数据。</span><br><span class="line">突破防火墙的限制完成一些之前无法建立的 TCP 连接。</span><br></pre></td></tr></table></figure>
 <p>图 1. SSH 端口转发<br><img src="http://pkf8r5ond.bkt.clouddn.com/18-12-28/411092.jpg" alt=""></p>
@@ -611,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

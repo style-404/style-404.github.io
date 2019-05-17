@@ -136,7 +136,7 @@
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/19-1-9/41317872.jpg">
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/19-1-9/59998626.jpg">
 <meta property="og:image" content="http://pkf8r5ond.bkt.clouddn.com/19-1-9/10130370.jpg">
-<meta property="og:updated_time" content="2019-01-12T06:44:15.870Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:12.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018·i春秋圣诞欢乐赛官方WriteUp">
 <meta name="twitter:description" content="gift打开页面 考点: snow html隐写 123snow 是一款在html嵌入隐写信息的软件，它的原理是通过在文本文件的末尾嵌入空格和制表位的方式嵌入隐藏信息，不同空格与制表位的组合代表不同的嵌入信息。 解密网址：http://fog.misty.com/perry/ccs/snow/snow/snow.html密钥为题目名字 gift phpDo you know .swp file?">
@@ -412,17 +412,18 @@
       
 
       
-        <h2 id="gift"><a href="#gift" class="headerlink" title="gift"></a>gift</h2><p>打开页面<br><img src="http://pkf8r5ond.bkt.clouddn.com/19-1-9/41923075.jpg" alt=""></p>
+        <p><meta name="referrer" content="no-referrer"></p>
+<h2 id="gift"><a href="#gift" class="headerlink" title="gift"></a>gift</h2><p>打开页面<br><img src="http://pkf8r5ond.bkt.clouddn.com/19-1-9/41923075.jpg" alt=""></p>
 <p>考点: snow html隐写</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">snow</span> 是一款在html嵌入隐写信息的软件，</span><br><span class="line">它的原理是通过在文本文件的末尾嵌入空格和制表位的方式嵌入隐藏信息，</span><br><span class="line">不同空格与制表位的组合代表不同的嵌入信息。</span><br></pre></td></tr></table></figure>
 <p>解密网址：<a href="http://fog.misty.com/perry/ccs/snow/snow/snow.html" target="_blank" rel="noopener">http://fog.misty.com/perry/ccs/snow/snow/snow.html</a><br>密钥为题目名字<br><img src="http://pkf8r5ond.bkt.clouddn.com/19-1-9/37624188.jpg" alt=""></p>
-<h2 id="gift-php"><a href="#gift-php" class="headerlink" title="gift php"></a>gift php</h2><p>Do you know .swp file? 非正常关闭vi编辑器时会生成一个.swp文件<br>访问.index.php.swp下载下来， vim-r.index.php.swp还原即可 源码 </p>
+<h2 id="gift-php"><a href="#gift-php" class="headerlink" title="gift php"></a>gift php</h2><p>Do you know .swp file? 非正常关闭vi编辑器时会生成一个.swp文件<br>访问.index.php.swp下载下来， vim-r.index.php.swp还原即可 源码</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="function"><span class="keyword">function</span> <span class="title">areyouok</span><span class="params">($greeting)</span></span>&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">return</span> preg_match(<span class="string">'/Merry.*Christmas/is'</span>,$greeting);</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">$greeting=@$_POST[<span class="string">'greeting'</span>];</span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(!areyouok($greeting))&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">if</span>(strpos($greeting,<span class="string">'Merry Christmas'</span>)!==<span class="keyword">false</span>)&#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'Merry Christmas. '</span>.<span class="string">'flag&#123;****&#125;'</span>;</span></span><br><span class="line"><span class="php">    &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'Do you know .swp file?'</span>;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">echo</span> <span class="string">'Do you know PHP?'</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>要求post一个 greeting参数，经过areyouok函数正则过滤后如果返回false，<br>就进入下一个if，如果 greeting参数包含 MerryChristmas则打印flag。<br>可以利用strpos函数的一个漏洞，传入一个数组，会返回 NULL， NULL不强等于false，即可绕过。<br><img src="http://pkf8r5ond.bkt.clouddn.com/19-1-9/41317872.jpg" alt=""></p>
 <h2 id="gift-php-plus"><a href="#gift-php-plus" class="headerlink" title="gift php plus"></a>gift php plus</h2><p><img src="http://pkf8r5ond.bkt.clouddn.com/19-1-9/59998626.jpg" alt=""><br>这题是在gift php的基础上加上了is_array的判断，不允许使用数组来绕过。</p>
 <p>所以上一道题的思路不能再用了。 这里需要用到正则回溯，可以参考p牛的文章：<a href="https://www.leavesongs.com/PENETRATION/use-pcre-backtrack-limit-to-bypass-restrict.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/use-pcre-backtrack-limit-to-bypass-restrict.html</a></p>
-<p>PHP为了防止正则表达式的拒绝服务攻击（reDOS），给pcre设定了一个回溯次数上限 pcre.backtrack_limit，默认为100万。当正则回溯超过这个上限时，就会返回false。 </p>
-<p>因此我们只要post100万个字符，让它回溯大于100万次，函数就会返回false，从而绕过if判断。 </p>
+<p>PHP为了防止正则表达式的拒绝服务攻击（reDOS），给pcre设定了一个回溯次数上限 pcre.backtrack_limit，默认为100万。当正则回溯超过这个上限时，就会返回false。</p>
+<p>因此我们只要post100万个字符，让它回溯大于100万次，函数就会返回false，从而绕过if判断。</p>
 <p><img src="http://pkf8r5ond.bkt.clouddn.com/19-1-9/10130370.jpg" alt=""></p>
 
       
@@ -574,7 +575,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

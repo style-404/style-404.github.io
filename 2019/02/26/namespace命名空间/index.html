@@ -123,13 +123,13 @@
 
 
 
-<meta name="description" content="namespace解决命名冲突问题a.php 123456789&amp;lt;?php// namespace a\b\c;class Apple&amp;#123;  function get_info()&amp;#123;    echo &apos;this is A&apos;;  &amp;#125;&amp;#125; b.php 12345678&amp;lt;?php// namespace a\b\d;class Apple&amp;#123;  f">
+<meta name="description" content="namespace解决命名冲突问题a.php 123456789&amp;lt;?php// namespace a\b\c;class Apple&amp;#123;  function get_info()&amp;#123;    echo &apos;this is A&apos;;  &amp;#125;&amp;#125; b.php 12345678&amp;lt;?php// namespace a\b\d;class Apple&amp;#123;">
 <meta name="keywords" content="开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="namespace命名空间">
 <meta property="og:url" content="https://style-404.github.io/2019/02/26/namespace命名空间/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="namespace解决命名冲突问题a.php 123456789&amp;lt;?php// namespace a\b\c;class Apple&amp;#123;  function get_info()&amp;#123;    echo &apos;this is A&apos;;  &amp;#125;&amp;#125; b.php 12345678&amp;lt;?php// namespace a\b\d;class Apple&amp;#123;  f">
+<meta property="og:description" content="namespace解决命名冲突问题a.php 123456789&amp;lt;?php// namespace a\b\c;class Apple&amp;#123;  function get_info()&amp;#123;    echo &apos;this is A&apos;;  &amp;#125;&amp;#125; b.php 12345678&amp;lt;?php// namespace a\b\d;class Apple&amp;#123;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0k4cyogo9j30ui023q2w.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0k4jt2b20j30fd043q2q.jpg">
@@ -137,10 +137,10 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0k4sqmw2ej307202fgld.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0k4wu4ur7j305301u3y9.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0k54g6i57j309n02ejr5.jpg">
-<meta property="og:updated_time" content="2019-02-26T13:32:10.067Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:18.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="namespace命名空间">
-<meta name="twitter:description" content="namespace解决命名冲突问题a.php 123456789&amp;lt;?php// namespace a\b\c;class Apple&amp;#123;  function get_info()&amp;#123;    echo &apos;this is A&apos;;  &amp;#125;&amp;#125; b.php 12345678&amp;lt;?php// namespace a\b\d;class Apple&amp;#123;  f">
+<meta name="twitter:description" content="namespace解决命名冲突问题a.php 123456789&amp;lt;?php// namespace a\b\c;class Apple&amp;#123;  function get_info()&amp;#123;    echo &apos;this is A&apos;;  &amp;#125;&amp;#125; b.php 12345678&amp;lt;?php// namespace a\b\d;class Apple&amp;#123;">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g0k4cyogo9j30ui023q2w.jpg">
 
 
@@ -391,7 +391,8 @@
       
 
       
-        <h2 id="namespace解决命名冲突问题"><a href="#namespace解决命名冲突问题" class="headerlink" title="namespace解决命名冲突问题"></a>namespace解决命名冲突问题</h2><p>a.php</p>
+        <p><meta name="referrer" content="no-referrer"></p>
+<h2 id="namespace解决命名冲突问题"><a href="#namespace解决命名冲突问题" class="headerlink" title="namespace解决命名冲突问题"></a>namespace解决命名冲突问题</h2><p>a.php</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="comment">// namespace a\b\c;</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span></span>&#123;</span></span><br><span class="line"><span class="php">  <span class="function"><span class="keyword">function</span> <span class="title">get_info</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">echo</span> <span class="string">'this is A'</span>;</span></span><br><span class="line"><span class="php">  &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>b.php</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="comment">// namespace a\b\d;</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span></span>&#123;</span></span><br><span class="line"><span class="php">  <span class="function"><span class="keyword">function</span> <span class="title">get_info</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">echo</span> <span class="string">'this is B'</span>;</span></span><br><span class="line"><span class="php">  &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure>
@@ -562,7 +563,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -137,7 +137,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g280cueav7j30v60h6406.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g280l04clnj30x70hjgn1.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g280yj6qcuj30ul0byglz.jpg">
-<meta property="og:updated_time" content="2019-04-19T08:57:08.640Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:20.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP sprintf格式化字符串漏洞">
 <meta name="twitter:description" content="原理sprintf()把百分号（%）符号替换成一个作为参数进行传递的变量： 123456&amp;lt;?php$number = 2;$str = &quot;Shanghai&quot;;$txt = sprintf(&quot;There are %u million cars in %s.&quot;,$number,$str);echo $txt;?&amp;gt; 运行结果1There are 2 million cars in Shan">
@@ -391,7 +391,7 @@
       
 
       
-        <p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g281m9qmayj30d605omxg.jpg" alt=""></p>
+        <p><meta name="referrer" content="no-referrer"><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g281m9qmayj30d605omxg.jpg" alt=""></p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>sprintf()<br>把百分号（%）符号替换成一个作为参数进行传递的变量：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$number = <span class="number">2</span>;</span></span><br><span class="line"><span class="php">$str = <span class="string">"Shanghai"</span>;</span></span><br><span class="line"><span class="php">$txt = sprintf(<span class="string">"There are %u million cars in %s."</span>,$number,$str);</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> $txt;</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>运行结果<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">There are <span class="number">2</span> million cars <span class="keyword">in</span> Shanghai.</span><br></pre></td></tr></table></figure></p>
@@ -573,7 +573,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -123,12 +123,12 @@
 
 
 
-<meta name="description" content="基础SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统） SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL">
+<meta name="description" content="基础SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统） SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定UR">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSRF学习">
 <meta property="og:url" content="https://style-404.github.io/2019/03/24/SSRF学习/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="基础SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统） SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL">
+<meta property="og:description" content="基础SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统） SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定UR">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g165ua5y17j30nh0e53zv.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1alni59d8j30cd054746.jpg">
@@ -146,10 +146,10 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1btpefn7bj30uh0cfadp.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g19dh7bspwj30ki048t8j.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g19dir17yuj30p405ct90.jpg">
-<meta property="og:updated_time" content="2019-03-24T15:20:47.939Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:23.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSRF学习">
-<meta name="twitter:description" content="基础SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统） SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL">
+<meta name="twitter:description" content="基础SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统） SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定UR">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g165ua5y17j30nh0e53zv.jpg">
 
 
@@ -400,7 +400,8 @@
       
 
       
-        <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统）</p>
+        <p><meta name="referrer" content="no-referrer"></p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统）</p>
 <p>SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL地址获取网页文本内容，加载指定地址的图片，下载等等。</p>
 <p>注释：除了http/https等方式可以造成ssrf，类似tcp connect 方式也可以探测内网一些ip 的端口是否开发服务，只不过危害比较小而已。</p>
 <p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g165ua5y17j30nh0e53zv.jpg" alt=""></p>
@@ -586,7 +587,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

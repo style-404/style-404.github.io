@@ -123,19 +123,19 @@
 
 
 
-<meta name="description" content="#安装与配置 配置我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。 我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：123">
+<meta name="description" content="#安装与配置 配置我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。 我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：12">
 <meta name="keywords" content="开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="thinnkphp学习">
 <meta property="og:url" content="https://style-404.github.io/2019/03/23/thinnkphp学习/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="#安装与配置 配置我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。 我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：123">
+<meta property="og:description" content="#安装与配置 配置我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。 我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：12">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1d7k1f0n1j30gn05x3yw.jpg">
-<meta property="og:updated_time" content="2019-03-23T16:52:45.935Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:05.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="thinnkphp学习">
-<meta name="twitter:description" content="#安装与配置 配置我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。 我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：123">
+<meta name="twitter:description" content="#安装与配置 配置我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。 我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：12">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1d7k1f0n1j30gn05x3yw.jpg">
 
 
@@ -386,7 +386,8 @@
       
 
       
-        <p>#安装与配置</p>
+        <p><meta name="referrer" content="no-referrer"></p>
+<p>#安装与配置</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>我们现在开始学习ThinkPHP第一步：设置ThinkPHP。一个框架的原始模样可能无法满足你的开发需求，但你可以通过设置来满足。在学习ThinkPHP的配置的时候，首先要明白：ThinkPHP框架中所有配置文件的定义格式都是采用返回PHP数组的方式来定义的。</p>
 <p>我们最常操作的是应用配置，默认的就是在Application/Common/Conf/config.php文件中：<br><figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">return <span class="built_in">array</span>(</span><br><span class="line">    <span class="symbol">'URL_ROUTER_ON'</span>   =&gt; <span class="literal">true</span>,</span><br><span class="line">    <span class="symbol">'URL_ROUTE_RULES'</span>=&gt;<span class="built_in">array</span>(</span><br><span class="line"></span><br><span class="line">    <span class="symbol">'blogs</span>/:id'               =&gt; <span class="built_in">array</span>(<span class="symbol">'Index</span>/read'),</span><br><span class="line">    <span class="symbol">'article</span>/:id'               =&gt; <span class="built_in">array</span>(<span class="symbol">'Article</span>/show')</span><br><span class="line">),</span><br><span class="line">    <span class="symbol">'URL_MAP_RULES'</span>=&gt;<span class="built_in">array</span>(</span><br><span class="line">    <span class="symbol">'new</span>/top' =&gt; <span class="symbol">'Index</span>/top?<span class="keyword">type</span>=top'</span><br><span class="line">),</span><br><span class="line"></span><br><span class="line">    <span class="symbol">'DB_TYPE'</span>               =&gt;  <span class="symbol">'mysql'</span>,</span><br><span class="line">    <span class="symbol">'DB_HOST'</span>               =&gt;  <span class="symbol">'localhost'</span>,</span><br><span class="line">    <span class="symbol">'DB_NAME'</span>               =&gt;  <span class="symbol">'think'</span>,</span><br><span class="line">    <span class="symbol">'DB_USER'</span>               =&gt;  <span class="symbol">'root'</span>,</span><br><span class="line">    <span class="symbol">'DB_PWD'</span>                =&gt;  <span class="string">''</span>,</span><br><span class="line">    <span class="symbol">'DB_PORT'</span>               =&gt;  <span class="string">'3306'</span>,</span><br><span class="line">    <span class="symbol">'DB_PREFIX'</span>             =&gt;  <span class="symbol">'think_'</span>,</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
 <p>说明：ThinkPHP的配置参数（一级参数）是不区分大小写的，因为不管大写小写，最后都会转为小写。但是为了在编程的过程中更符合规范，建议统一使用大写来设置配置参数。上面的第一个配置URL_ROUTER_ON，我们开启了路由重写功能，为后面的 URL_ROUTE_RULES 奠定基础（详细的后面我们会在路由章节说到）。最后几个带DB_的设置项是表示设置连接数据库的参数，几乎每一个web应用都会用到数据库，这些设置为我们后续进一步学习的基础。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"> <span class="keyword">return</span> <span class="keyword">array</span>(</span></span><br><span class="line"><span class="php">    <span class="string">'USER_CONFIG'</span>        =&gt; <span class="keyword">array</span>(</span></span><br><span class="line"><span class="php">        <span class="string">'USER_AUTH'</span> =&gt; <span class="keyword">true</span>,</span></span><br><span class="line"><span class="php">        <span class="string">'USER_TYPE'</span> =&gt; <span class="number">2</span>,</span></span><br><span class="line"><span class="php">    ),</span></span><br><span class="line"><span class="php">);</span></span><br></pre></td></tr></table></figure></p>
@@ -591,7 +592,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -123,20 +123,20 @@
 
 
 
-<meta name="description" content="babyt3看到include $_GET[&amp;#39;file&amp;#39;]尝试文件包含用php://filter读取index文件,成功读取 解码得到如下:12345678910111213&amp;lt;?php$a = @$_GET[&apos;file&apos;];if (!$a) &amp;#123;	$a = &apos;./templates/index.html&apos;;&amp;#125;echo &apos;include $_GET[\&apos;fil">
+<meta name="description" content="babyt3看到include $_GET[&amp;#39;file&amp;#39;]尝试文件包含用php://filter读取index文件,成功读取 解码得到如下:12345678910111213&amp;lt;?php$a = @$_GET[&apos;file&apos;];if (!$a) &amp;#123;	$a = &apos;./templates/index.html&apos;;&amp;#125;echo &apos;include $_GET[\&apos;fi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019西湖论剑writeup">
 <meta property="og:url" content="https://style-404.github.io/2019/04/11/2019西湖论剑writeup/index.html">
 <meta property="og:site_name" content="可乐&#39;blog">
-<meta property="og:description" content="babyt3看到include $_GET[&amp;#39;file&amp;#39;]尝试文件包含用php://filter读取index文件,成功读取 解码得到如下:12345678910111213&amp;lt;?php$a = @$_GET[&apos;file&apos;];if (!$a) &amp;#123;	$a = &apos;./templates/index.html&apos;;&amp;#125;echo &apos;include $_GET[\&apos;fil">
+<meta property="og:description" content="babyt3看到include $_GET[&amp;#39;file&amp;#39;]尝试文件包含用php://filter读取index文件,成功读取 解码得到如下:12345678910111213&amp;lt;?php$a = @$_GET[&apos;file&apos;];if (!$a) &amp;#123;	$a = &apos;./templates/index.html&apos;;&amp;#125;echo &apos;include $_GET[\&apos;fi">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1yx9205u1j30wh0ioq3x.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1yx9q7wypj30vs08laac.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1yxahyuwhj30um0fsmxk.jpg">
-<meta property="og:updated_time" content="2019-04-14T08:13:28.341Z">
+<meta property="og:updated_time" content="2019-05-17T07:20:15.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019西湖论剑writeup">
-<meta name="twitter:description" content="babyt3看到include $_GET[&amp;#39;file&amp;#39;]尝试文件包含用php://filter读取index文件,成功读取 解码得到如下:12345678910111213&amp;lt;?php$a = @$_GET[&apos;file&apos;];if (!$a) &amp;#123;	$a = &apos;./templates/index.html&apos;;&amp;#125;echo &apos;include $_GET[\&apos;fil">
+<meta name="twitter:description" content="babyt3看到include $_GET[&amp;#39;file&amp;#39;]尝试文件包含用php://filter读取index文件,成功读取 解码得到如下:12345678910111213&amp;lt;?php$a = @$_GET[&apos;file&apos;];if (!$a) &amp;#123;	$a = &apos;./templates/index.html&apos;;&amp;#125;echo &apos;include $_GET[\&apos;fi">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1yx9205u1j30wh0ioq3x.jpg">
 
 
@@ -387,12 +387,13 @@
       
 
       
-        <h1 id="babyt3"><a href="#babyt3" class="headerlink" title="babyt3"></a>babyt3</h1><p>看到<code>include $_GET[&#39;file&#39;]</code>尝试文件包含用<code>php://filter</code>读取index文件,成功读取 解码得到如下:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$a = @$_GET[<span class="string">'file'</span>];</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (!$a) &#123;</span></span><br><span class="line"><span class="php">	$a = <span class="string">'./templates/index.html'</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> <span class="string">'include $_GET[\'file\']'</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (strpos(<span class="string">'flag'</span>,$a)!==<span class="keyword">false</span>) &#123;</span></span><br><span class="line"><span class="php">	<span class="keyword">die</span>(<span class="string">'nonono'</span>);</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="keyword">include</span> $a;</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--hint: ZGlyLnBocA== --&gt;</span></span><br></pre></td></tr></table></figure></p>
+        <p><meta name="referrer" content="no-referrer"></p>
+<h1 id="babyt3"><a href="#babyt3" class="headerlink" title="babyt3"></a>babyt3</h1><p>看到<code>include $_GET[&#39;file&#39;]</code>尝试文件包含用<code>php://filter</code>读取index文件,成功读取 解码得到如下:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$a = @$_GET[<span class="string">'file'</span>];</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (!$a) &#123;</span></span><br><span class="line"><span class="php">	$a = <span class="string">'./templates/index.html'</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> <span class="string">'include $_GET[\'file\']'</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (strpos(<span class="string">'flag'</span>,$a)!==<span class="keyword">false</span>) &#123;</span></span><br><span class="line"><span class="php">	<span class="keyword">die</span>(<span class="string">'nonono'</span>);</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="keyword">include</span> $a;</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--hint: ZGlyLnBocA== --&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>提示有dir.php 继续读取dir.php<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$a = @$_GET[<span class="string">'dir'</span>];</span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(!$a)&#123;</span></span><br><span class="line"><span class="php">$a = <span class="string">'/tmp'</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php">var_dump(scandir($a));</span></span><br></pre></td></tr></table></figure></p>
 <p>分析:<br>index.php<br>获取file值 检查是否出现flag<br>dir.php<br>列出目录结构</p>
 <p>先在dir.php中查看目录<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1yx9205u1j30wh0ioq3x.jpg" alt=""><br>然后在index.php中读取<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1yx9q7wypj30vs08laac.jpg" alt=""><br>解码得到flag<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1yxahyuwhj30um0fsmxk.jpg" alt=""></p>
-<p># </p>
-<p># </p>
+<p>#</p>
+<p>#</p>
 
       
     </div>
@@ -537,7 +538,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
