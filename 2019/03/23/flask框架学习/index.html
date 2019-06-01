@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="flask运行及调试WSGI介绍1https://blog.csdn.net/on_1y/article/details/18803563 一个最小的应用一个最小的应用看起来像这样，新建 hello.py 文件，并向其中写入如下代码：123456from flask import Flaskapp = Flask(__name__)@app.route(&apos;/&apos;)def hello_world()">
+<meta name="keywords" content="开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flask框架学习">
+<meta property="og:url" content="https://style-404.github.io/2019/03/23/flask框架学习/index.html">
+<meta property="og:site_name" content="可乐&#39;blog">
+<meta property="og:description" content="flask运行及调试WSGI介绍1https://blog.csdn.net/on_1y/article/details/18803563 一个最小的应用一个最小的应用看起来像这样，新建 hello.py 文件，并向其中写入如下代码：123456from flask import Flaskapp = Flask(__name__)@app.route(&apos;/&apos;)def hello_world()">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1cyxv45i1j30qa0eb76c.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1d1eyb1a4j30sn09kgmk.jpg">
+<meta property="og:updated_time" content="2019-05-17T07:20:09.454Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flask框架学习">
+<meta name="twitter:description" content="flask运行及调试WSGI介绍1https://blog.csdn.net/on_1y/article/details/18803563 一个最小的应用一个最小的应用看起来像这样，新建 hello.py 文件，并向其中写入如下代码：123456from flask import Flaskapp = Flask(__name__)@app.route(&apos;/&apos;)def hello_world()">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1cyxv45i1j30qa0eb76c.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://style-404.github.io/2019/03/23/flask框架学习/">
+
+
+
+
+
+  <title>flask框架学习 | 可乐'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可乐'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2019/03/23/flask框架学习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="筱阳">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可乐'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">flask框架学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-23T21:21:49+08:00">
+                2019-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><meta name="referrer" content="no-referrer"></p>
+<h1 id="flask运行及调试"><a href="#flask运行及调试" class="headerlink" title="flask运行及调试"></a>flask运行及调试</h1><h2 id="WSGI介绍"><a href="#WSGI介绍" class="headerlink" title="WSGI介绍"></a>WSGI介绍</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>blog.csdn.net<span class="regexp">/on_1y/</span>article<span class="regexp">/details/</span><span class="number">18803563</span></span><br></pre></td></tr></table></figure>
+<h2 id="一个最小的应用"><a href="#一个最小的应用" class="headerlink" title="一个最小的应用"></a>一个最小的应用</h2><p>一个最小的应用看起来像这样，新建 hello.py 文件，并向其中写入如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello, World!'</span></span><br></pre></td></tr></table></figure></p>
+<p>那么这段代码做了什么？</p>
+<p>首先我们导入了类 Flask。这个类的实例化将会是我们的 WSGI 应用。<br>接着，我们创建一个该类的实例。第一个参数是应用模块或包的名称，这样 Flask 才会知道去哪里寻找模板、静态文件等等。如果你使用的是单一的模块（就如本例），第一个参数应该使用 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我们使用装饰器route()告诉 Flask 哪个URL才能触发我们的函数。</span><br><span class="line">定义一个函数，该函数名也是用来给特定函数生成 URLs，并且返回我们想要显示在用户浏览器上的信息。</span><br><span class="line">使用 Python 解释器运行这个文件，注意这个文件不能取名为flask.py，因为这会与 Flask 本身冲突。</span><br><span class="line"></span><br><span class="line">运行这个应用既可以使用 flask 命令行也可以使用 Python 的 -m 调用 flask，在运行之前你需要设置 FLASK_APP 的环境变量来告诉终端需要运行哪个应用，在终端执行如下命令：</span><br></pre></td></tr></table></figure></p>
+<p>export FLASK_APP=hello.py<br>flask run<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">现在使用浏览器浏览http://<span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">5000</span>/，将会看到页面上的 Hello, World!。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">当你运行服务器，你会注意到它只能从你自己的计算机上访问，网络中其它任何的地方都不能访问。这是因为默认情况下是 debug 模式，只有应用中的一个用户可以执行你计算机上的任意 Python 代码。</span><br><span class="line"></span><br><span class="line">如果你关闭 debug 或者信任你所在网络上的用户，可以让你的服务器对外公开可用，只需要在命令行中添加参数 --host=<span class="number">0.0</span><span class="meta">.0</span><span class="meta">.0</span>:</span><br></pre></td></tr></table></figure></p>
+<p>flask run –host=0.0.0.0</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">这让你的操作系统去监听所有公开的 IP。</span><br><span class="line"></span><br><span class="line">调试模式</span><br><span class="line">使用 flask 命令行可以非常方便的启动一个本地开发服务器，但是每次修改代码后你都需要手动重启服务器。通过前面的启动后输出显示可以发现 <span class="keyword">Environment</span> 为 production，同时调试模式未开启 <span class="keyword">Debug</span> mode: off。</span><br><span class="line"></span><br><span class="line">这样做并不好，Flask 能做得更好。如果启用了调试支持，在代码修改后服务器能够自动重载，并且如果发生错误，它会提供一个有用的调试器。</span><br><span class="line"></span><br><span class="line">为了让所有的开发者特征可用（包括调试模式），在运行服务器之前可以设置 FLASK_ENV 环境变量为 development：</span><br></pre></td></tr></table></figure>
+<p>$ export FLASK_ENV=development<br>$ export FLASK_DEBUG=1<br>$ flask run<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">上述命令做了以下几件事：</span><br><span class="line"></span><br><span class="line">使调试器（debugger）可用</span><br><span class="line">启动了代码改变自动的热加载</span><br><span class="line">在 flask 应用中开启了 <span class="builtin-name">debug</span> 模式</span><br><span class="line">注意</span><br><span class="line">尽管交互式调试器(debugger)不能在分叉(forking)环境下工作(这使得它几乎不可能在生产服务器上使用)，它依然允许执行任意代码。这使它成为一个巨大的安全风险，因此它绝对不能用于生产环境。</span><br><span class="line"></span><br><span class="line">运行中的调试器的截图，从截图可以看出在页面上有终端可以执行交互式命令:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 路由</span></span><br><span class="line">route 装饰器是用于把一个函数绑定到一个 URL 上。</span><br></pre></td></tr></table></figure></p>
+<p>from flask import Flask<br>app = Flask(<strong>name</strong>)</p>
+<p> 如果访问 /,返回 Index Page<br>@app.route(‘/‘)<br>def index():<br>    return ‘Index Page’</p>
+<p> 如果访问 /hello，返回 Hello, World!<br>@app.route(‘/hello’)<br>def hello():<br>    return ‘Hello, World!’<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">访问地址 <span class="string">http:</span><span class="comment">//127.0.0.1:5000，浏览器页面会显示 Index Page；</span></span><br><span class="line">如果访问地址 <span class="string">http:</span><span class="comment">//127.0.0.1:5000/hello，浏览器页面会显示 Hello, World!。这样就实现了通过访问不同的 URL 地址从而响应不同的页面。</span></span><br><span class="line">为了给 URL 增加变量的部分，你需要把一些特定的字段标记成&lt;variable_name&gt;。这些特定的字段将作为参数传入到你的函数中。当然也可以指定一个可选的转换器通过规则&lt;<span class="string">converter:</span>variable_name&gt;将变量值转换为特定的数据类型。</span><br><span class="line">在 <span class="regexp">/home/</span>shiyanlou<span class="regexp">/Code/</span>hello.py 文件中添加如下的代码：</span><br></pre></td></tr></table></figure></p>
+<p>@app.route(‘/user/<username>‘)<br>def show_user_profile(username):<br>     显示用户名<br>    return ‘User &#123;&#125;’.format(username)</username></p>
+<p>@app.route(‘/post/<a href="int:post_id" target="_blank" rel="noopener">int:post_id</a>‘)<br>def show_post(post_id):<br>     显示提交整型的用户”id”的结果，注意”int”是将输入的字符串形式转换为整型数据<br>    return ‘Post &#123;&#125;’.format(post_id)</p>
+<p>@app.route(‘/path/<a href="path:subpath" target="_blank" rel="noopener">path:subpath</a>‘)<br>def show_subpath(subpath):<br>     显示 /path/ 之后的路径名<br>    return ‘Subpath &#123;&#125;’.format(subpath)<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">当访问 http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5000</span><span class="regexp">/user/</span>shiyanlou 时，页面显示为 User shiyanlou。</span><br><span class="line"></span><br><span class="line">当访问 http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5000</span><span class="regexp">/post/</span><span class="number">3</span> 时，页面显示为 Post <span class="number">3</span>。用户在浏览器地址栏上输入的都是字符串，但是在传递给 show_post 函数处理时已经被转换为了整型。</span><br><span class="line"></span><br><span class="line">当访问 http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5000</span><span class="regexp">/path/</span>file<span class="regexp">/A/</span>a.txt 时，页面显示为 Subpath file<span class="regexp">/A/</span>a.txt</span><br><span class="line"></span><br><span class="line">唯一 URLs <span class="regexp">/ 重定向行为</span></span><br></pre></td></tr></table></figure></p>
+<p>@app.route(‘/projects/‘)<br>def projects():<br>    return ‘The project page’</p>
+<p>@app.route(‘/about’)<br>def about():<br>    return ‘The about page<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">虽然它们看起来确实相似，但它们结尾斜线的使用在 <span class="built_in">URL</span> 定义中不同。</span><br><span class="line"></span><br><span class="line">第一种情况中，规范的 <span class="built_in">URL</span> 指向 projects 尾端有一个斜线/。这种感觉很像在文件系统中的文件夹。访问一个结尾不带斜线的 <span class="built_in">URL</span> 会被 Flask 重定向到带斜线的规范 <span class="built_in">URL</span> 去。</span><br><span class="line">当访问 <span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>/projects/ 时，页面会显示 The project page。</span><br><span class="line"></span><br><span class="line">然而，第二种情况的 <span class="built_in">URL</span> 结尾不带斜线，类似 UNIX-like 系统下的文件的路径名。此时如果访问结尾带斜线的 <span class="built_in">URL</span> 会产生一个<span class="number">404</span> “Not Found”错误。</span><br><span class="line">当访问 <span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>/about 时，页面会显示 The about page；但是当访问 <span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>/about/ 时，页面就会报错 Not Found。</span><br><span class="line"></span><br><span class="line">当用户访问页面忘记结尾斜线时，这个行为允许关联的 <span class="built_in">URL</span> 继续工作，并且与 Apache 和其它的服务器的行为一致，反之则不行，因此在代码的 <span class="built_in">URL</span> 设置时斜线只可多写不可少写；另外，<span class="built_in">URL</span> 会保持唯一，有助于避免搜索引擎索引同一个页面两次。</span><br><span class="line"></span><br><span class="line"><span class="comment">## HTTP方法</span></span><br><span class="line"></span><br><span class="line">默认情况下，路由只会响应 GET 请求，但是能够通过给 route() 装饰器提供 methods 参数来改变。这里是一个例子:</span><br></pre></td></tr></table></figure></p>
+<p>@app.route(‘/login’, methods=[‘GET’, ‘POST’])<br>def login():<br>    if request.method == ‘POST’:<br>        do_the_login()    如果是 POST 方法就执行登录操作<br>    else:<br>        show_the_login_form()    如果是 GET 方法就展示登录表单<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">如果使用 GET 方法，HEAD 方法将会自动添加进来。你不必处理它们。也能确保 HEAD 请求会按照 HTTP RFC (文档在 HTTP 协议里面描述) 要求来处理，因此你完全可以忽略这部分 HTTP 规范。</span><br><span class="line">同样地，自从 Flask <span class="number">0.6</span> 后，OPTIONS 方法也能自动为你处理。</span><br><span class="line"></span><br><span class="line"><span class="comment">## 练习</span></span><br><span class="line"></span><br><span class="line">请开发一个小应用，<span class="built_in">URL</span> 地址输入<span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>/xxx（其中 xxx 表示你的名字），访问页面会显示 xxx。</span><br><span class="line"></span><br><span class="line">请完成一个应用，当 <span class="built_in">URL</span> 是<span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>/<span class="built_in">sum</span>/<span class="keyword">a</span>/b时，其中<span class="keyword">a</span>和b都是数字，服务器返回它们的和。</span><br><span class="line">练习题 <span class="number">1</span> 的答案</span><br></pre></td></tr></table></figure></p>
+<p>from flask import Flask<br>app = Flask(<strong>name</strong>)</p>
+<p>@app.route(‘/<username>‘)<br>def get_name(username):<br>    return username<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></username></p>
+<p>from flask import Flask<br>app = Flask(<strong>name</strong>)</p>
+<p>@app.route(‘/sum/<a href="int:a" target="_blank" rel="noopener">int:a</a>/<a href="int:b" target="_blank" rel="noopener">int:b</a>‘)<br>def get_sum(a,b):<br>    return ‘&#123;0&#125; + &#123;1&#125; = &#123;2&#125;’.format(a,b,a+b)<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 静态文件及渲染模板</span></span><br><span class="line"><span class="meta">## 静态文件</span></span><br><span class="line">动态的 web 应用同样需要静态文件。CSS 和 JavaScript 文件通常来源于此。</span><br><span class="line">理想情况下，你的 web 服务器已经配置好为它们服务，然而在开发过程中 Flask 就能够做到。只要在你的包中或模块旁边创建一个名为<span class="keyword">static</span> 的文件夹，在应用中使用 /<span class="keyword">static</span> 即可访问。</span><br><span class="line"></span><br><span class="line">给静态文件生成 URL ，使用特殊的 <span class="keyword">static</span> 端点名</span><br><span class="line">url_for(<span class="string">'static'</span>, filename=<span class="string">'style.css'</span>)</span><br><span class="line">这个文件是应该存储在文件系统上的<span class="keyword">static</span>/style.css。</span><br><span class="line">在 Python 中生成 HTML 并不好玩，实际上是相当繁琐的，因为你必须自行做好 HTML 转义以保持应用程序的安全。由于这个原因，Flask 自动为你配置好 Jinja2 模板。</span><br><span class="line"></span><br><span class="line">你可以使用方法 render_template() 来渲染模板。所有你需要做的就是提供模板的名称以及你想要作为关键字参数传入模板的变量。</span><br><span class="line"></span><br><span class="line">这里有个渲染模板的简单例子，在 /home/shiyanlou/Code 目录下新建 hello.py 文件，并向其中添加如下代码:</span><br></pre></td></tr></table></figure></p>
+<p>from flask import Flask, render_template<br>app = Flask(<strong>name</strong>)</p>
+<p>@app.route(‘/hello/‘)<br>@app.route(‘/hello/<name>‘)<br>def hello(name=None):    默认 name 为 None<br>    return render_template(‘hello.html’, name=name)    将 name 参数传递到模板变量中<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Flask 将会在 templates 文件夹中寻找模板。因此如果你的应用是个模块，这个文件夹在模块的旁边，如果它是一个包，那么这个文件夹在你的包里面:</span><br><span class="line"></span><br><span class="line"><span class="section">比如，应用是模块（本系列实验的应用结构都是模块型）:</span></span><br></pre></td></tr></table></figure></name></p>
+<p>/application.py<br>/templates<br>    /hello.html<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">/application.py</span><br><span class="line">/templates</span><br><span class="line">    /hello.html</span><br></pre></td></tr></table></figure></p>
+<p>对于模板，你可以使用 Jinja2 模板的全部能力。详细信息查看官方的 Jinja2 Template Documentation 。</p>
+<p>在 /home/shiyanlou/Code 目录下新建 templates 文件夹并在其中新建 hello.html 文件：<br>然后向 hello.html 模板文件中添加如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello from Flask<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">&amp;#123;% if name %&amp;#125;   <span class="comment">&lt;!-- 如果 name 不为空则将 name 渲染出来 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello &amp;#123;&amp;#123; name &amp;#125;&amp;#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">&amp;#123;% else %&amp;#125;   <span class="comment">&lt;!-- 如果 name 为空则打印 Hello World! --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">&amp;#123;% endif %&amp;#125;</span><br></pre></td></tr></table></figure></p>
+<p>按照前面的方法运行应用程序，当访问 <a href="http://127.0.0.1:5000/hello/" target="_blank" rel="noopener">http://127.0.0.1:5000/hello/</a> 时页面显示 Hello World!；<br>当访问 <a href="http://127.0.0.1:5000/hello/shiyanlou" target="_blank" rel="noopener">http://127.0.0.1:5000/hello/shiyanlou</a> 时页面显示 Hello shiyanlou!。<br>在模板中你也可以使用request，session和g对象，也能使用函数get_flashed_messages() 。</p>
+<p>模板继承是十分有用的。如果想要知道模板继承如何工作的话，请阅读文档模板继承。基本的模板继承使得某些特定元素（如标题、导航和页脚）在每一页成为可能。</p>
+<p>自动转义默认是开启的，因此如name包含 HTML，它将会自动转义。如果你信任一个变量，并且你知道它是安全的（例如一个模块把 wiki 标记转换到 HTML ），你可以用Markup类或|safe过滤器在模板中标记它是安全的。 在 Jinja 2 文档中，你会见到更多例子。</p>
+<p>练习:<br>请创建一个模板和CSS文件，并在模板引入CSS文件，当访问网站首页时显示一个绿色的Hello ShiYanLou字样。关于HTML以及CSS的学习请参考在线教程<br>文件目录结构如下所示：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/hello.py</span></span><br><span class="line"><span class="string">/templates</span></span><br><span class="line">    <span class="string">/hello.html</span></span><br><span class="line"><span class="string">/static</span></span><br><span class="line">    <span class="string">/hello.css</span></span><br></pre></td></tr></table></figure>
+<p>hello.py 文件中的代码如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_hello</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'hello.html'</span>)</span><br></pre></td></tr></table></figure>
+<p>templates/hello.html 存放的是前端代码，如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"&amp;#123;&amp;#123; url_for('static', filename='hello.css') &amp;#125;&amp;#125;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello ShiYanLou<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>static/hello.css 存放的是 css 代码，如下所示：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">h1&amp;<span class="comment">#123;</span></span><br><span class="line"><span class="symbol">    color:</span> green<span class="comment">;</span></span><br><span class="line">    text-align: center<span class="comment">;</span></span><br><span class="line">&amp;<span class="comment">#125;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="接收请求数据"><a href="#接收请求数据" class="headerlink" title="接收请求数据"></a>接收请求数据</h1><p>首先你需要从 flask 模块中导入request:<br>from flask import request<br>当前请求的方法可以用method属性来访问。你可以用form属性来访问表单数据 (数据在 POST 或者PUT中传输)。<br>这里是上面提及到的两种属性的完整的例子:<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@app.route(<span class="string">'/login'</span>, methods=[<span class="string">'POST'</span>, <span class="string">'GET'</span>])</span><br><span class="line">def login():</span><br><span class="line">    <span class="keyword">error</span> = None</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        <span class="keyword">if</span> valid_login(request.form[<span class="string">'username'</span>],</span><br><span class="line">                       request.form[<span class="string">'password'</span>]):</span><br><span class="line">            <span class="keyword">return</span> log_the_user_in(request.form[<span class="string">'username'</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">error</span> = <span class="string">'Invalid username/password'</span></span><br><span class="line">     当请求形式为“GET”或者认证失败则执行以下代码</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>, <span class="keyword">error</span>=<span class="keyword">error</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果在form属性中不存在上述键值会发生些什么？在这种情况下会触发一个特别的 KeyError。你可以像捕获标准的KeyError一样来捕获它，如果你不这样去做，会显示一个HTTP 400 Bad Request错误页面。所以很多情况下你不需要处理这个问题。</p>
+<p>你可以用args属性来接收在URL ( ?key=value )中提交的参数:<br>searchword = request.args.get(‘key’, ‘’)<br>我们推荐使用get来访问 URL 参数或捕获KeyError，因为用户可能会修改 URL，向他们显示一个400 bad request页面不是用户友好的。</p>
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><p>你能够很容易地用 Flask 处理文件上传。只要确保在你的 HTML 表单中不要忘记设置属性enctype=”multipart/form-data”，否则浏览器将不会传送文件。</p>
+<p>上传的文件是存储在内存或者文件系统上一个临时位置。你可以通过请求对象中files属性访问这些文件。每个上传的文件都会存储在这个属性字典里。它表现得像一个标准的 Python file对象，但是它同样具有save()方法，该方法允许你存储文件在服务器的文件系统上。</p>
+<p>下面是一个简单的例子用来演示提交文件到服务器上:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from flask import request</span><br><span class="line"></span><br><span class="line">@app.route(<span class="string">'/upload'</span>, methods=[<span class="string">'GET'</span>, <span class="string">'POST'</span>])</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_file</span><span class="params">()</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span><span class="symbol">:</span></span><br><span class="line">        f = request.files[<span class="string">'the_file'</span>]</span><br><span class="line">        f.save(<span class="string">'/var/www/uploads/uploaded_file.txt'</span>)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<p>如果你想要知道在上传到你的应用之前在客户端的文件名称，你可以访问filename属性。<br>但请记住永远不要信任这个值，因为这个值可以伪造。如果你想要使用客户端的文件名来在服务器上存储文件，把它传递到Werkzeug提供给你的secure_filename()函数:</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">from</span> werkzeug <span class="keyword">import</span> secure_filename</span><br><span class="line"></span><br><span class="line">@app.route(<span class="string">'/upload'</span>, methods=[<span class="string">'GET'</span>, <span class="string">'POST'</span>])</span><br><span class="line">def upload_file():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        f = request.files[<span class="string">'the_file'</span>]</span><br><span class="line">        f.save(<span class="string">'/var/www/uploads/'</span> + secure_filename(f.filename))</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h1 id="cookies"><a href="#cookies" class="headerlink" title="cookies"></a>cookies</h1><p>你可以用 cookies 属性来访问 Cookies 。你能够用响应对象的 set_cookie 来设置 cookies。请求对象中的 cookies 属性是一个客户端发送所有的 cookies 的字典。</p>
+<p>如果你要使用会话(sessions)，请不要直接使用 cookies，相反，请用 Flask 中的会话，Flask 已经在cookies 上增加了一些安全细节；关于更多 seesions 和 cookies 的区别与联系，请参见施杨出品的博客。</p>
+<p>读取 cookies:<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from flask <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line">@app.route(<span class="string">'/'</span>)</span><br><span class="line">def index():</span><br><span class="line">    username = request.cookies.<span class="built_in">get</span>(<span class="string">'username'</span>)</span><br><span class="line">     注意这里引用cookies字典的键值对是使用cookies.<span class="built_in">get</span>(<span class="built_in">key</span>)</span><br><span class="line">     而不是cookies[<span class="built_in">key</span>]，这是防止该字典不存在时报错<span class="string">"keyerror"</span></span><br></pre></td></tr></table></figure></p>
+<p>存储 cookies:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> make_response</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    resp = make_response(render_template(...))</span><br><span class="line">    resp.set_cookie(<span class="string">'username'</span>, <span class="string">'the username'</span>)</span><br><span class="line">    <span class="keyword">return</span> resp</span><br></pre></td></tr></table></figure></p>
+<p>注意cookies是在响应对象中被设置。由于通常只是从视图函数返回字符串，Flask 会将其转换为响应对象。如果你要显式地这么做，可以使用 make_response() 函数接着修改它。</p>
+<p>有时候你可能要在响应对象不存在的地方设置cookie。利用延迟请求回调模式使得这种情况成为可能。</p>
+<p>本节讲解了 flask 的请求，如果想在没有请求的情况下获取上下文，可以使用test_request_context()或者request_context()，从request对象的form中可以获取表单的数据，args中可以获取 URL 中的参数，files可以获取上传的文件，cookies可以操作cookie。</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>请实现一个上传图片到服务器的功能。具体要求如下：</p>
+<p>在 /home/shiyanlou/Code 目录下新建 upload_file.py 文件并在其中写入本练习的代码。<br>要求上传的文件保存位置为 /home/shiyanlou/Code 目录下。<br>当访问首页 <a href="http://127.0.0.1" target="_blank" rel="noopener">http://127.0.0.1</a> 时出现表单可以上传文件，<br>当上传成功后在浏览器可以看到 &lt;上传的文件名&gt; upload successed!</p>
+<p>参考代码<br>在 /home/shiyanlou/Code/upload_file.py 文件中添加如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"><span class="keyword">from</span> werkzeug <span class="keyword">import</span> secure_filename    获取上传文件的文件名</span><br><span class="line"></span><br><span class="line">UPLOAD_FOLDER = <span class="string">'/home/shiyanlou/Code'</span>    上传路径</span><br><span class="line">ALLOWED_EXTENSIONS = set([<span class="string">'txt'</span>, <span class="string">'pdf'</span>, <span class="string">'png'</span>, <span class="string">'jpg'</span>, <span class="string">'jpeg'</span>, <span class="string">'gif'</span>])    允许上传的文件类型</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[<span class="string">'UPLOAD_FOLDER'</span>] = UPLOAD_FOLDER</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">allowed_file</span><span class="params">(filename)</span>:</span>    验证上传的文件名是否符合要求，文件名必须带点并且符合允许上传的文件类型要求，两者都满足则返回 true</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'.'</span> <span class="keyword">in</span> filename <span class="keyword">and</span> \</span><br><span class="line">           filename.rsplit(<span class="string">'.'</span>, <span class="number">1</span>)[<span class="number">1</span>] <span class="keyword">in</span> ALLOWED_EXTENSIONS</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_file</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:    如果是 POST 请求方式</span><br><span class="line">        file = request.files[<span class="string">'file'</span>]    获取上传的文件</span><br><span class="line">        <span class="keyword">if</span> file <span class="keyword">and</span> allowed_file(file.filename):    如果文件存在并且符合要求则为 true</span><br><span class="line">            filename = secure_filename(file.filename)    获取上传文件的文件名</span><br><span class="line">            file.save(os.path.join(app.config[<span class="string">'UPLOAD_FOLDER'</span>], filename))    保存文件</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'&amp;#123;&amp;#125; upload successed!'</span>.format(filename)    返回保存成功的信息</span><br><span class="line">     使用 GET 方式请求页面时或是上传文件失败时返回上传文件的表单页面</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'''</span></span><br><span class="line"><span class="string">    &lt;!doctype html&gt;</span></span><br><span class="line"><span class="string">    &lt;title&gt;Upload new File&lt;/title&gt;</span></span><br><span class="line"><span class="string">    &lt;h1&gt;Upload new File&lt;/h1&gt;</span></span><br><span class="line"><span class="string">    &lt;form action="" method=post enctype=multipart/form-data&gt;</span></span><br><span class="line"><span class="string">      &lt;p&gt;&lt;input type=file name=file&gt;</span></span><br><span class="line"><span class="string">         &lt;input type=submit value=Upload&gt;</span></span><br><span class="line"><span class="string">    &lt;/form&gt;</span></span><br><span class="line"><span class="string">    '''</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="重定向、响应、会话和扩展"><a href="#重定向、响应、会话和扩展" class="headerlink" title="重定向、响应、会话和扩展"></a>重定向、响应、会话和扩展</h1><h2 id="重定向和错误"><a href="#重定向和错误" class="headerlink" title="重定向和错误"></a>重定向和错误</h2><p>你能够用redirect()函数重定向用户到其它地方。能够用abort()函数提前中断一个请求并带有一个错误代码。</p>
+<p>下面是一个演示它们如何工作的例子，在 /home/shiyanlou/Code/ 目录下新建 hello.py 文件并向其中写入如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> abort, redirect, url_for</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">'login'</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    abort(<span class="number">401</span>)</span><br><span class="line">    this_is_never_executed()</span><br></pre></td></tr></table></figure></p>
+<p>按照之前的方式运行应用，这是一个相当无意义的例子因为用户会从主页/重定向到一个不能访问的页面/login（ 401 意味着禁止访问），但是它说明了重定向如何工作。</p>
+<p>默认情况下，每个错误代码会显示一个黑白错误页面。比如上面的页面会显示 401 Unauthorized。<br>如果你想定制错误页面，可以使用errorhandler()装饰器，向 /home/shiyanlou/Code/hello.py 文件中添加如下代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> render_template</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.errorhandler(401)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">page_not_found</span><span class="params">(error)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'page_not_found.html'</span>), <span class="number">404</span></span><br></pre></td></tr></table></figure></p>
+<p>注意到 404 是在render_template()调用之后。告诉 Flask 该页的错误代码应是 404 ，即没有找到。默认的 200 被假定为：一切正常。</p>
+<p>在 /home/shiyanlou/Code 目录下新建 templates 文件夹，并在其中新建 page_not_found.html 文件。<br>向 page_not_found.html 文件中添加如下代码：<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;<span class="built_in">page</span> <span class="built_in">not</span> found, this <span class="keyword">is</span> an error <span class="built_in">page</span>.&lt;/h1&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><p>一个视图函数的返回值会被自动转换为一个响应对象。如果返回值是一个字符串，它被转换成一个响应主体是该字符串，错误代码为 200 OK ，媒体类型为text/html的响应对象。Flask 把返回值转换成响应对象的逻辑如下：</p>
+<p>如果返回的是一个合法的响应对象，它会直接从视图返回。<br>如果返回的是一个字符串，响应对象会用字符串数据和默认参数创建。<br>如果返回的是一个元组而且元组中元素能够提供额外的信息。这样的元组必须是(response, status, headers) 形式且至少含有其中的一个元素。status值将会覆盖状态代码，headers可以是一个列表或额外的消息头值字典。<br>如果上述条件均不满足，Flask 会假设返回值是一个合法的 WSGI 应用程序，并转换为一个请求对象。<br>如果你想要获取在视图中得到的响应对象，你可以用函数make_response()。</p>
+<p>想象你有这样一个视图:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.errorhandler(<span class="number">404</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">not_found</span><span class="params">(error)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'error.html'</span>), <span class="number">404</span></span><br></pre></td></tr></table></figure></p>
+<p>你只需要用make_response()封装返回表达式，获取结果对象并修改，然后返回它：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@app.errorhandler(<span class="number">404</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">not_found</span><span class="params">(error)</span></span><span class="symbol">:</span></span><br><span class="line">    resp = make_response(render_template(<span class="string">'error.html'</span>), <span class="number">404</span>)</span><br><span class="line">    resp.headers[<span class="string">'X-Something'</span>] = <span class="string">'A value'</span></span><br><span class="line">    <span class="keyword">return</span> resp</span><br></pre></td></tr></table></figure></p>
+<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><p>除了请求对象，还有第二个称为session对象允许你在不同请求间存储特定用户的信息。这是在 cookies 的基础上实现的，并且在 cookies 中使用加密的签名。这意味着用户可以查看 cookie 的内容，但是不能修改它，除非知道签名的密钥。</p>
+<p>要使用会话，你需要设置一个密钥。这里介绍会话如何工作，在 /home/shiyanlou/Code 目录下新建 test.py 文件并写入如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, session, redirect, url_for, escape, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"> 设置密钥，保证会话安全</span><br><span class="line">app.secret_key = <span class="string">'_5#y2L"F4Q8z\n\xec]/'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'username'</span> <span class="keyword">in</span> session:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Logged in as %s'</span> % escape(session[<span class="string">'username'</span>])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'You are not logged in'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        session[<span class="string">'username'</span>] = request.form[<span class="string">'username'</span>]</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'''</span></span><br><span class="line"><span class="string">        &lt;form method="post"&gt;</span></span><br><span class="line"><span class="string">            &lt;p&gt;&lt;input type=text name=username&gt;</span></span><br><span class="line"><span class="string">            &lt;p&gt;&lt;input type=submit value=Login&gt;</span></span><br><span class="line"><span class="string">        &lt;/form&gt;</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/logout')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logout</span><span class="params">()</span>:</span></span><br><span class="line">     如果用户名存在，则从会话中移除该用户名</span><br><span class="line">    session.pop(<span class="string">'username'</span>, <span class="keyword">None</span>)</span><br><span class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>这里提到的escape()可以在你不使用模板引擎的时候做转义（如同本例）。其中，login函数中返回的网页源代码可以单独存储在templates文件夹中作为模板文件html，然后使用return render_template()更方便。</p>
+<p>按照前面的方式运行程序：</p>
+<p>当访问首页 <a href="http://127.0.0.1:5000/" target="_blank" rel="noopener">http://127.0.0.1:5000/</a> 时会显示 You are not logged in；</p>
+<p>当访问登录页面 <a href="http://127.0.0.1:5000/login" target="_blank" rel="noopener">http://127.0.0.1:5000/login</a> 时会出现一个输入框，在输入框中输入用户名 shiyanlou，然后点击 Login 按钮，这时 URL 会重定向到首页上，首页显示 Logged in as shiyanlou；</p>
+<p>最后再访问登出页面 <a href="http://127.0.0.1:5000/logout，这时从" target="_blank" rel="noopener">http://127.0.0.1:5000/logout，这时从</a> session 中移除了用户名，URL 重定向到首页显示 You are not logged in；</p>
+<p>怎样产生一个好的密钥：</p>
+<p>随机的问题在于很难判断什么是真随机。一个密钥应该足够随机。你的操作系统可以基于一个密码随机生成器来生成漂亮的随机值，这个值可以用来做密钥:<br><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -c 'import os; print(os.urandom(16))'</span><br><span class="line">b'm <span class="symbol">\x</span>f8&gt;]?<span class="symbol">\x</span>86<span class="symbol">\x</span>cf/y<span class="symbol">\x</span>0e<span class="symbol">\x</span>c5<span class="symbol">\x</span>c7j<span class="symbol">\x</span>c5/'</span><br></pre></td></tr></table></figure></p>
+<p>把这个值复制粘贴到你的代码，你就搞定了密钥。</p>
+<p>使用基于 cookie 的会话需注意: Flask 会将你放进会话（session）对象的值序列化到 cookie 。如果你试图寻找一个跨请求不能存留的值，cookies 确实是启用的，并且你不会获得明确的错误信息，检查你页面请求中 cookie 的大小，并与 web 浏览器所支持的大小对比。</p>
+<h2 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h2><p>好的应用和用户界面全部是关于反馈。如果用户得不到足够的反馈，他们可能会变得讨厌这个应用。Flask 提供了一个真正的简单的方式来通过消息闪现系统给用户反馈。消息闪现系统基本上使得在请求结束时记录信息并在下一个 （且仅在下一个）请求中访问。通常结合模板布局来显示消息。</p>
+<p>使用flash()方法来闪现一个消息，使用get_flashed_messages()能够获取消息，get_flashed_messages()也能用于模板中。</p>
+<p>下面来看一个简单的例子，在 /home/shiyanlou/Code 目录下新建 flashTest.py 文件，并向其中写入如下代码：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask, flash, redirect, render_template, \</span><br><span class="line">     request, url_for</span><br><span class="line"></span><br><span class="line">app = Flask(__name_<span class="number">_</span>)</span><br><span class="line">app.secret_key = b<span class="string">'_5#y2L"F4Q8z\n\xec]/'</span></span><br><span class="line"></span><br><span class="line">@app.route(<span class="string">'/'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>)</span><br><span class="line"></span><br><span class="line">@app.route(<span class="string">'/login'</span>, methods=[<span class="string">'GET'</span>, <span class="string">'POST'</span>])</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span></span><span class="symbol">:</span></span><br><span class="line">    error = None</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">if</span> request.form[<span class="string">'username'</span>] != <span class="string">'admin'</span> <span class="keyword">or</span> \</span><br><span class="line">                request.form[<span class="string">'password'</span>] != <span class="string">'secret'</span><span class="symbol">:</span></span><br><span class="line">            error = <span class="string">'Invalid credentials'</span></span><br><span class="line">        <span class="symbol">else:</span></span><br><span class="line">            flash(<span class="string">'You were successfully logged in'</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>, error=error)</span><br></pre></td></tr></table></figure></p>
+<p>然后在 /home/shiyanlou/Code/templates 目录下新建 base.html 页面，其中写入基本的模板代码，代码主要是从后端获取 flash 消息以及错误信息。</p>
+<figure class="highlight cal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;title&gt;My Application&lt;/title&gt;</span><br><span class="line">&amp;<span class="string">#123</span>;% <span class="keyword">with</span> messages = get_flashed_messages() %&amp;<span class="string">#125</span>;</span><br><span class="line">  &amp;<span class="string">#123</span>;% <span class="keyword">if</span> messages %&amp;<span class="string">#125</span>;</span><br><span class="line">    &lt;ul class=flashes&gt;</span><br><span class="line">    &amp;<span class="string">#123</span>;% <span class="keyword">for</span> message <span class="keyword">in</span> messages %&amp;<span class="string">#125</span>;</span><br><span class="line">      &lt;li&gt;&amp;<span class="string">#123</span>;&amp;<span class="string">#123</span>; message &amp;<span class="string">#125</span>;&amp;<span class="string">#125</span>;&lt;/li&gt;</span><br><span class="line">    &amp;<span class="string">#123</span>;% endfor %&amp;<span class="string">#125</span>;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  &amp;<span class="string">#123</span>;% endif %&amp;<span class="string">#125</span>;</span><br><span class="line">&amp;<span class="string">#123</span>;% endwith %&amp;<span class="string">#125</span>;</span><br><span class="line">&amp;<span class="string">#123</span>;% block body %&amp;<span class="string">#125</span>;&amp;<span class="string">#123</span>;% endblock %&amp;<span class="string">#125</span>;</span><br></pre></td></tr></table></figure>
+<p>在该目录下新建 index.html 页面，这个页面继承于 base.html 页面：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;#123;% extends <span class="string">"base.html"</span> %&amp;#125;</span><br><span class="line">&amp;#123;% block body %&amp;#125;</span><br><span class="line">  &lt;h1&gt;Overview&lt;/h1&gt;</span><br><span class="line">  &lt;p&gt;<span class="keyword">Do</span> you want <span class="keyword">to</span> &lt;a href=<span class="string">"&amp;#123;&amp;#123; url_for('login') &amp;#125;&amp;#125;"</span>&gt;<span class="keyword">log</span> <span class="keyword">in</span>?&lt;/a&gt;</span><br><span class="line">&amp;#123;% endblock %&amp;#125;</span><br></pre></td></tr></table></figure></p>
+<p>在该目录下新建 login.html 页面，这个页面也继承于 base.html 页面：.<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&amp;#123;% extends "base.html" %&amp;#125;</span><br><span class="line">&amp;#123;% block body %&amp;#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Login<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  &amp;#123;% if error %&amp;#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">error</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Error:<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> &amp;#123;&amp;#123; error &amp;#125;&amp;#125;</span><br><span class="line">  &amp;#123;% endif %&amp;#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">post</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Username:</span><br><span class="line">      <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">text</span> <span class="attr">name</span>=<span class="string">username</span> <span class="attr">value</span>=<span class="string">"&amp;#123;&amp;#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">          request.form.username &amp;#125;&amp;#125;"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Password:</span><br><span class="line">      <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">password</span> <span class="attr">name</span>=<span class="string">password</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">submit</span> <span class="attr">value</span>=<span class="string">Login</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">&amp;#123;% endblock %&amp;#125;</span><br></pre></td></tr></table></figure></p>
+<p>按照前面的方式运行程序：</p>
+<p>当访问首页 <a href="http://127.0.0.1:5000，会提示" target="_blank" rel="noopener">http://127.0.0.1:5000，会提示</a> Do you want to log in?，点击链接跳转到登录页面。</p>
+<p>在登录页面 <a href="http://127.0.0.1:5000/login，输入用户名和密码，如果输入错误的信息比如两个都为" target="_blank" rel="noopener">http://127.0.0.1:5000/login，输入用户名和密码，如果输入错误的信息比如两个都为</a> shiyanlou，点击 Login，就会出现错误提示 Error: Invalid credentials。如果用户名输入 admin、密码输入 secret，点击 Login，就会跳转到首页，同时在首页会显示 flash 消息 You were successfully logged in。</p>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>有时候你会遇到一种情况：理论上来说你处理的数据应该是正确的，然而实际上并不正确的状况。比如你可能有一些客户端代码，代码向服务器发送一个 HTTP 请求但是显然它是错误的。这可能是由于用户篡改数据，或客户端代码失败。大部分时候针对这一情况返回400 Bad Request就可以了，但是有时候不能这样做，代码必须继续工作。</p>
+<p>你也有可能想要记录一些发生的不正常事情。这时候日志就派上用处。从 Flask 0.3 开始日志记录是预先配置好的。</p>
+<p>这里有一些日志调用的例子:</p>
+<p>app.logger.debug(‘A value for debugging’)<br>app.logger.warning(‘A warning occurred (%d apples)’, 42)<br>app.logger.error(‘An error occurred’)<br>附带的 logger 是一个标准的日志类 Logger ，因此更多的信息请查阅官方文档 logging documentation。</p>
+<p>整合 WSGI 中间件<br>如果你想给你的应用添加 WSGI 中间件，你可以封装内部 WSGI 应用。例如如果你想使用 Werkzeug 包中的某个中间件来应付 lighttpd 中的 bugs，你可以这样做:</p>
+<p>from werkzeug.contrib.fixers import LighttpdCGIRootFix<br>app.wsgi_app = LighttpdCGIRootFix(app.wsgi_app)</p>
+<h2 id="练习-1"><a href="#练习-1" class="headerlink" title="练习"></a>练习</h2><p>请实现一个完整的用户登录功能:</p>
+<p>当访问地址 <a href="http://127.0.0.1:5000/login" target="_blank" rel="noopener">http://127.0.0.1:5000/login</a> ，出现登录页面，可以使用用户名和密码填写登录表单。<br>如果用户名和密码都为shiyanlou，那么就把用户名数据放到session中，把地址重定向到首页显示Hello shiyanlou，同时闪现消息 you were logged in。<br>如果用户名和密码不对，依然把地址重定向到首页显示hello world，同时闪现消息 username or password invalid。<br>参考答案<br>文件目录结构如下所示：<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/app.py</span></span><br><span class="line"><span class="string">/templates</span></span><br><span class="line">    <span class="string">/index.html</span></span><br><span class="line">    <span class="string">/login.html</span></span><br></pre></td></tr></table></figure></p>
+<p>在 app.py 文件中添加如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> flash, redirect, url_for, render_template, session</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.secret_key = <span class="string">b'_5#y2L"F4Q8z\n\xec]/'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/&lt;name&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>,name=name)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        <span class="keyword">if</span> request.form[<span class="string">'username'</span>] != <span class="string">'shiyanlou'</span> <span class="keyword">or</span> request.form[<span class="string">'password'</span>] != <span class="string">'shiyanlou'</span>:</span><br><span class="line">            flash(<span class="string">'username or password invalid'</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>, name=<span class="string">'world'</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            session[<span class="string">'username'</span>] = request.form[<span class="string">'username'</span>]</span><br><span class="line">            name = request.form[<span class="string">'username'</span>]</span><br><span class="line">            flash(<span class="string">'you were logged in'</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>, name=name))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>在 templates/index.html 文件中添加如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Index<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    &amp;#123;% for message in get_flashed_messages() %&amp;#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">flash</span>&gt;</span>&amp;#123;&amp;#123; message &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &amp;#123;% endfor %&amp;#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello &amp;#123;&amp;#123;name&amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在 templates/login.html 文件中添加如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Login<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"&amp;#123;&amp;#123; url_for('login') &amp;#125;&amp;#125;"</span> <span class="attr">method</span>=<span class="string">post</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Username:</span><br><span class="line">            <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">text</span> <span class="attr">name</span>=<span class="string">username</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Password:</span><br><span class="line">            <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">password</span> <span class="attr">name</span>=<span class="string">password</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">submit</span> <span class="attr">value</span>=<span class="string">Login</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Flask项目实战之博客开发（一）"><a href="#Flask项目实战之博客开发（一）" class="headerlink" title="Flask项目实战之博客开发（一）"></a>Flask项目实战之博客开发（一）</h1><p>实验源码：<br>wget <a href="http://labfile.oss.aliyuncs.com/courses/29/flaskr.zip" target="_blank" rel="noopener">http://labfile.oss.aliyuncs.com/courses/29/flaskr.zip</a><br>unzip flaskr.zip<br>实验代码建议统一存放在 /home/shiyanlou/Code 目录下。<br>这里我们将博客应用起名为flaskr，也可以取一个不那么 web 2.0 的名字。基本上我们想要它做如下的事情：</p>
+<p>根据配置文件中的认证允许用户登录以及注销。仅仅支持一个用户。<br>当用户登录后，他们可以添加新的条目，这些条目是由纯文本的标题和 HTML 的正文构成。因为我们信任用户这里的 HTML 是安全的。<br>页面倒序显示所有条目（新的条目在前），并且用户登入后可以在此添加新条目。<br>我们将在这个应用中直接使用 SQLite 3 因为它足够应付这种规模的应用。对更大的应用使用 SQLAlchemy 是十分有意义的，它以一种更智能方式处理数据库连接，允许你一次连接多个不同的关系数据库。你也可以考虑流行的 NoSQL 数据库，前提是你的数据更适合它们。</p>
+<p>这是最终应用的一个截图:</p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1cyxv45i1j30qa0eb76c.jpg" alt=""></p>
+<p>在开始之前，让我们为这个应用创建需要的文件夹:<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/flaskr</span></span><br><span class="line">    <span class="string">/static</span></span><br><span class="line">    <span class="string">/templates</span></span><br></pre></td></tr></table></figure></p>
+<p>flaskr：项目总文件夹。其中会存放数据库代码文件 schema.sql 和 主代码文件 flaskr.py。<br>static：项目的资源文件。用于存放 css 和 javascript 文件。<br>templates：项目前端页面文件。用于存放前端页面模板。</p>
+<h2 id="数据库模式"><a href="#数据库模式" class="headerlink" title="数据库模式"></a>数据库模式</h2><p>首先我们要创建数据库模式。对于这个应用仅一张表就足够了，而且我们只想支持 SQLite ，所以很简单。在 Code/flaskr 目录下新建 schema.sql 文件并向其中写入如下代码：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> entries;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> entries (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">integer</span> primary <span class="keyword">key</span> autoincrement,</span><br><span class="line">  title <span class="keyword">string</span> <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  <span class="built_in">text</span> <span class="keyword">string</span> <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>这个模式由一个称为entries的单表构成，在这个表中每行包含一个id，一个title和一个text。id是一个自增的整数而且是主键，其余两个为非空的字符串。</p>
+<h2 id="应用代码"><a href="#应用代码" class="headerlink" title="应用代码"></a>应用代码</h2><p>现在我们已经有了数据库模式了，可以创建应用的模块了。</p>
+<p>在 Code/flaskr 目录下新建 flaskr.py 文件。对于小应用，直接把配置放在主模块里，正如我们现在要做的一样，这是可行的。然而一个更干净的解决方案就是单独创建.ini或者.py文件接着加载或者导入里面的值。</p>
+<p>在 flaskr.py 文件中写入如下代码:<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入所有的模块</span></span><br><span class="line">import sqlite3</span><br><span class="line">from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line">DATABASE = '/tmp/flaskr.db'</span><br><span class="line">ENV = 'development'</span><br><span class="line">DEBUG = True</span><br><span class="line">SECRET_KEY = 'development key'</span><br><span class="line">USERNAME = 'admin'</span><br><span class="line">PASSWORD = 'default'</span><br></pre></td></tr></table></figure></p>
+<p>，修改 flaskr.py 文件在其中配置初始化:</p>
+<h1 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app = Flask(__name__)</span><br><span class="line">app<span class="selector-class">.config</span><span class="selector-class">.from_object</span>(__name__)</span><br></pre></td></tr></table></figure>
+<p>from_object()将会寻找给定的对象(如果它是一个字符串，则会导入它)，搜寻里面定义的全部大写的变量。在我们的这种情况中，配置文件就是我们上面写的几行代码。 你也可以将他们分别存储到多个文件。</p>
+<p>通常从配置文件中加载配置是一个好的主意。这时可以使用from_envvar()来实现，可以用它替换上面的from_object()：</p>
+<p>app.config.from_envvar(‘FLASKR_SETTINGS’, silent=True)<br>这种方法我们可以设置一个名为FLASKR_SETTINGS的环境变量来设定一个配置文件载入后是否覆盖默认值。静默开关silent=True告诉 Flask 不去关心这个环境变量键值是否存在。</p>
+<p>SECRET_KEY是为了保持客户端的会话安全。明智地选择该键，使得它难以猜测，最好是尽可能复杂。</p>
+<p>DEBUG 调试标志启用或禁用交互式调试。决不让调试模式在生产系统中启动，因为它将允许用户在服务器上执行代码！</p>
+<p>我们还添加了一个轻松地连接到指定数据库的方法，这个方法用于在请求时打开一个连接，并且在交互式 Python shell 和脚本中也能使用，这将方便后面的使用。</p>
+<p>在 Code/flaskr.py 文件中继续添加如下代码：</p>
+<p>def connect_db():<br>    return sqlite3.connect(app.config[‘DATABASE’])<br>最后如果我们想要把这个文件当做独立应用来运行，只需在服务器启动文件也就是 Code/flaskr.py 文件的末尾添加这一行:<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.<span class="built_in">run</span>()</span><br></pre></td></tr></table></figure></p>
+<p>如此我们便可以顺利开始运行这个应用，通过使用如下命令:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">python3</span> flaskr.<span class="keyword">py</span></span><br><span class="line"> * Serving Flask app <span class="string">"flaskr"</span> (lazy loading)</span><br><span class="line"> * Environmen<span class="variable">t:</span> development</span><br><span class="line"> * Debug <span class="keyword">mode</span>: <span class="keyword">on</span></span><br><span class="line"> * Running <span class="keyword">on</span> http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5000</span>/ (Press CTRL+C <span class="keyword">to</span> <span class="keyword">quit</span>)</span><br><span class="line"> * Restarting with stat</span><br><span class="line"> * Debugger <span class="keyword">is</span> active!</span><br><span class="line"> * Debugger PIN: <span class="number">289</span>-<span class="number">075</span>-<span class="number">564</span></span><br></pre></td></tr></table></figure></p>
+<p>你将会看到一个信息，信息提示你服务器启动的地址，这个地址你能够访问到的。</p>
+<p>当你在浏览器中访问服务器获得一个 404 Not Found 的错误时，是因为我们还没有任何视图。我们之后再来关注这些。首先应该让数据库工作起来。</p>
+<h1 id="Flask项目实战之博客开发（二）"><a href="#Flask项目实战之博客开发（二）" class="headerlink" title="Flask项目实战之博客开发（二）"></a>Flask项目实战之博客开发（二）</h1><h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>如前面所述，Flaskr 是一个数据库驱动的应用程序，准确地来说，Flaskr 是一个使用关系数据库系统的应用程序。这样的系统需要一个模式告诉它们如何存储信息。因此在首次启动服务器之前，创建数据库模式是很重要的。</p>
+<p>可以通过管道把 schema.sql 作为 sqlite 3 命令的输入来创建这个模式，命令如下:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlite3 /tmp/flaskr<span class="selector-class">.db</span> &lt; schema.sql</span><br></pre></td></tr></table></figure></p>
+<p>这种方法的缺点是需要安装 sqlite 3 命令，而且你必须提供数据库的路径，否则将报错。由于实验楼环境中没有安装 sqllite3 所以会得到报错command not found: sqlite3。</p>
+<p>添加一个函数来对数据库进行初始化是个不错的想法。如果你想要这么做，首先必须从contextlib包中导入contextlib.closing()函数。在 Code/flaskr.py 文件中添加如下代码:<br><figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> closing</span><br></pre></td></tr></table></figure></p>
+<p>接着我们可以创建一个称为 init_db 函数，该函数用来初始化数据库。为此我们可以使用之前定义的 connect_db 函数。 只要在 Code/flaskr.py 文件中的 connect_db 函数下添加这样的函数:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_db</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">with</span> closing(connect_db()) <span class="keyword">as</span> db:</span><br><span class="line">        <span class="keyword">with</span> app.open_resource(<span class="string">'schema.sql'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            db.cursor().executescript(f.read().decode())</span><br><span class="line">        db.commit()</span><br></pre></td></tr></table></figure></p>
+<p>closing()函数允许我们在with块中保持数据库连接可用。应用对象的open_resource()方法在其方框外也支持这个功能，因此可以在with块中直接使用。这个函数从当前位置（你的flaskr 文件夹）中打开一个文件，并且允许你读取它。我们在这里用它在数据库连接上执行一个脚本。</p>
+<p>当我们连接到数据库时会得到一个数据库连接对象（这里命名它为 db），这个对象提供给我们一个数据库指针。指针上有一个可以执行完整脚本的方法。最后我们不显式地提交更改， SQLite 3 或者其它事务数据库不会这么做。</p>
+<p>现在可以在 Python shell 里创建数据库，导入并调用刚才的函数:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; from flaskr import init_db</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; init_db()</span><br></pre></td></tr></table></figure></p>
+<p>注意:</p>
+<p>如果你后面得到一个表不能找到的异常，请检查你是否调用了 init_db 函数以及你的表名是否正确 (例如： singular vs. plural)。</p>
+<h2 id="请求数据库连接"><a href="#请求数据库连接" class="headerlink" title="请求数据库连接"></a>请求数据库连接</h2><p>现在我们知道了怎样建立数据库连接以及在脚本中使用这些连接，但是我们如何能优雅地在请求中这么做？</p>
+<p>所有我们的函数中都需要数据库连接，因此在请求之前初始化它们，在请求结束后自动关闭它们就很有意义。</p>
+<p>Flask 允许我们使用before_request()，after_request()和 teardown_request()装饰器来实现这个功能，在 Code/flaskr.py 文件中添加如下代码:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@app</span>.before_request</span><br><span class="line">def before_request():</span><br><span class="line">    g.db = connect_db()</span><br><span class="line"></span><br><span class="line"><span class="variable">@app</span>.teardown_request</span><br><span class="line">def teardown_request(exception):</span><br><span class="line">    g.db.close()</span><br></pre></td></tr></table></figure></p>
+<p>使用before_request()装饰器的函数会在请求之前被调用而且不带参数。使用after_request()装饰器的函数会在请求之后被调用且传入将要发给客户端的响应。</p>
+<p>它们必须返回那个响应对象或是不同的响应对象。但当异常抛出时，它们不一定会被执行，这时可以使用teardown_request()装饰器。它装饰的函数将在响应构造后执行，并不允许修改请求，返回的值会被忽略。如果在请求已经被处理的时候抛出异常，它会被传递到每个函数，否则会传入一个None。</p>
+<p>我们把当前的数据库连接保存在 Flask 提供的 g 特殊对象中。这个对象只能保存一次请求的信息，并且在每个函数里都可用。不要用其它对象来保存信息，因为在多线程环境下将不可行。特殊的对象 g 在后台有一些神奇的机制来保证它在做正确的事情。</p>
+<h1 id="Flask项目实战之博客开发（三）"><a href="#Flask项目实战之博客开发（三）" class="headerlink" title="Flask项目实战之博客开发（三）"></a>Flask项目实战之博客开发（三）</h1><h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><h3 id="显示条目"><a href="#显示条目" class="headerlink" title="显示条目"></a>显示条目</h3><p>这个视图显示所有存储在数据库中的条目。它监听着应用的根地址以及将会从数据库中查询标题和内容。id值最大的条目（最新的条目）将在最前面。从游标返回的行是按select语句中声明的列组织的元组。对于像我们这样的小应用是足够的，但是你可能要把它们转换成字典，如果你对如何转换成字典感兴趣的话，请查阅简化查询例子。</p>
+<p>视图函数将会把条目作为字典传入show_entries.html 模板并返回渲染结果。</p>
+<p>在 flaskr/flaskr.py 文件中添加如下代码:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@app.route(<span class="string">'/'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_entries</span><span class="params">()</span></span><span class="symbol">:</span></span><br><span class="line">    cur = g.db.execute(<span class="string">'select title, text from entries order by id desc'</span>)    查询语句</span><br><span class="line">    entries = [dict(title=row[<span class="number">0</span>], text=row[<span class="number">1</span>]) <span class="keyword">for</span> row <span class="keyword">in</span> cur.fetchall()]    将查询结果转换为字典</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'show_entries.html'</span>, entries=entries)</span><br></pre></td></tr></table></figure></p>
+<h3 id="添加条目"><a href="#添加条目" class="headerlink" title="添加条目"></a>添加条目</h3><p>这个视图允许登录的用户添加新的条目。它只回应POST请求，实际的表单是显示在show_entries页面。如果正常工作的话，我们用flash()向下一个请求闪现一条信息并且跳转回show_entries页面。</p>
+<p>在 flaskr/flaskr.py 文件中添加如下代码:</p>
+<p>@app.route(‘/add’, methods=[‘POST’])<br>def add_entry():<br>    if not session.get(‘logged_in’):<br>        abort(401)<br>    g.db.execute(‘insert into entries (title, text) values (?, ?)’,[request.form[‘title’], request.form[‘text’]])   # 向数据库中插入数据<br>    g.db.commit()   # 更新数据<br>    flash(‘New entry was successfully posted’)   # 闪现一条消息<br>    return redirect(url_for(‘show_entries’))<br>注意我们这里检查用户登录情况(logged_in键存在会话中，并且为True)。向 SQL 语句中传递参数，需要在语句中使用问号?来代替参数，并把参数放在列表中进行传递。不要使用字符串格式化的方式直接把参数传入 SQL 语句中，这样可能会有潜在的 SQL 注入风险。</p>
+<h3 id="登入和注销"><a href="#登入和注销" class="headerlink" title="登入和注销"></a>登入和注销</h3><p>这些函数是用于用户登录以及注销。登录时依据在配置中的值检查用户名和密码并且在会话中设置logged_in键值。如果用户成功登录，logged_in键值被设置成True，并跳转回show_entries页面。此外，会有消息闪现来提示用户登录成功。</p>
+<p>如果发生错误，模板会通知，并提示重新登录。在 flaskr/flaskr.py 文件中添加如下代码:<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@app.route(<span class="string">'/login'</span>, methods=[<span class="string">'GET'</span>, <span class="string">'POST'</span>])</span><br><span class="line">def login():</span><br><span class="line">    <span class="built_in">error</span> = None</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        <span class="keyword">if</span> request.form[<span class="string">'username'</span>] != app.<span class="built_in">config</span>[<span class="string">'USERNAME'</span>]:    如果用户名不符合</span><br><span class="line">            <span class="built_in">error</span> = <span class="string">'Invalid username'</span></span><br><span class="line">        elif request.form[<span class="string">'password'</span>] != app.<span class="built_in">config</span>[<span class="string">'PASSWORD'</span>]:    如果密码不符合</span><br><span class="line">            <span class="built_in">error</span> = <span class="string">'Invalid password'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            session[<span class="string">'logged_in'</span>] = True    成功登录，在 session 中添加一个 logged_in 值为 True</span><br><span class="line">            flash(<span class="string">'You were logged in'</span>)    闪现一条消息</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">'show_entries'</span>))    重定向到首页</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>, <span class="built_in">error</span>=<span class="built_in">error</span>)    如果没有成功登录则返回登录页面以及错误信息</span><br></pre></td></tr></table></figure></p>
+<p>另一方面，注销函数从会话中移除了logged_in键值。这里我们使用一个大绝招：<br>如果你使用字典的pop()方法并传入第二个参数（默认），这个方法会从字典中删除这个键，如果这个键不存在则什么都不做。这很有用，因为我们不需要检查用户是否已经登入。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@app.route(<span class="string">'/logout'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logout</span><span class="params">()</span></span><span class="symbol">:</span></span><br><span class="line">    session.pop(<span class="string">'logged_in'</span>, None)    移除 logged_in 键</span><br><span class="line">    flash(<span class="string">'You were logged out'</span>)    闪现消息</span><br><span class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">'show_entries'</span>))    重定向到首页</span><br></pre></td></tr></table></figure></p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>现在我们应该开始编写模板。如果我们现在请求 URLs ，将会得到一个 Flask 无法找到模板的异常。模板使用 Jinja2 语言以及默认开启自动转义。这就意味着除非你使用Markup标记或在模板中使用|safe过滤器，否则 Jinja2 会确保特殊字符比如&lt;或&gt;被转义成等价的XML实体。</p>
+<p>我们使用模板继承使得在网站的所有页面中重用布局成为可能。</p>
+<p>我们的模板统一存放在Code/flaskr/templates文件夹中。</p>
+<h3 id="layout-html"><a href="#layout-html" class="headerlink" title="layout.html"></a>layout.html</h3><p>这个模板包含 HTML 主体结构，标题和一个登录链接（或者当用户已登录则提供注销）。如果有闪现信息的话它也将显示闪现信息。&#123;% block body %&#125; 块能够被子模板中的同样名字(body)的块替代。</p>
+<p>session字典在模板中同样可用的，你能用它检查用户是否登录。注意在 Jinja 中你可以访问不存在的对象/字典属性或成员，如同下面的代码，即便 logged_in 键不存在，仍然可以正常工作。</p>
+<p>在 flaskr/templates 目录下新建 layout.html 文件并写入如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Flaskr<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">stylesheet</span> <span class="attr">type</span>=<span class="string">text/css</span> <span class="attr">href</span>=<span class="string">"&amp;#123;&amp;#123; url_for('static', filename='style.css') &amp;#125;&amp;#125;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">page</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Flaskr<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">metanav</span>&gt;</span></span><br><span class="line">  &amp;#123;% if not session.logged_in %&amp;#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&amp;#123;&amp;#123; url_for('login') &amp;#125;&amp;#125;"</span>&gt;</span>log in<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  &amp;#123;% else %&amp;#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&amp;#123;&amp;#123; url_for('logout') &amp;#125;&amp;#125;"</span>&gt;</span>log out<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  &amp;#123;% endif %&amp;#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  &amp;#123;% for message in get_flashed_messages() %&amp;#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">flash</span>&gt;</span>&amp;#123;&amp;#123; message &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  &amp;#123;% endfor %&amp;#125;</span><br><span class="line">  &amp;#123;% block body %&amp;#125;&amp;#123;% endblock %&amp;#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="show-entries-html"><a href="#show-entries-html" class="headerlink" title="show_entries.html"></a>show_entries.html</h3><p>这个模板继承了上面的layout.html模板用来显示信息。注意for遍历了所有我们用render_template()函数传入的信息。我们同样告诉表单提交到add_entry函数通过使用 HTTP 的POST方法。</p>
+<p>在 flaskr/templates 目录下新建 show_entries.html 文件并写入如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&amp;#123;% extends "layout.html" %&amp;#125;</span><br><span class="line">&amp;#123;% block body %&amp;#125;</span><br><span class="line">  &amp;#123;% if session.logged_in %&amp;#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"&amp;#123;&amp;#123; url_for('add_entry') &amp;#125;&amp;#125;"</span> <span class="attr">method</span>=<span class="string">post</span> <span class="attr">class</span>=<span class="string">add-entry</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Title:</span><br><span class="line">        <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">text</span> <span class="attr">size</span>=<span class="string">30</span> <span class="attr">name</span>=<span class="string">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Text:</span><br><span class="line">        <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">text</span> <span class="attr">rows</span>=<span class="string">5</span> <span class="attr">cols</span>=<span class="string">40</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">submit</span> <span class="attr">value</span>=<span class="string">Share</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">  &amp;#123;% endif %&amp;#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">entries</span>&gt;</span></span><br><span class="line">  &amp;#123;% for entry in entries %&amp;#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">h2</span>&gt;</span>&amp;#123;&amp;#123; entry.title &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span>&amp;#123;&amp;#123; entry.text|safe &amp;#125;&amp;#125;</span><br><span class="line">  &amp;#123;% else %&amp;#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">em</span>&gt;</span>Unbelievable.  No entries here so far<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span><br><span class="line">  &amp;#123;% endfor %&amp;#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">&amp;#123;% endblock %&amp;#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="login-html"><a href="#login-html" class="headerlink" title="login.html"></a>login.html</h3><p>最后是登录模板，基本上只显示一个允许用户登录的表单。</p>
+<p>在 flaskr/templates 目录下新建 login.html 文件并写入如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&amp;#123;% extends "layout.html" %&amp;#125;</span><br><span class="line">&amp;#123;% block body %&amp;#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Login<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  &amp;#123;% if error %&amp;#125;<span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">error</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Error:<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> &amp;#123;&amp;#123; error &amp;#125;&amp;#125;&amp;#123;% endif %&amp;#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"&amp;#123;&amp;#123; url_for('login') &amp;#125;&amp;#125;"</span> <span class="attr">method</span>=<span class="string">post</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Username:</span><br><span class="line">      <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">text</span> <span class="attr">name</span>=<span class="string">username</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Password:</span><br><span class="line">      <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">password</span> <span class="attr">name</span>=<span class="string">password</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">submit</span> <span class="attr">value</span>=<span class="string">Login</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">&amp;#123;% endblock %&amp;#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="添加样式"><a href="#添加样式" class="headerlink" title="添加样式"></a>添加样式</h3><p>现在其它一切都正常工作，是时候给应用添加些样式。</p>
+<p>在 Code/flaskr/static 目录下新建 style.css 样式文件并写入如下代码：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>            &amp;<span class="selector-id">#123</span>; <span class="attribute">font-family</span>: sans-serif; <span class="attribute">background</span>: <span class="number">#eee</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-tag">a</span>, <span class="selector-tag">h1</span>, <span class="selector-tag">h2</span>       &amp;<span class="selector-id">#123</span>; <span class="attribute">color</span>: <span class="number">#377BA8</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-tag">h1</span>, <span class="selector-tag">h2</span>          &amp;<span class="selector-id">#123</span>; <span class="attribute">font-family</span>: <span class="string">'Georgia'</span>, serif; <span class="attribute">margin</span>: <span class="number">0</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-tag">h1</span>              &amp;<span class="selector-id">#123</span>; <span class="attribute">border-bottom</span>: <span class="number">2px</span> solid <span class="number">#eee</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-tag">h2</span>              &amp;<span class="selector-id">#123</span>; <span class="attribute">font-size</span>: <span class="number">1.2em</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.page</span>           &amp;<span class="selector-id">#123</span>; <span class="attribute">margin</span>: <span class="number">2em</span> auto; <span class="attribute">width</span>: <span class="number">35em</span>; <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">                  <span class="attribute">padding</span>: <span class="number">0.8em</span>; <span class="attribute">background</span>: white; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-class">.entries</span>        &amp;<span class="selector-id">#123</span>; <span class="attribute">list-style</span>: none; <span class="attribute">margin</span>: <span class="number">0</span>; <span class="attribute">padding</span>: <span class="number">0</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-class">.entries</span> <span class="selector-tag">li</span>     &amp;<span class="selector-id">#123</span>; <span class="attribute">margin</span>: <span class="number">0.8em</span> <span class="number">1.2em</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-class">.entries</span> <span class="selector-tag">li</span> <span class="selector-tag">h2</span>  &amp;<span class="selector-id">#123</span>; <span class="attribute">margin-left</span>: -<span class="number">1em</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-class">.add-entry</span>      &amp;<span class="selector-id">#123</span>; <span class="attribute">font-size</span>: <span class="number">0.9em</span>; <span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-class">.add-entry</span> <span class="selector-tag">dl</span>   &amp;<span class="selector-id">#123</span>; <span class="attribute">font-weight</span>: bold; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-class">.metanav</span>        &amp;<span class="selector-id">#123</span>; <span class="attribute">text-align</span>: right; <span class="attribute">font-size</span>: <span class="number">0.8em</span>; <span class="attribute">padding</span>: <span class="number">0.3em</span>;</span><br><span class="line">                  <span class="attribute">margin-bottom</span>: <span class="number">1em</span>; <span class="attribute">background</span>: <span class="number">#fafafa</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-class">.flash</span>          &amp;<span class="selector-id">#123</span>; <span class="attribute">background</span>: <span class="number">#CEE5F5</span>; <span class="attribute">padding</span>: <span class="number">0.5em</span>;</span><br><span class="line">                  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#AACBE2</span>; &amp;<span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-class">.error</span>          &amp;<span class="selector-id">#123</span>; <span class="attribute">background</span>: <span class="number">#F0D6D6</span>; <span class="attribute">padding</span>: <span class="number">0.5em</span>; &amp;<span class="selector-id">#125</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="运行应用"><a href="#运行应用" class="headerlink" title="运行应用"></a>运行应用</h2><p>这样我们就完成了简单博客应用的代码编写，现在在终端执行如下命令运行程序：（在这之前注意要配置数据库，如果没有配置可以参考上一个实验的步骤）<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">python3</span> flaskr.<span class="keyword">py</span></span><br></pre></td></tr></table></figure></p>
+<p>访问首页 <a href="http://127.0.0.1:5000" target="_blank" rel="noopener">http://127.0.0.1:5000</a> ，效果如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1d1eyb1a4j30sn09kgmk.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="筱阳 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="筱阳 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"># 开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/22/Python-urllib-HTTP头注入漏洞/" rel="next" title="Python urllib HTTP头注入漏洞">
+                <i class="fa fa-chevron-left"></i> Python urllib HTTP头注入漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/23/thinnkphp学习/" rel="prev" title="thinnkphp学习">
+                thinnkphp学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="筱阳">
+            
+              <p class="site-author-name" itemprop="name">筱阳</p>
+              <p class="site-description motion-element" itemprop="description">只会复现的菜鸡</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.freebuf.com/" title="freebug" target="_blank">freebug</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flask运行及调试"><span class="nav-number">1.</span> <span class="nav-text">flask运行及调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WSGI介绍"><span class="nav-number">1.1.</span> <span class="nav-text">WSGI介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个最小的应用"><span class="nav-number">1.2.</span> <span class="nav-text">一个最小的应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接收请求数据"><span class="nav-number">2.</span> <span class="nav-text">接收请求数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件上传"><span class="nav-number">3.</span> <span class="nav-text">文件上传</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookies"><span class="nav-number">4.</span> <span class="nav-text">cookies</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">4.1.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重定向、响应、会话和扩展"><span class="nav-number">5.</span> <span class="nav-text">重定向、响应、会话和扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向和错误"><span class="nav-number">5.1.</span> <span class="nav-text">重定向和错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应"><span class="nav-number">5.2.</span> <span class="nav-text">响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话"><span class="nav-number">5.3.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息"><span class="nav-number">5.4.</span> <span class="nav-text">消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志"><span class="nav-number">5.5.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习-1"><span class="nav-number">5.6.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask项目实战之博客开发（一）"><span class="nav-number">6.</span> <span class="nav-text">Flask项目实战之博客开发（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库模式"><span class="nav-number">6.1.</span> <span class="nav-text">数据库模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用代码"><span class="nav-number">6.2.</span> <span class="nav-text">应用代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建应用"><span class="nav-number">7.</span> <span class="nav-text">创建应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask项目实战之博客开发（二）"><span class="nav-number">8.</span> <span class="nav-text">Flask项目实战之博客开发（二）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建数据库"><span class="nav-number">8.1.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求数据库连接"><span class="nav-number">8.2.</span> <span class="nav-text">请求数据库连接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask项目实战之博客开发（三）"><span class="nav-number">9.</span> <span class="nav-text">Flask项目实战之博客开发（三）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-number">9.1.</span> <span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示条目"><span class="nav-number">9.1.1.</span> <span class="nav-text">显示条目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加条目"><span class="nav-number">9.1.2.</span> <span class="nav-text">添加条目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登入和注销"><span class="nav-number">9.1.3.</span> <span class="nav-text">登入和注销</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板"><span class="nav-number">9.2.</span> <span class="nav-text">模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#layout-html"><span class="nav-number">9.2.1.</span> <span class="nav-text">layout.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#show-entries-html"><span class="nav-number">9.2.2.</span> <span class="nav-text">show_entries.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#login-html"><span class="nav-number">9.2.3.</span> <span class="nav-text">login.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加样式"><span class="nav-number">9.2.4.</span> <span class="nav-text">添加样式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行应用"><span class="nav-number">9.3.</span> <span class="nav-text">运行应用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">筱阳</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

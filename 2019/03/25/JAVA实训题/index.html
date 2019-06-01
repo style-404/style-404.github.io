@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第1关：随机数123456789101112131415161718192021222324252627package step1;public class MaxMin&amp;#123;	public static void main(String[] args)&amp;#123;    	double[] arr = new double[100];        int s=0;				//定义 统计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA实训题">
+<meta property="og:url" content="https://style-404.github.io/2019/03/25/JAVA实训题/index.html">
+<meta property="og:site_name" content="可乐&#39;blog">
+<meta property="og:description" content="第1关：随机数123456789101112131415161718192021222324252627package step1;public class MaxMin&amp;#123;	public static void main(String[] args)&amp;#123;    	double[] arr = new double[100];        int s=0;				//定义 统计">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-17T07:20:08.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA实训题">
+<meta name="twitter:description" content="第1关：随机数123456789101112131415161718192021222324252627package step1;public class MaxMin&amp;#123;	public static void main(String[] args)&amp;#123;    	double[] arr = new double[100];        int s=0;				//定义 统计">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://style-404.github.io/2019/03/25/JAVA实训题/">
+
+
+
+
+
+  <title>JAVA实训题 | 可乐'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可乐'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2019/03/25/JAVA实训题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="筱阳">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可乐'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JAVA实训题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-25T12:54:05+08:00">
+                2019-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><meta name="referrer" content="no-referrer"></p>
+<h2 id="第1关：随机数"><a href="#第1关：随机数" class="headerlink" title="第1关：随机数"></a>第1关：随机数</h2><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> step1;</span><br><span class="line"><span class="keyword">public</span> class MaxMin&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args)&#123;</span><br><span class="line">    	<span class="keyword">double</span>[] arr = <span class="keyword">new</span> <span class="keyword">double</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="built_in">int</span> s=<span class="number">0</span>;				<span class="comment">//定义 统计大于50的整数个数 变量</span></span><br><span class="line">        <span class="keyword">double</span> <span class="built_in">max</span>=<span class="number">0</span>,<span class="built_in">min</span>=<span class="number">100</span>;	<span class="comment">//定义 最大值 最小值 变量</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">double</span> d=<span class="number">100</span>*Math.<span class="built_in">random</span>();<span class="comment">//获取随机数</span></span><br><span class="line">	    arr[i] = d;</span><br><span class="line">        <span class="comment">/********* Begin *********/</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(arr[i]&gt;<span class="built_in">max</span>) &#123;</span><br><span class="line">        	<span class="built_in">max</span> = Math.<span class="built_in">floor</span>(arr[i]);</span><br><span class="line">        	&#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(arr[i]&lt;<span class="built_in">min</span>) &#123;</span><br><span class="line">        	<span class="built_in">min</span> = Math.<span class="built_in">floor</span>(arr[i]);</span><br><span class="line">        	&#125;</span><br><span class="line">        <span class="keyword">if</span>(arr[i]&gt;<span class="number">50</span>) &#123;</span><br><span class="line">        	s ++;</span><br><span class="line">        	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/********* end *********/</span></span><br><span class="line">        &#125;</span><br><span class="line">        judgeRadom.cpm(arr,<span class="built_in">max</span>,<span class="built_in">min</span>,s);	<span class="comment">//这个方法会判断你的计算是否正确</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编写程序，利用数组计算Fibonacci数列的前20个元素的值。</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package step2;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fibonacci</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String args[])&#123;</span><br><span class="line">	<span class="comment">/*********begin********/</span></span><br><span class="line">        <span class="keyword">int</span> arr[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">20</span>];</span><br><span class="line">        arr[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        arr[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;arr.length;i++)&#123;</span><br><span class="line">            arr[i] = arr[i<span class="number">-1</span>] + arr[i<span class="number">-2</span>];</span><br><span class="line">            <span class="keyword">sum</span> = <span class="keyword">sum</span> + arr[i];</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.printf(<span class="string">"前20个元素的和为"</span> + <span class="keyword">sum</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/********end********/</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用递归计算1＋2＋…＋n之和。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package step3;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Sum</span></span>&#123;</span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span> args[])&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.<span class="keyword">in</span>);</span><br><span class="line">		<span class="built_in">int</span> <span class="built_in">num</span> = sc.nextInt();</span><br><span class="line">        <span class="built_in">int</span> result = recursionSum(<span class="built_in">num</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="built_in">int</span> recursionSum(<span class="built_in">int</span> mum)&#123;</span><br><span class="line">        <span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">****begin**</span><span class="strong">*****</span>**/</span></span>       </span><br><span class="line">		<span class="keyword">if</span>(mum==<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> mum+recursionSum(mum<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">****end**</span><span class="strong">*****</span>**/</span></span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类的定义 与 对象的创建<br>设计一个表示学生的类，该类具有表示姓名的属性name和表示年龄的属性age，同时还具有表示说话行为的方法speak()，用于输出学生的姓名和年龄。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">package task01;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 说明：根据TODO提示信息，在横线处编写对应功能代码，</span></span><br><span class="line"><span class="comment"> *      编写代码时，注意要删除对应的横线。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">// TODO 在此定义学生类名</span></span><br><span class="line"><span class="keyword">class</span> <span class="title">Student</span>&#123;</span><br><span class="line">    <span class="comment">// TODO 在此定义2个成员变量</span></span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">speak</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"我的姓名:"</span>+name+<span class="string">",年龄:"</span>+age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Task01</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Scanner scan = <span class="keyword">new</span> Scanner(System.<span class="keyword">in</span>);</span><br><span class="line">        <span class="comment">// TODO 在此定义一个学生对象</span></span><br><span class="line">        Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">        <span class="comment">// TODO 在此给学生对象姓名赋值</span></span><br><span class="line">        stu.name = scan.next();</span><br><span class="line">        <span class="comment">// TODO 在此给学生对象年龄赋值</span></span><br><span class="line">        stu.age = scan.nextInt();</span><br><span class="line">        <span class="comment">// TODO 在此调用学生对象 speak() 方法</span></span><br><span class="line">        stu.speak();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本实训将创建三个学生对象，它们的引用变量分别是s1、s2和s3，首先分别使用s1和s2引用为name和age赋值，然后调用speak()方法，最后将s2变量赋值给s3，s3也调用speak()方法。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">package task02;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 说明：根据提示，补充完整 begin 和 end 之间的代码。</span></span><br><span class="line"><span class="comment"> *     （其他代码可以不用改）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* begin *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line"><span class="comment">// 在此定义学生类名</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">/**************** <span class="title">end</span> *****************/</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* begin *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line">	<span class="comment">// 在此定义2个成员变量：姓名name和年龄age</span></span><br><span class="line">    <span class="built_in">String</span> name;</span><br><span class="line">	<span class="built_in">int</span> age;</span><br><span class="line">	<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* end *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> speak() &#123;</span><br><span class="line">		System.out.println(<span class="string">"我的名字是"</span> + name + <span class="string">",今年"</span> + age + <span class="string">"岁"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Task02</span></span>&#123;</span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line">		Scanner scan = <span class="keyword">new</span> Scanner(System.<span class="keyword">in</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* begin *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * 创建Student类的第一个对象，其引用变量为s1，</span></span><br><span class="line"><span class="comment">		 * 使用s1分别为name和age赋值，值为运行时接收从键盘输入</span></span><br><span class="line"><span class="comment">		 * 然后调用speak()方法。</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">        Student s1 = <span class="keyword">new</span> Student();</span><br><span class="line">		s1.name = scan.next();</span><br><span class="line">        s1.age = scan.nextInt();</span><br><span class="line">        s1.speak();</span><br><span class="line">		<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* end *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* begin *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * 创建Student类的第二个对象，其引用变量为s2，</span></span><br><span class="line"><span class="comment">		 * 使用s2分别为name和age赋值，值为运行时接收从键盘输入，</span></span><br><span class="line"><span class="comment">		 * 然后调用speak()方法。</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		Student s2 = <span class="keyword">new</span> Student();</span><br><span class="line">        s2.name = scan.next();</span><br><span class="line">        s2.age = scan.nextInt();</span><br><span class="line">        s2.speak();</span><br><span class="line">		<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* end *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* begin *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * 创建Student类的第三个对象，其引用变量为s3，</span></span><br><span class="line"><span class="comment">		 * 将s2的值赋给s3，</span></span><br><span class="line"><span class="comment">		 * 然后使用s3调用speak()方法。</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">        Student s3 = <span class="keyword">new</span> Student();</span><br><span class="line">        s3 = s2;</span><br><span class="line">        s3.speak();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* end *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对类进行封装，防止外界对类中的成员变量随意访问。<br>为了掌握类的封装，本练习将使用private关键字对学生类的成员变量name和age进行私有化，同时分别提供一个setName(String n)和setAge(int a)方法用于外界的访问，其中setAge(int a)中需要对age进行判断。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">package task03;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 说明：根据提示，补充完整 begin 和 end 之间的代码。</span></span><br><span class="line"><span class="comment"> *     （其他代码可以不用改）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* begin *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line"><span class="comment">// 在此定义学生类名</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">/**************** <span class="title">end</span> *****************/</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* begin *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line">	 <span class="comment">// 将名字name和年龄age属性定义为私有的</span></span><br><span class="line">	private <span class="built_in">String</span> name;</span><br><span class="line">    private <span class="built_in">int</span> age;</span><br><span class="line">	<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* end *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line"></span><br><span class="line">	<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* begin *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 定义4个公有的方法：getName()、setName(String n)、</span></span><br><span class="line"><span class="comment">	 * getAge()和setAge(int a)，</span></span><br><span class="line"><span class="comment">	 * 用于对外访问name和age。</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * 在setAge(int a)方法中对传入的参数进行检查，</span></span><br><span class="line"><span class="comment">	 * 如果输入值为负数，则打印出“设置的年龄不合法”，</span></span><br><span class="line"><span class="comment">	 * 如果不为负数，才将其设置为age属性的值。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	public <span class="built_in">String</span> getName()&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public <span class="built_in">int</span> getAge()&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public <span class="keyword">void</span> setAge(<span class="built_in">int</span> age)&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(age&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"设置的年龄不合法"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public <span class="keyword">void</span> setName(<span class="built_in">String</span> name)&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* end *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> speak() &#123;</span><br><span class="line">		System.out.println(<span class="string">"我的名字是"</span> + name + <span class="string">",今年"</span> + age + <span class="string">"岁"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Task03</span></span>&#123;</span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line">		Scanner scan = <span class="keyword">new</span> Scanner(System.<span class="keyword">in</span>);</span><br><span class="line">		<span class="built_in">String</span> name1 = scan.next();</span><br><span class="line">		<span class="built_in">int</span> age1 = scan.nextInt();</span><br><span class="line"></span><br><span class="line">		<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* begin *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * 创建Student类的实例对象，</span></span><br><span class="line"><span class="comment">		 * 通过调用对象的setName(String n)和setAge(int a)方法</span></span><br><span class="line"><span class="comment">		 * 来设置实例对象的name属性和age属性值，</span></span><br><span class="line"><span class="comment">		 * 方法的参数值为运行时接收从键盘输入，</span></span><br><span class="line"><span class="comment">		 * 并调用speak()方法。</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">        Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">        stu.setName(name1);</span><br><span class="line">        stu.setAge(age1);</span><br><span class="line">        stu.speak();</span><br><span class="line"></span><br><span class="line">		<span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="bullet">* end *</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>*/</span></span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> chapter2.step7;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;        <span class="comment">//1.导入Scanner</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> HelloWorld&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);    <span class="comment">//2.声明扫描仪</span></span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"请录入嫦娥个人信息："</span>);</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"请输入姓名："</span>);</span><br><span class="line">        String name = input.<span class="keyword">next</span>();</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"请输入年龄："</span>);</span><br><span class="line">        <span class="keyword">int</span> age = input.nextInt();</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"请输入性别："</span>);</span><br><span class="line">        String sex = input.<span class="keyword">next</span>();</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"请输入体重："</span>);</span><br><span class="line">        <span class="keyword">float</span> weight = input.nextFloat();</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"请输入地址："</span>);</span><br><span class="line">        String address = input.<span class="keyword">next</span>();</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"请输入是否已婚："</span>);</span><br><span class="line">        String isMarried = input.<span class="keyword">next</span>();</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"信息如下："</span>);</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"\t姓名："</span> + name);</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"\t年龄："</span> + age + <span class="string">"岁"</span>);</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"\t性别："</span> + sex);</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"\t体重："</span> + weight + <span class="string">"kg"</span>);</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"\t地址："</span> + address);</span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="string">"\t婚否："</span> + isMarried);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="筱阳 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="筱阳 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/25/湖湘杯web-WP/" rel="next" title="湖湘杯web_WP">
+                <i class="fa fa-chevron-left"></i> 湖湘杯web_WP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/25/渗透测试流程/" rel="prev" title="渗透测试流程">
+                渗透测试流程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="筱阳">
+            
+              <p class="site-author-name" itemprop="name">筱阳</p>
+              <p class="site-description motion-element" itemprop="description">只会复现的菜鸡</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.freebuf.com/" title="freebug" target="_blank">freebug</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第1关：随机数"><span class="nav-number">1.</span> <span class="nav-text">第1关：随机数</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章"><span class="nav-number"></span> <span class="nav-text">第二章</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">筱阳</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言该漏洞出现的原因在于ThinkPHP5框架底层对控制器名过滤不严，从而让攻击者可以通过url调用到ThinkPHP框架内部的敏感函数，进而导致getshell漏洞， 漏洞分析在App.php 的run()方法中的110行通过self::routerCheck函数进行路由检测找到routercheckthinkphp/library/think/App.php :606我们可以看到又进入$re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Thinkphp 5.0远程代码执行漏洞">
+<meta property="og:url" content="https://style-404.github.io/2019/03/31/Thinkphp-5-0远程代码执行漏洞/index.html">
+<meta property="og:site_name" content="可乐&#39;blog">
+<meta property="og:description" content="前言该漏洞出现的原因在于ThinkPHP5框架底层对控制器名过滤不严，从而让攻击者可以通过url调用到ThinkPHP框架内部的敏感函数，进而导致getshell漏洞， 漏洞分析在App.php 的run()方法中的110行通过self::routerCheck函数进行路由检测找到routercheckthinkphp/library/think/App.php :606我们可以看到又进入$re">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1mvn5sojpj30mh06074o.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1m26s7a9lj30o10djabi.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1mvsgvq85j30qx0bnq3y.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m3v5wu0vj30s80fnjte.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m2ct1qwij30pi0dojt1.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m3taixcwj30ou0bgjsd.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n0gfx7zkj30vj0j9ju1.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n0hzlw24j30g50fhq49.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n0nnbj4ij30xj0hqmzn.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n0zo2m15j30r10e9gnb.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n13akbkxj30ra0hpjt9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n15p5a4rj30lb0hvjte.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n16v6mhqj30r30i8myy.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n19ne3aqj30s90h5myu.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n1av6qjwj30wa0akq41.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n1fs4atzj30nd069dg9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n1j2g79yj30p30ft3ze.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m2zlh5wyj30lx09b3z9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1m31aqg68j30lz0810ti.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1m33n1mqyj30nn094mxv.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m367b9n3j30q40aq0tu.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m38iewqcj30m20bvq3w.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m3fqsimfj30m60ctdgw.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m3jdum1vj30la02z74d.jpg">
+<meta property="og:updated_time" content="2019-05-17T07:20:07.086Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Thinkphp 5.0远程代码执行漏洞">
+<meta name="twitter:description" content="前言该漏洞出现的原因在于ThinkPHP5框架底层对控制器名过滤不严，从而让攻击者可以通过url调用到ThinkPHP框架内部的敏感函数，进而导致getshell漏洞， 漏洞分析在App.php 的run()方法中的110行通过self::routerCheck函数进行路由检测找到routercheckthinkphp/library/think/App.php :606我们可以看到又进入$re">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1mvn5sojpj30mh06074o.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://style-404.github.io/2019/03/31/Thinkphp-5-0远程代码执行漏洞/">
+
+
+
+
+
+  <title>Thinkphp 5.0远程代码执行漏洞 | 可乐'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可乐'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://style-404.github.io/2019/03/31/Thinkphp-5-0远程代码执行漏洞/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="筱阳">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可乐'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Thinkphp 5.0远程代码执行漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T15:57:43+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><meta name="referrer" content="no-referrer"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>该漏洞出现的原因在于ThinkPHP5框架底层对控制器名过滤不严，从而让攻击者可以通过url调用到ThinkPHP框架内部的敏感函数，进而导致getshell漏洞，</p>
+<h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><p>在App.php 的run()方法中的110行<br>通过self::routerCheck函数进行路由检测<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1mvn5sojpj30mh06074o.jpg" alt=""><br>找到routercheck<br>thinkphp/library/think/App.php :606<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1m26s7a9lj30o10djabi.jpg" alt=""><br>我们可以看到又进入$request-&gt;path()函数<br>/thinkphp/library/think/Request.php 行数:416行<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1mvsgvq85j30qx0bnq3y.jpg" alt=""><br>又进入pathinfo()函数，<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m3v5wu0vj30s80fnjte.jpg" alt=""><br>Config::get(‘var_pathinfo’)是配置文件中的设置的参数，默认值为s，从GET中获取键值，然后赋值给routeCheck中的$path<br>再回到App.php，由于没有在配置文件定义任何路由，所以默认按照方式1解析调度。<br>接着调用了parseUrl()<br>在 <code>thinkphp/library/think/Route.php</code>:1208<br>从1256进行分析<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m2ct1qwij30pi0dojt1.jpg" alt=""><br>可以看到解析URL的时候只是将URL按分割符分割，并没有进行安全检测。<br>其中的路由url从Request::path()中获取<br><code>/thinkphp/library/think/Request.php</code>:<br>继续往后跟<br><code>thinkphp/library/think/App.php</code><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m3taixcwj30ou0bgjsd.jpg" alt=""></p>
+<p>Config::get(‘var_pathinfo’)是配置文件中的设置的参数，默认值为s，从GET中获取键值，然后赋值给routeCheck中的$path<br>我们再回到App.php 行数:606<br>这里会进行路由检测，检查$check后会进入else分支导入路由配置，接着检测路由url调度结果为$result，如果调度失败且开启了强制路由$must，则报出路由无效，接着进入Route::parseUrl函数，根据$path（自定义url）解析操作<br>开始跟踪parseUrl函数<br>/thinkphp/library/think/Route.php<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n0gfx7zkj30vj0j9ju1.jpg" alt=""><br>进入parseUrlPath函数<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n0hzlw24j30g50fhq49.jpg" alt=""><br>对模块/控制器/操作的url地址分割成数组来返回<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n0nnbj4ij30xj0hqmzn.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n0zo2m15j30r10e9gnb.jpg" alt=""><br>回到parseurl(),我们可以看到，返回的结果赋值为$path,提取路由信息又封装到$route,<br>最后返回,回到App.php<br>在app.php<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n13akbkxj30ra0hpjt9.jpg" alt=""><br>找到self::exec()<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n15p5a4rj30lb0hvjte.jpg" alt=""><br>我们可以看到模块/控制器/操作 的函数为self::module<br>开始跟踪module函数<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n16v6mhqj30r30i8myy.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n19ne3aqj30s90h5myu.jpg" alt=""><br>我们可以看到，根据$config[‘app_multi_module’]进入多模块部署，$bind为NULL，又进入elseif分支，判断模块是否在禁止的列表里面$config[‘deny_module_list’]，而且mmodule存在，$available = true，就不会抛出异常<br>module函数最后的返回值，发现$controller没有进行过滤，那么此时应该为think<code>\</code>app，也就是return self::invokeMethod($call, $vars);<br>找到invokeMethod()<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n1av6qjwj30wa0akq41.jpg" alt=""><br>此时穿进去的$call也就是$method,是一个数组，第一个元素是一个think\App对象，第二个元素则是调用方法名称的字符串invokefunction，然后通过反射ReflectionMethod获取这个对象下对应的方法<br>再通过函数$args = self::bindParams($reflect, $vars);获取传入的参数，也就是payload</p>
+<p>最后再调用反射$reflect-&gt;invokeArgs($args);，将Payload数组传入反射对象函数invokeFunction，完成代码执行。<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n1fs4atzj30nd069dg9.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1n1j2g79yj30p30ft3ze.jpg" alt=""></p>
+<p>在攻击时注意使用一个已存在的module，否则会报错 模块不存在<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m2zlh5wyj30lx09b3z9.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1m31aqg68j30lz0810ti.jpg" alt=""><br>此处在获取控制器名时直接从之前的解析结果中获取，无任何安全检查。<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g1m33n1mqyj30nn094mxv.jpg" alt=""><br>这里对控制器类进行实例化<br>接着在 <code>thinkphp/library/think/Loader.php</code>：454 找到controller 方法<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m367b9n3j30q40aq0tu.jpg" alt=""><br>根据传入的name获取对应的类，如果存在就直接返回这个类的一个实例化对象。<br>跟进getModuleAndClass方法：<code>Loader.php : 521 行</code><br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m38iewqcj30m20bvq3w.jpg" alt=""><br>如果控制器名中有<code>\</code>，就直接返回。<br>回到thinkphp/library/think/App.php的module方法，<br><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m3fqsimfj30m60ctdgw.jpg" alt=""><br>正常情况下应该获取到对应控制器类的实例化对象，而我们现在得到了一个<code>\think\App</code>的实例化对象，进而通过url调用其任意的public方法，同时解析url中的额外参数，当作方法的参数传入。</p>
+<h1 id="漏洞影响版本"><a href="#漏洞影响版本" class="headerlink" title="漏洞影响版本"></a>漏洞影响版本</h1><h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>在thinkphp5.0版本的thinkphp/library/think/App.php554行，thinkphp5.1版本的thinkphp/library/think/route/dispatch/Url.php63行添加如下代码进行过滤：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (!preg_match('/^[<span class="string">A-Za-z</span>](<span class="link">\w|\.</span>)*$/', $controller)) &#123;</span><br><span class="line"><span class="code">    throw new HttpException(404, 'controller not exists:' . $controller);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws1.sinaimg.cn/large/005RaR9Jly1g1m3jdum1vj30la02z74d.jpg" alt=""></p>
+<p>payload:<br>/?s=index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=file_put_contents&amp;vars[1][]=1.php&amp;vars[1][]=&lt;?php phpinfo();?&gt;</p>
+<p>s=index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=phpinfo&amp;vars[1][]=1</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://paper.seebug.org/770/" target="_blank" rel="noopener">https://paper.seebug.org/770/</a><br><a href="http://www.lmxspace.com/2018/12/12/Thinkphp-5-0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" target="_blank" rel="noopener">http://www.lmxspace.com/2018/12/12/Thinkphp-5-0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</a><br><a href="https://blog.51cto.com/superwolf/2338829" target="_blank" rel="noopener">https://blog.51cto.com/superwolf/2338829</a><br><a href="https://www.kancloud.cn/zmwtp/tp5/120709" target="_blank" rel="noopener">https://www.kancloud.cn/zmwtp/tp5/120709</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="筱阳 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="筱阳 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/31/ThinkPHP-框架-5-0-15-SQL-注入分析/" rel="next" title="ThinkPHP 框架 5.0.15 SQL 注入分析">
+                <i class="fa fa-chevron-left"></i> ThinkPHP 框架 5.0.15 SQL 注入分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/08/2019年掘安杯writeup/" rel="prev" title="2019年掘安杯writeup">
+                2019年掘安杯writeup <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="筱阳">
+            
+              <p class="site-author-name" itemprop="name">筱阳</p>
+              <p class="site-description motion-element" itemprop="description">只会复现的菜鸡</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.freebuf.com/" title="freebug" target="_blank">freebug</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞分析"><span class="nav-number">2.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞影响版本"><span class="nav-number">3.</span> <span class="nav-text">漏洞影响版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞修复"><span class="nav-number">4.</span> <span class="nav-text">漏洞修复</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">筱阳</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
