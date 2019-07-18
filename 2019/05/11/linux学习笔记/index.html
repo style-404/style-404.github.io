@@ -130,10 +130,12 @@
 <meta property="og:site_name" content="可乐&#39;blog">
 <meta property="og:description" content="休夸此地分天下linux启动http服务1、安装apache yum install httpd #根据提示，输入Y安装即可成功安装 systemctl start httpd.service #启动apache systemctl stop httpd.service #停止apache systemctl restart httpd.service #重启apache systemctl en">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-17T07:20:17.649Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g3wz86xsvxj30kq03lglf.jpg">
+<meta property="og:updated_time" content="2019-06-11T01:51:57.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux学习笔记">
 <meta name="twitter:description" content="休夸此地分天下linux启动http服务1、安装apache yum install httpd #根据提示，输入Y安装即可成功安装 systemctl start httpd.service #启动apache systemctl stop httpd.service #停止apache systemctl restart httpd.service #重启apache systemctl en">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005RaR9Jgy1g3wz86xsvxj30kq03lglf.jpg">
 
 
 
@@ -363,6 +365,17 @@
 
           
           
+             <span id="/2019/05/11/linux学习笔记/" class="leancloud_visitors" data-flag-title="linux学习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -422,6 +435,9 @@
 <p>yum install php</p>
 <p>yum install mariadb-server mariadbsystemctl start mariadb<br>启动mariadbsystemctl enable mariadb 设置为开机启动</p>
 <p><strong>目前无法处理此请求。</strong><br>在/ect/php.ini<br>将下值由Off 变更为 On<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">display_errors</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">display_startup_errors</span> = <span class="literal">On</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a>命令学习</h1><p>grep<br>grep命令用于查找文件里符合条件的字符串<br><strong>实例</strong><br>在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行。此时，可以使用如下命令：<br><code>grep test *file</code><br>以递归的方式查找符合条件的文件。例如，查找指定目录/etc/acpi 及其子目录（如果存在子目录的话）下所有文件中包含字符串”flag”的文件，并打印出该字符串所在行的内容，使用的命令为：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grep</span> -r flag <span class="regexp">/etc/</span>acpi</span><br></pre></td></tr></table></figure></p>
+<h1 id="文件解析"><a href="#文件解析" class="headerlink" title="文件解析"></a>文件解析</h1><h2 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="/etc/passwd"></a>/etc/passwd</h2><p><img src="https://ws1.sinaimg.cn/large/005RaR9Jgy1g3wz86xsvxj30kq03lglf.jpg" alt=""><br>用户名：用户登录时使用。长度应在1到32个字符之间。<br>密码：x字符表示加密密码存储在/ etc / shadow文件中。请注意，您需要使用passwd命令来计算在CLI中键入的密码的哈希值，或者在/ etc / shadow文件中存储/更新密码的哈希值。<br>用户ID（UID）：必须为每个用户分配一个用户ID（UID）。UID 0（零）保留给root，UID 1-99保留给其他预定义帐户。系统为管理和系统帐户/组保留了进一步的UID 100-999。<br>组ID（GID）：主要组ID（存储在/ etc / group文件中）<br>用户ID信息：评论字段。它允许您添加有关用户的额外信息，例如用户的全名，电话号码等。此字段由finger命令使用。<br>主目录：用户登录时所在目录的绝对路径。如果此目录不存在，则用户目录将变为/<br>Command / shell：命令或shell的绝对路径（/ bin / bash）。通常，这是一个shell。请注意，它不必是一个shell</p>
+<p>参考:<a href="https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/" target="_blank" rel="noopener">https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/</a></p>
 
       
     </div>
@@ -545,8 +561,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -563,7 +588,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -622,6 +647,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命令学习"><span class="nav-number">1.</span> <span class="nav-text">命令学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件解析"><span class="nav-number">2.</span> <span class="nav-text">文件解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#etc-passwd"><span class="nav-number">2.1.</span> <span class="nav-text">/etc/passwd</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -814,6 +855,113 @@
 
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("pJ8UCSAVsxv35xedvWr96XzP-gzGzoHsz", "xsXqNgz1r3zohHa2Vxc0DNXa");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 
