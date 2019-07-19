@@ -3,6 +3,28 @@
   
     
     <entry>
+      <title>Nmap 常用参数</title>
+      <link href="/2019/07/19/Nmap-%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0/"/>
+      <url>/2019/07/19/Nmap-%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0/</url>
+      
+        <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"><p>-sT     TCP connect()扫描，这种方式会在目标主机的日志中记录大批连接请求和错误信息。<br>-sS     半开扫描，很少有系统能把它记入系统日志。不过，需要Root权限。<br>-sF  -sN     秘密FIN数据包扫描、Xmas Tree、Null扫描模式<br>-sP     ping扫描，Nmap在扫描端口时，默认都会使用ping扫描，只有主机存活，Nmap才会继续扫描。<br>-sU     UDP扫描，但UDP扫描是不可靠的<br>-sA     这项高级的扫描方法通常用来穿过防火墙的规则集<br>-sV     探测端口服务版本<br>-Pn     扫描之前不需要用ping命令，有些防火墙禁止ping命令。可以使用此选项进行扫描<br>-v     显示扫描过程，推荐使用<br>-h     帮助选项，是最清楚的帮助文档<br>-p     指定端口，如“1-65535、1433、135、22、80”等<br>-O     启用远程操作系统检测，存在误报<br>-A     全面系统检测、启用脚本检测、扫描等<br>-oN/-oX/-oG     将报告写入文件，分别是正常、XML、grepable 三种格式<br>-T4     针对TCP端口禁止动态扫描延迟超过10ms<br>-iL     读取主机列表，例如，“-iL C:\ip.txt”</p><ul><li>扫描指定IP所开放的端口：nmap -sS -p 1-65535 -v XXX.XXX.XXX.XXX</li><li>扫描C段存活主机：nmap -sP XXX.XXX.XXX.XXX/24</li><li>指定端口扫描：nmap -p 80,1433,22,1521 XXX.XXX.XXX.XXX</li><li>探测主机操作系统：nmap -o XXX.XXX.XXX.XXX</li><li>全面的系统探测：nmap -v -A XXX.XXX.XXX.XXX（Nmap默认扫描主机1000个高危端口）</li><li>探测指定网段：nmap XXX.XXX.XXX.XXX-XXX</li><li>穿透防火墙进行扫描：nmap -Pn -A XXX.XXX.XXX.XXX（XXX.XXX.XXX.XXX禁止用ping的）</li><li>使用脚本，扫描Web敏感目录：nmap -p 80 –script=http-enum.nse XXX.XXX.XXX.XXX</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    <entry>
+      <title>Dns注入</title>
+      <link href="/2019/07/18/Dns%E6%B3%A8%E5%85%A5/"/>
+      <url>/2019/07/18/Dns%E6%B3%A8%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<meta name="referrer" content="no-referrer">]]></content>
+      
+      
+      
+    </entry>
+    
+    <entry>
       <title>一句话木马(转)</title>
       <link href="/2019/07/18/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-%E8%BD%AC/"/>
       <url>/2019/07/18/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-%E8%BD%AC/</url>
