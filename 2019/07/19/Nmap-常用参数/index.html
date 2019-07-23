@@ -130,7 +130,7 @@
 <meta property="og:site_name" content="可乐&#39;blog">
 <meta property="og:description" content="-sT     TCP connect()扫描，这种方式会在目标主机的日志中记录大批连接请求和错误信息。-sS     半开扫描，很少有系统能把它记入系统日志。不过，需要Root权限。-sF  -sN     秘密FIN数据包扫描、Xmas Tree、Null扫描模式-sP     ping扫描，Nmap在扫描端口时，默认都会使用ping扫描，只有主机存活，Nmap才会继续扫描。-sU">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-19T01:47:38.292Z">
+<meta property="og:updated_time" content="2019-07-19T06:16:54.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nmap 常用参数">
 <meta name="twitter:description" content="-sT     TCP connect()扫描，这种方式会在目标主机的日志中记录大批连接请求和错误信息。-sS     半开扫描，很少有系统能把它记入系统日志。不过，需要Root权限。-sF  -sN     秘密FIN数据包扫描、Xmas Tree、Null扫描模式-sP     ping扫描，Nmap在扫描端口时，默认都会使用ping扫描，只有主机存活，Nmap才会继续扫描。-sU">
@@ -396,7 +396,8 @@
       
         <meta name="referrer" content="no-referrer">
 
-<p>-sT     TCP connect()扫描，这种方式会在目标主机的日志中记录大批连接请求和错误信息。<br>-sS     半开扫描，很少有系统能把它记入系统日志。不过，需要Root权限。<br>-sF  -sN     秘密FIN数据包扫描、Xmas Tree、Null扫描模式<br>-sP     ping扫描，Nmap在扫描端口时，默认都会使用ping扫描，只有主机存活，Nmap才会继续扫描。<br>-sU     UDP扫描，但UDP扫描是不可靠的<br>-sA     这项高级的扫描方法通常用来穿过防火墙的规则集<br>-sV     探测端口服务版本<br>-Pn     扫描之前不需要用ping命令，有些防火墙禁止ping命令。可以使用此选项进行扫描<br>-v     显示扫描过程，推荐使用<br>-h     帮助选项，是最清楚的帮助文档<br>-p     指定端口，如“1-65535、1433、135、22、80”等<br>-O     启用远程操作系统检测，存在误报<br>-A     全面系统检测、启用脚本检测、扫描等<br>-oN/-oX/-oG     将报告写入文件，分别是正常、XML、grepable 三种格式<br>-T4     针对TCP端口禁止动态扫描延迟超过10ms<br>-iL     读取主机列表，例如，“-iL C:\ip.txt”</p>
+<p>-sT     TCP connect()扫描，这种方式会在目标主机的日志中记录大批连接请求和错误信息。<br>-sS     半开扫描，很少有系统能把它记入系统日志。不过，需要Root权限。<br>-sF  -sN     秘密FIN数据包扫描、Xmas Tree、Null扫描模式<br>-sP     ping扫描，Nmap在扫描端口时，默认都会使用ping扫描，只有主机存活，Nmap才会继续扫描。<br>-sU     UDP扫描，但UDP扫描是不可靠的<br>-sA     这项高级的扫描方法通常用来穿过防火墙的规则集<br>-sV     探测端口服务版本<br>-Pn     扫描之前不需要用ping命令，有些防火墙禁止ping命令。可以使用此选项进行扫描<br>-sn ping探测扫描主机， 不进行端口扫描 （测试过对方主机把icmp包都丢弃掉，依然能检测到对方开机状态）</p>
+<p>-v     显示扫描过程，推荐使用<br>-h     帮助选项，是最清楚的帮助文档<br>-p     指定端口，如“1-65535、1433、135、22、80”等<br>-O     启用远程操作系统检测，存在误报<br>-A     全面系统检测、启用脚本检测、扫描等<br>-oN/-oX/-oG     将报告写入文件，分别是正常、XML、grepable 三种格式<br>-T4     针对TCP端口禁止动态扫描延迟超过10ms<br>-iL     读取主机列表，例如，“-iL C:\ip.txt”<br>-n：不做DNS解析</p>
 <ul>
 <li>扫描指定IP所开放的端口：nmap -sS -p 1-65535 -v XXX.XXX.XXX.XXX</li>
 <li>扫描C段存活主机：nmap -sP XXX.XXX.XXX.XXX/24</li>
@@ -407,6 +408,7 @@
 <li>穿透防火墙进行扫描：nmap -Pn -A XXX.XXX.XXX.XXX（XXX.XXX.XXX.XXX禁止用ping的）</li>
 <li>使用脚本，扫描Web敏感目录：nmap -p 80 –script=http-enum.nse XXX.XXX.XXX.XXX</li>
 </ul>
+<p>参考:<a href="https://www.cnblogs.com/nmap/p/6232969.html" target="_blank" rel="noopener">https://www.cnblogs.com/nmap/p/6232969.html</a></p>
 
       
     </div>
@@ -469,6 +471,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/22/Google-hack-指南/" rel="prev" title="Google hack 指南">
+                Google hack 指南 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -544,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -566,7 +572,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
